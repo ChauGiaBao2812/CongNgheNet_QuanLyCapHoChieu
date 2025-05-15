@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Folder Include="Models\ViewModels\" />
+    <Folder Include="GiaoDienHTML\" />
   </ItemGroup>
 
   <ItemGroup>
