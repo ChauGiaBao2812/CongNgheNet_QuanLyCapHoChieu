@@ -6,6 +6,7 @@ namespace QuanLiHoChieu.Controllers;
 
 public class HomeController : Controller
 {
+    // Debug
     private readonly ILogger<HomeController> _logger;
 
     public HomeController(ILogger<HomeController> logger)
