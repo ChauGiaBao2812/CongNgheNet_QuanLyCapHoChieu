@@ -1,0 +1,100 @@
+﻿<div class="container">
+    <div class="row align-items-stretch">
+        <!-- Cột trái: Thông tin hồ sơ + Ghi chú -->
+        <div class="col-md-6">
+            <!-- Thông tin hồ sơ -->
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5>Thông tin hồ sơ</h5>
+                </div>
+                <div class="card-body">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Mã hồ sơ:</label>
+                        <div class="col-sm-8">
+                            
+                            <p class="form-control-plaintext">Mã hồ sơ(ABC)</p>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Ngày nộp:</label>
+                        <div class="col-sm-8">
+                            <p class="form-control-plaintext">12/12/2025</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card: Ghi chú (Xác thực) -->
+            <div class="card mb-4">
+                <div class="card-header bg-info text-white">
+                    <h5>Ghi chú (Xác thực)</h5>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <div class="border p-2 bg-light">
+                            Ghi chú xác thực gì đó!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card: Ghi chú (Xét duyệt) -->
+            <div class="card mb-4">
+                <div class="card-header bg-info text-white">
+                    <h5>Ghi chú (Xét duyệt)</h5>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <div class="border p-2 bg-light">
+                            Ghi chú xét duyệt gì đó!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- Đóng col-md-6 trái TẠI ĐÂY -->
+        <!-- Cột phải: Tình trạng -->
+        <div class="col-md-6 d-flex flex-column">
+            <div class="card flex-grow-1">
+                <div class="card-header bg-info text-white">
+                    <h5>Tình trạng</h5>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label>Xác thực:</label>
+                        <div class="border p-2 bg-light">
+                            Id user xác thực 
+                        </div>
+                    </div>
+                    <div class="form-group mt-3">
+                        <label>Xét duyệt:</label>
+                        <div class="border p-2 bg-light">
+                            Id user xét duyệt
+                        </div>
+                    </div>
+                    <div class="form-group mt-3">
+                        <label>Lưu trữ:</label>
+                        <div class="border p-2 bg-light">
+                            Id user lưu trữ
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    .form-group label {
+        font-weight: 500;
+        margin-bottom: 5px;
+    }
+
+    .border {
+        border-radius: 4px;
+    }
+
+    .bg-light {
+        background-color: #f8f9fa !important;
+    }
+</style>

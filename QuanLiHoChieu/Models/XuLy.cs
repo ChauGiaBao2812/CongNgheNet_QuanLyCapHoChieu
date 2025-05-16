@@ -7,7 +7,7 @@ namespace QuanLiHoChieu.Models
     {
         [Key]
         public int XuLyID { get; set; }
-
+       
         [Required]
         [StringLength(20)]
         public string FormID { get; set; } = null!;
