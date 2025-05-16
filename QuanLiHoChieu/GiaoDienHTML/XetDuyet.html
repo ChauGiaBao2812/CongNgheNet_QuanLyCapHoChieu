@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Xét duyệt hồ sơ</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+
+    <div class="verification-container">
+        <div class="info-box">
+            Thông tin từ người dùng
+
+            <img src="Img/error.png" alt="Các yêu cầu xét duyệt" onclick="toggleRequirements()" />
+
+            <div id="requirementBox" class="requirement-box">
+                <strong>Các yêu cầu:</strong>
+                <ul>
+                    <li>Yêu cầu 1</li>
+                    <li>Không</li>
+                    <li>Sai</li>
+                </ul>
+                <button onclick="toggleRequirements()">Đóng</button>
+            </div>
+        </div>
+
+        <div class="note-section">
+            <label>Ghi chú</label><br />
+            <textarea placeholder="Nhập ghi chú ở đây..."></textarea>
+        </div>
+
+        <div class="action-buttons">
+            <button class="invalid-btn">Không hợp lệ</button>
+            <button class="valid-btn">Hợp lệ</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleRequirements() {
+            const box = document.getElementById("requirementBox");
+            box.style.display = (box.style.display === "block") ? "none" : "block";
+        }
+    </script>
+
+</body>
+</html>

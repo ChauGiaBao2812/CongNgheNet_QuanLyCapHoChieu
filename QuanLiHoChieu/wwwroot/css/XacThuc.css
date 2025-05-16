@@ -1,0 +1,75 @@
+﻿.info-boxes {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.info-box {
+    width: 48%;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    font-size: 1.2em;
+    text-align: center;
+}
+
+.note-box {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+    .note-box textarea {
+        width: 100%;
+        height: 100px;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #999;
+    }
+
+.button-group {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+    .button-group button {
+        padding: 10px 30px;
+        font-size: 1em;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+.invalid-btn {
+    background-color: #fcf0c7;
+}
+
+.valid-btn {
+    background-color: #fce1ac;
+}
+
+form {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+
+    .form-group label {
+        font-weight: bold;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 1em;
+    }
