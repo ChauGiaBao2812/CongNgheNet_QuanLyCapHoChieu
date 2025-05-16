@@ -5,6 +5,7 @@ namespace QuanLiHoChieu.Models
 {
     public class User
     {
+        [Required]
         [Key]
         [StringLength(20)]
         public string UserID { get; set; } = null!;

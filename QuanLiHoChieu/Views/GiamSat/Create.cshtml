@@ -1,0 +1,85 @@
+﻿@model QuanLiHoChieu.Models.ViewModels.TaiKhoanUserViewModel
+
+@{
+    ViewData["Title"] = "Create User Account";
+}
+
+<h2>Create User Account</h2>
+
+<form asp-action="Create" method="post" id="createAccountForm">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="form-group">
+        <label asp-for="Username"></label>
+        <input asp-for="Username" class="form-control" />
+        <span asp-validation-for="Username" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Password"></label>
+        <input asp-for="Password" type="password" class="form-control" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="HoTen"></label>
+        <input asp-for="HoTen" class="form-control" />
+        <span asp-validation-for="HoTen" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="GioiTinh"></label>
+        <select asp-for="GioiTinh" class="form-control">
+            <option value="">-- Select Gender --</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+        </select>
+        <span asp-validation-for="GioiTinh" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="NgaySinh"></label>
+        <input asp-for="NgaySinh" type="date" class="form-control" />
+        <span asp-validation-for="NgaySinh" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="QueQuan"></label>
+        <input asp-for="QueQuan" class="form-control" />
+        <span asp-validation-for="QueQuan" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="SDT"></label>
+        <input asp-for="SDT" class="form-control" />
+        <span asp-validation-for="SDT" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" type="email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ChucVu"></label>
+        <select asp-for="ChucVu" class="form-control">
+            <option value="">-- Chọn chức vụ --</option>
+            <option value="GiamSat">Giám Sát</option>
+            <option value="XuLy">Xử Lý</option>
+            <option value="LuuTru">Lưu Trữ</option>
+            <option value="XacThuc">Xác Thực</option>
+            <option value="XetDuyet">Xét Duyệt</option>
+        </select>
+        <span asp-validation-for="ChucVu" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

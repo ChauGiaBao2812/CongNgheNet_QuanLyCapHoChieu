@@ -1,0 +1,112 @@
+CREATE DATABASE PASSPORT_SYSTEM
+GO
+USE PASSPORT_SYSTEM
+GO
+
+-- Tạo bảng TaiKhoan
+CREATE TABLE TaiKhoan (
+    Username VARCHAR(20) PRIMARY KEY,
+    MatKhau NVARCHAR(255) NOT NULL
+);
+
+-- Tạo bảng User
+CREATE TABLE [User] (
+    UserID VARCHAR(20) PRIMARY KEY,
+    HoTen NVARCHAR(100) NOT NULL,
+    GioiTinh NVARCHAR(10) NOT NULL,
+    NgaySinh DATE NOT NULL,
+    QueQuan NVARCHAR(100) NOT NULL,
+    SĐT NVARCHAR(15) NOT NULL,
+    Email NVARCHAR(100) NOT NULL,
+    ChucVu NVARCHAR(50) NOT NULL,
+    Username VARCHAR(20) UNIQUE NOT NULL,
+    FOREIGN KEY (Username) REFERENCES TaiKhoan(Username)
+);
+
+-- Tạo bảng ResidentData
+CREATE TABLE ResidentData (
+    CCCD VARCHAR(20) PRIMARY KEY,
+    HoTen NVARCHAR(100) NOT NULL,
+    GioiTinh NVARCHAR(10) NOT NULL,
+    NgaySinh DATE NOT NULL,
+    NoiSinh NVARCHAR(100) NOT NULL,
+    NgayCap DATE NOT NULL,
+    NoiCap NVARCHAR(100) NOT NULL,
+    DanToc NVARCHAR(50) NOT NULL,
+    TonGiao NVARCHAR(50),
+    SĐT NVARCHAR(15) NOT NULL,
+	ttTinhThanh NVARCHAR(100) NOT NULL,
+    ttQuanHuyen NVARCHAR(100) NOT NULL,
+    ttPhuongXa NVARCHAR(100) NOT NULL,
+    ttSoNhaDuong NVARCHAR(100) NOT NULL,
+    thtTinhThanh NVARCHAR(100) NOT NULL,
+    thtQuanHuyen NVARCHAR(100) NOT NULL,
+    thtPhuongXa NVARCHAR(100) NOT NULL,
+    thtSoNhaDuong NVARCHAR(100) NOT NULL,
+    NgheNghiep NVARCHAR(100),
+    CoQuan NVARCHAR(100),
+    DiaChiCoQuan NVARCHAR(100),
+    HoTenCha NVARCHAR(100),
+    NgaySinhCha DATE,
+    HoTenMe NVARCHAR(100),
+    NgaySinhMe DATE
+);
+
+-- Tạo bảng PassportData
+CREATE TABLE PassportData (
+    FormID VARCHAR(20) PRIMARY KEY,
+    HoTen NVARCHAR(100) NOT NULL,
+    GioiTinh NVARCHAR(10) NOT NULL,
+    NgaySinh DATE NOT NULL,
+    NoiSinh NVARCHAR(100) NOT NULL,
+    CCCD VARCHAR(20) NOT NULL,
+    NgayCap DATE NOT NULL,
+    NoiCap NVARCHAR(100) NOT NULL,
+    DanToc NVARCHAR(50) NOT NULL,
+    TonGiao NVARCHAR(50),
+    SĐT NVARCHAR(15) NOT NULL,
+	ttTinhThanh NVARCHAR(100) NOT NULL,
+    ttQuanHuyen NVARCHAR(100) NOT NULL,
+    ttPhuongXa NVARCHAR(100) NOT NULL,
+    ttSoNhaDuong NVARCHAR(100) NOT NULL,
+    thtTinhThanh NVARCHAR(100) NOT NULL,
+    thtQuanHuyen NVARCHAR(100) NOT NULL,
+    thtPhuongXa NVARCHAR(100) NOT NULL,
+    thtSoNhaDuong NVARCHAR(100) NOT NULL,
+    NgheNghiep NVARCHAR(100),
+    CoQuan NVARCHAR(100),
+    DiaChiCoQuan NVARCHAR(100),
+    HoTenCha NVARCHAR(100),
+    NgaySinhCha DATE,
+    HoTenMe NVARCHAR(100),
+    NgaySinhMe DATE,
+    NoiDungDeNghi NVARCHAR(MAX) NOT NULL,
+    NoiTiepNhanHS NVARCHAR(100) NOT NULL,
+    NgayNop DATE NOT NULL,
+    FOREIGN KEY (CCCD) REFERENCES ResidentData(CCCD)
+);
+
+-- Tạo bảng XuLy
+CREATE TABLE XuLy (
+    XuLyID INT PRIMARY KEY IDENTITY(1,1),
+    FormID VARCHAR(20) NOT NULL,
+    UserID VARCHAR(20) NOT NULL,
+    NgayXuLy DATE NOT NULL,
+    TrangThai NVARCHAR(50) NOT NULL,
+    GhiChu NVARCHAR(255),
+    LoaiXuLy NVARCHAR(50) NOT NULL,
+    FOREIGN KEY (FormID) REFERENCES PassportData(FormID),
+    FOREIGN KEY (UserID) REFERENCES [User](UserID)
+);
+
+-- Tạo bảng LuuTru
+CREATE TABLE LuuTru (
+    PassportID VARCHAR(20) PRIMARY KEY,
+    UserID VARCHAR(20) NOT NULL,
+    FormID VARCHAR(20) UNIQUE NOT NULL,
+    NgayNop DATE NOT NULL,
+    NgayCap DATE NOT NULL,
+    CoGiaTriDen DATE NOT NULL,
+    FOREIGN KEY (FormID) REFERENCES PassportData(FormID),
+    FOREIGN KEY (UserID) REFERENCES [User](UserID)
+);
