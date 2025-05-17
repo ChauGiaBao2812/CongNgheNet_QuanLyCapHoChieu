@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Admin</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="overlay">
+      <form action="/submit" method="post" class="edit-form">
+        <h1>CHỈNH SỬA</h1>
+        <label for="id_user">Id_user</label>
+        <input type="text" id="id_user" name="id_user" />
+        <br />
+        <label>Quyền:</label>
+        <div class="checkbox-group">
+          <label
+            ><input type="checkbox" name="quyen[]" value="xac_thuc" checked />
+            Xác thực</label
+          >
+          <label
+            ><input type="checkbox" name="quyen[]" value="xet_duyet" /> Xét
+            duyệt</label
+          >
+          <label
+            ><input type="checkbox" name="quyen[]" value="luu_tru" /> Lưu
+            trữ</label
+          >
+          <label
+            ><input type="checkbox" name="quyen[]" value="giam_sat" /> Giám
+            sát</label
+          >
+        </div>
+        <button class="adjust-btn">Lưu</button>
+      </form>
+    </div>
+
+    <img src="Img/add_icon.png" class="add-icon" />
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Mã user</th>
+          <th>Ngày tạo</th>
+          <th>Hành động</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>U01</td>
+          <td>30/3/2025</td>
+          <td>
+            <button class="save-btn" onclick="show(event)">Chỉnh sửa</button>
+            <button class="save-btn">Xóa</button>
+          </td>
+        </tr>
+        <tr>
+          <td>U02</td>
+          <td>30/4/2025</td>
+          <td>
+            <button class="save-btn" onclick="show(event)">Chỉnh sửa</button>
+            <button class="save-btn">Xóa</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <script>
+      function show(event) {
+        event.preventDefault();
+        document.querySelector(".overlay").style.display = "flex";
+      }
+
+      // Ẩn overlay khi click ra ngoài form
+      document
+        .querySelector(".overlay")
+        .addEventListener("click", function (e) {
+          const form = document.querySelector(".edit-form");
+          if (!form.contains(e.target)) {
+            this.style.display = "none";
+          }
+        });
+
+      const deleteButtons = document.querySelectorAll(".save-btn");
+
+      deleteButtons.forEach(function (btn) {
+        if (btn.textContent.trim() === "Xóa") {
+          btn.addEventListener("click", function (e) {
+            e.preventDefault();
+            const confirmDelete = confirm("Bạn có chắc muốn xóa không?");
+            if (confirmDelete) {
+              const row = btn.closest("tr");
+              row.remove();
+            }
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

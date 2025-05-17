@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Lưu trữ hồ sơ</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h1>Lưu trữ hồ sơ</h1>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Mã hồ sơ</th>
+          <th>Tình trạng</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>HS01</td>
+          <td>Đồng ý cấp hộ chiếu</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>HS02</td>
+          <td>Không đồng ý cấp hộ chiếu</td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const rows = document.querySelectorAll("table tr");
+
+        rows.forEach((row, index) => {
+          if (index === 0) return; // Bỏ qua hàng tiêu đề
+
+          const statusCell = row.cells[1];
+          const storageCell = row.cells[2];
+
+          if (statusCell.textContent.trim() === "Đồng ý cấp hộ chiếu") {
+            const button = document.createElement("button");
+            button.textContent = "Lưu";
+            button.className = "save-btn";
+            storageCell.appendChild(button);
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
