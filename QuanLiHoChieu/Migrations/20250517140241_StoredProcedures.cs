@@ -5,6 +5,7 @@
 namespace QuanLiHoChieu.Migrations
 {
     /// <inheritdoc />
+    /// <inheritdoc />
     public partial class StoredProcedures : Migration
     {
         /// <inheritdoc />
@@ -25,7 +26,7 @@ namespace QuanLiHoChieu.Migrations
                 AS
                 BEGIN
                     BEGIN TRY
-                        OPEN SYMMETRIC KEY UserDataKey DECRYPTION BY PASSWORD = 'UserDataPassword';
+                        EXEC sp_OpenSymmetricKey;
 
                         INSERT INTO [User] (
                             UserID, HoTen, GioiTinh, NgaySinh, QueQuan,
@@ -33,22 +34,20 @@ namespace QuanLiHoChieu.Migrations
                         )
                         VALUES (
                             @UserID,
-                            ENCRYPTBYKEY(KEY_GUID('UserDataKey'), @HoTen),
+                            ENCRYPTBYKEY(KEY_GUID('SymmetricKey_AES'), @HoTen),
                             @GioiTinh,
                             @NgaySinh,
                             @QueQuan,
-                            ENCRYPTBYKEY(KEY_GUID('UserDataKey'), @SDT),
-                            ENCRYPTBYKEY(KEY_GUID('UserDataKey'), @Email),
+                            ENCRYPTBYKEY(KEY_GUID('SymmetricKey_AES'), @SDT),
+                            ENCRYPTBYKEY(KEY_GUID('SymmetricKey_AES'), @Email),
                             @ChucVu,
                             @Username
                         );
 
-                        CLOSE SYMMETRIC KEY UserDataKey;
+                        EXEC sp_CloseSymmetricKey;
                     END TRY
                     BEGIN CATCH
-                        IF EXISTS (SELECT * FROM sys.symmetric_keys WHERE name = 'UserDataKey')
-                            CLOSE SYMMETRIC KEY UserDataKey;
-
+                            EXEC sp_CloseSymmetricKey;
                         THROW;
                     END CATCH
                 END;
@@ -59,7 +58,7 @@ namespace QuanLiHoChieu.Migrations
                 CREATE PROCEDURE sp_SelectUser
                 AS
                 BEGIN
-                    OPEN SYMMETRIC KEY UserDataKey DECRYPTION BY PASSWORD = 'UserDataPassword';
+                    EXEC sp_OpenSymmetricKey;
 
                     SELECT
                         UserID,
@@ -73,7 +72,7 @@ namespace QuanLiHoChieu.Migrations
                         Username
                     FROM [User];
 
-                    CLOSE SYMMETRIC KEY UserDataKey;
+                    EXEC sp_CloseSymmetricKey;
                 END;
                 ");
 
@@ -105,7 +104,7 @@ namespace QuanLiHoChieu.Migrations
                 AS
                 BEGIN
                     BEGIN TRY
-                        OPEN SYMMETRIC KEY ResidentDataKey DECRYPTION BY PASSWORD = 'ResidentDataPassword';
+                        EXEC sp_OpenSymmetricKey;
 
                         INSERT INTO ResidentData (
                             CCCD, HoTen, GioiTinh, NgaySinh, NoiSinh, NgayCap, NoiCap, DanToc, TonGiao, SĐT,
@@ -114,35 +113,35 @@ namespace QuanLiHoChieu.Migrations
                             HoTenCha, NgaySinhCha, HoTenMe, NgaySinhMe
                         )
                         VALUES (
-                            ENCRYPTBYKEY(KEY_GUID('ResidentDataKey'), CONVERT(VARCHAR(20), @CCCD)),
-                            ENCRYPTBYKEY(KEY_GUID('ResidentDataKey'), @HoTen),
+                            ENCRYPTBYKEY(KEY_GUID('SymmetricKey_AES'), CONVERT(VARCHAR(20), @CCCD)),
+                            ENCRYPTBYKEY(KEY_GUID('SymmetricKey_AES'), @HoTen),
                             @GioiTinh,
                             @NgaySinh,
-                            ENCRYPTBYKEY(KEY_GUID('ResidentDataKey'), @NoiSinh),
+                            ENCRYPTBYKEY(KEY_GUID('SymmetricKey_AES'), @NoiSinh),
                             @NgayCap,
-                            ENCRYPTBYKEY(KEY_GUID('ResidentDataKey'), @NoiCap),
+                            ENCRYPTBYKEY(KEY_GUID('SymmetricKey_AES'), @NoiCap),
                             @DanToc,
                             @TonGiao,
-                            ENCRYPTBYKEY(KEY_GUID('ResidentDataKey'), @SDT),
-                            ENCRYPTBYKEY(KEY_GUID('ResidentDataKey'), @ttTinhThanh),
-                            ENCRYPTBYKEY(KEY_GUID('ResidentDataKey'), @ttQuanHuyen),
-                            ENCRYPTBYKEY(KEY_GUID('ResidentDataKey'), @ttPhuongXa),
-                            ENCRYPTBYKEY(KEY_GUID('ResidentDataKey'), @ttSoNhaDuong),
-                            ENCRYPTBYKEY(KEY_GUID('ResidentDataKey'), @thtTinhThanh),
-                            ENCRYPTBYKEY(KEY_GUID('ResidentDataKey'), @thtQuanHuyen),
-                            ENCRYPTBYKEY(KEY_GUID('ResidentDataKey'), @thtPhuongXa),
-                            ENCRYPTBYKEY(KEY_GUID('ResidentDataKey'), @thtSoNhaDuong),
-                            ENCRYPTBYKEY(KEY_GUID('ResidentDataKey'), @HoTenCha),
+                            ENCRYPTBYKEY(KEY_GUID('SymmetricKey_AES'), @SDT),
+                            ENCRYPTBYKEY(KEY_GUID('SymmetricKey_AES'), @ttTinhThanh),
+                            ENCRYPTBYKEY(KEY_GUID('SymmetricKey_AES'), @ttQuanHuyen),
+                            ENCRYPTBYKEY(KEY_GUID('SymmetricKey_AES'), @ttPhuongXa),
+                            ENCRYPTBYKEY(KEY_GUID('SymmetricKey_AES'), @ttSoNhaDuong),
+                            ENCRYPTBYKEY(KEY_GUID('SymmetricKey_AES'), @thtTinhThanh),
+                            ENCRYPTBYKEY(KEY_GUID('SymmetricKey_AES'), @thtQuanHuyen),
+                            ENCRYPTBYKEY(KEY_GUID('SymmetricKey_AES'), @thtPhuongXa),
+                            ENCRYPTBYKEY(KEY_GUID('SymmetricKey_AES'), @thtSoNhaDuong),
+                            ENCRYPTBYKEY(KEY_GUID('SymmetricKey_AES'), @HoTenCha),
                             @NgaySinhCha,
-                            ENCRYPTBYKEY(KEY_GUID('ResidentDataKey'), @HoTenMe),
+                            ENCRYPTBYKEY(KEY_GUID('SymmetricKey_AES'), @HoTenMe),
                             @NgaySinhMe
                         );
+                        EXEC sp_CloseSymmetricKey;
 
-                        CLOSE SYMMETRIC KEY ResidentDataKey;
                     END TRY
                     BEGIN CATCH
-                        IF EXISTS (SELECT * FROM sys.symmetric_keys WHERE name = 'ResidentDataKey')
-                            CLOSE SYMMETRIC KEY ResidentDataKey;
+                        IF EXISTS (SELECT * FROM sys.symmetric_keys WHERE name = 'SymmetricKey_AES')
+                            EXEC sp_CloseSymmetricKey;
 
                         THROW;
                     END CATCH
@@ -154,7 +153,7 @@ namespace QuanLiHoChieu.Migrations
                 CREATE PROCEDURE sp_SelectResidentData
                 AS
                 BEGIN
-                    OPEN SYMMETRIC KEY ResidentDataKey DECRYPTION BY PASSWORD = 'ResidentDataPassword';
+                    EXEC sp_OpenSymmetricKey;
 
                     SELECT
                         CONVERT(VARCHAR(20), DECRYPTBYKEY(CCCD)) AS CCCD,
@@ -181,7 +180,7 @@ namespace QuanLiHoChieu.Migrations
                         NgaySinhMe
                     FROM ResidentData;
 
-                    CLOSE SYMMETRIC KEY ResidentDataKey;
+                    EXEC sp_CloseSymmetricKey;
                 END;
                 ");
 

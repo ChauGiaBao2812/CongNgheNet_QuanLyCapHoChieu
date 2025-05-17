@@ -16,6 +16,7 @@ namespace QuanLiHoChieu.Data
         public DbSet<XuLy> XuLys { get; set; } = null!;
         public DbSet<ResidentData> ResidentDatas { get; set; } = null!;
         public DbSet<LuuTru> LuuTrus { get; set; } = null!;
+        public DbSet<AuditLog> AuditLog { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -26,6 +27,7 @@ namespace QuanLiHoChieu.Data
             modelBuilder.Entity<XuLy>().ToTable("XuLy");
             modelBuilder.Entity<ResidentData>().ToTable("ResidentData");
             modelBuilder.Entity<LuuTru>().ToTable("LuuTru");
+            modelBuilder.Entity<AuditLog>().ToTable("AuditLog");
 
             // Unique constraint on FormID in LuuTru (only needed if not using [Index])
             modelBuilder.Entity<LuuTru>()

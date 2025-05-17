@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations_Backup\**" />
+    <Content Remove="Migrations_Backup\**" />
+    <EmbeddedResource Remove="Migrations_Backup\**" />
+    <None Remove="Migrations_Backup\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.13" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.13" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.13">

@@ -12,8 +12,8 @@ using QuanLiHoChieu.Data;
 namespace QuanLiHoChieu.Migrations
 {
     [DbContext(typeof(PassportDbContext))]
-    [Migration("20250516065644_EncryptionProcedureAndMasterKey")]
-    partial class EncryptionProcedureAndMasterKey
+    [Migration("20250517135152_Keys")]
+    partial class Keys
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,37 @@ namespace QuanLiHoChieu.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("QuanLiHoChieu.Models.AuditLog", b =>
+                {
+                    b.Property<int>("LogID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LogID"));
+
+                    b.Property<string>("Action")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("TableName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime>("TimeStamp")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("LogID");
+
+                    b.ToTable("AuditLog", (string)null);
+                });
 
             modelBuilder.Entity("QuanLiHoChieu.Models.LuuTru", b =>
                 {
