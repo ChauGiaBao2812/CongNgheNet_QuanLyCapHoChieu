@@ -27,19 +27,10 @@ namespace QuanLiHoChieu.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(TaiKhoanUserViewModel model)
         {
-            _logger.LogInformation("I went here");
             model.UserID = Guid.NewGuid().ToString("N").Substring(0, 20);
 
             if (!ModelState.IsValid)
             {
-                foreach (var key in ModelState.Keys)
-                {
-                    var errors = ModelState[key].Errors;
-                    foreach (var error in errors)
-                    {
-                        _logger.LogWarning($"Validation error on {key}: {error.ErrorMessage}");
-                    }
-                }
                 return View(model);
             }
 
