@@ -28,12 +28,21 @@ namespace QuanLiHoChieu.Migrations
                 END
             ");
 
+            migrationBuilder.Sql(@"
+                IF NOT EXISTS (SELECT * FROM sys.symmetric_keys WHERE name = 'ResidentDataKey')
+                BEGIN
+                    CREATE SYMMETRIC KEY ResidentDataKey
+                    WITH ALGORITHM = AES_256
+                    ENCRYPTION BY PASSWORD = 'ResidentDataPassword';
+                END
+            ");
             // (Optional) Create the [User] table or update schema if needed
             // migrationBuilder.CreateTable(...);
         }
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.Sql("DROP SYMMETRIC KEY IF EXISTS UserDataKey;");
+            migrationBuilder.Sql("DROP SYMMETRIC KEY IF EXISTS ResidentDataKey;");
             migrationBuilder.Sql("DROP MASTER KEY;");
         }
     }
