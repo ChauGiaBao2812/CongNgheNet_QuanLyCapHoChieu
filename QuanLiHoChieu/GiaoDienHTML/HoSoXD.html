@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hồ sơ xét duyệt</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap">
+    <link rel="stylesheet" href="css/HoSo.css" />
+</head>
+<body>
+    <div class="app-container">
+        <div class="header">
+            <a href="#" class="btn logout-btn">
+                <span class="icon">→</span> Đăng xuất
+            </a>
+        </div>
+
+        <div class="content">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Danh sách hồ sơ</h2>
+                    <div class="actions">
+                        <button class="btn primary-btn">+ Tạo hồ sơ mới</button>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Mã hồ sơ</th>
+                                <th>Tình trạng</th>
+                                <th>Ngày nộp</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>HS01</td>
+                                <td><span class="status-badge pending">Chưa xét duyệt</span></td>
+                                <td>12/03/2025</td>
+                            </tr>
+                            <tr>
+                                <td>HS02</td>
+                                <td><span class="status-badge verified">Đã xét duyệt</span></td>
+                                <td>11/03/2025</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
