@@ -8,9 +8,18 @@
         this.classList.toggle('fa-eye');
         this.classList.toggle('fa-eye-slash');
     });
+
+    async function hashPassword(password) {
+        const encoder = new TextEncoder();
+        const data = encoder.encode(password);
+        const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
     const loginForm = document.getElementById('loginForm');
 
-    loginForm.addEventListener('submit', function (e) {
+    loginForm.addEventListener('submit', async function (e) {
         e.preventDefault();
 
         document.getElementById('username-error').textContent = '';
@@ -38,9 +47,12 @@
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ĐANG XỬ LÝ...';
             submitBtn.disabled = true;
 
-            setTimeout(() => {
-                this.submit();
-            }, 1500);
+            if (password.length < 64) {
+                const hashed = await hashPassword(password);
+                passwordInput.value = hashed;
+            }
+
+            this.submit();
         }
     });
 });

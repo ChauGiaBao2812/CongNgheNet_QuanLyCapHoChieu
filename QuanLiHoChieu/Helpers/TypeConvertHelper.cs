@@ -1,4 +1,7 @@
-﻿namespace QuanLiHoChieu.Helpers
+﻿using System.Security.Cryptography;
+using System.Text;
+
+namespace QuanLiHoChieu.Helpers
 {
     public class TypeConvertHelper
     {
@@ -18,6 +21,12 @@
             }
 
             return bytes;
+        }
+
+        public static byte[] ComputeSHA256(string input)
+        {
+            using var sha256 = SHA256.Create();
+            return sha256.ComputeHash(Encoding.UTF8.GetBytes(input));
         }
     }
 }
