@@ -50,5 +50,10 @@ namespace QuanLiHoChieu.Controllers
             // Thành công -> tạo session hoặc chuyển hướng
             return RedirectToAction("Index", "Home");
         }
+
+        public IActionResult Logout()
+        {
+            return View();
+        }
     }
 }
