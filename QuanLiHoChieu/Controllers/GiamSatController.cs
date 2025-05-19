@@ -8,6 +8,7 @@ using QuanLiHoChieu.Data;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authentication;
 
 namespace QuanLiHoChieu.Controllers
 {
@@ -29,14 +30,9 @@ namespace QuanLiHoChieu.Controllers
 
         public IActionResult Create()
         {
-            if (!User.Identity.IsAuthenticated)
+            if (string.IsNullOrEmpty(User?.Identity?.Name))
             {
-                _logger.LogWarning("User is NOT authenticated!");
-            }
-            else
-            {
-                _logger.LogInformation("Authenticated user: {User}", User.Identity.Name);
-                _logger.LogInformation("User roles: {Roles}", string.Join(",", User.Claims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value)));
+                return RedirectToAction("AccessDenied", "Chung");
             }
 
             var username = User.Identity.Name;
@@ -101,6 +97,10 @@ namespace QuanLiHoChieu.Controllers
 
             return RedirectToAction(nameof(Index));
         }
-
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync("MyCookieAuth");
+            return RedirectToAction("Login", "Chung");
+        }
     }
 }

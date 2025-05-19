@@ -78,8 +78,6 @@ namespace QuanLiHoChieu.Controllers
                 IsPersistent = false // This ensures the cookie is session-only, disappears when browser closes
             };
 
-            _logger.LogInformation("Signing in with IsPersistent={IsPersistent}", authProperties.IsPersistent);
-
             await HttpContext.SignInAsync("MyCookieAuth", principal, authProperties);
 
             return user.ChucVu switch
