@@ -25,18 +25,18 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
+    gap: 15px;
 }
 
-.username {
-    font-size: 16px;
-    font-weight: 500;
+.header-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid #ced4da;
 }
-
-    .username strong {
-        color: #007bff;
-    }
 
 .logout-btn {
     display: flex;
@@ -62,57 +62,28 @@ body {
         background-color: #c82333;
     }
 
-.form-container {
-    display: flex;
-    max-width: 1200px;
+.form-title {
+    max-width: 800px;
     margin: 80px auto 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-}
-
-.form-sidebar {
-    width: 35%;
-    background-color: #f8f9fa;
-    padding: 40px;
-}
-
-.sidebar-header h2 {
     font-size: 24px;
     font-weight: 600;
     color: #1a3c66;
-    margin-bottom: 10px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
 }
 
-.sidebar-header p {
-    font-size: 14px;
-    color: #6c757d;
+.form-container {
+    max-width: 800px;
+    margin: 0 auto 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
-
-.sidebar-features {
-    list-style: none;
-    margin-top: 20px;
-}
-
-    .sidebar-features li {
-        font-size: 14px;
-        color: #333;
-        margin-bottom: 10px;
-        position: relative;
-        padding-left: 20px;
-    }
-
-        .sidebar-features li::before {
-            content: '✓';
-            color: #007bff;
-            position: absolute;
-            left: 0;
-        }
 
 .form-content {
-    width: 65%;
-    padding: 40px;
+    padding: 30px;
 }
 
 .form-section {
@@ -125,22 +96,8 @@ body {
     margin-bottom: 20px;
 }
 
-.section-number {
-    width: 32px;
-    height: 32px;
-    background-color: #007bff;
-    color: #fff;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    font-weight: 600;
-    margin-right: 10px;
-}
-
 .section-title {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
     color: #1a3c66;
 }
@@ -231,13 +188,17 @@ body {
     }
 
 @media (max-width: 768px) {
-    .form-container {
-        flex-direction: column;
+    .form-title {
+        margin: 70px 10px 15px;
+        font-size: 20px;
     }
 
-    .form-sidebar,
+    .form-container {
+        margin: 0 10px 20px;
+    }
+
     .form-content {
-        width: 100%;
+        padding: 20px;
     }
 
     .form-grid {
@@ -246,7 +207,7 @@ body {
 
     .header-content {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: flex-end;
     }
 
     .logout-btn {
