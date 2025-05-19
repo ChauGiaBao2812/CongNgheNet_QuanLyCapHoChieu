@@ -11,19 +11,38 @@
 <body>
     <header class="header">
         <div class="header-content">
-            <img src="content/images/default-avatar.jpg" alt="Avatar" class="header-avatar">
-            <button class="logout-btn" onclick="window.location.href='/Logout'">
-                Đăng Xuất
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"></path>
-                </svg>
-            </button>
+            <div class="header-left">
+                <span class="header-title">Danh sách hồ sơ</span>
+                <span class="header-divider">/</span>
+                <span class="header-title">Danh sách user</span>
+            </div>
+            <div class="header-right">
+                <img src="content/images/default-avatar.jpg" alt="Avatar" class="header-avatar">
+                <button class="logout-btn" onclick="window.location.href='/Logout'">
+                    Đăng Xuất
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"></path>
+                    </svg>
+                </button>
+            </div>
         </div>
     </header>
 
-    <h2 class="form-title">DANH SÁCH HỒ SƠ</h2>
-
     <div class="profile-container">
+        <div class="table-controls">
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Tìm kiếm...">
+                <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#007bff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+            </div>
+            <select class="filter-select">
+                <option value="all">All</option>
+                <option value="approved">Approved</option>
+                <option value="pending">Pending</option>
+            </select>
+        </div>
         <div class="profile-table-container">
             <table class="profile-table">
                 <thead>
