@@ -1,37 +1,60 @@
 ﻿<!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <title>Xét duyệt hồ sơ</title>
-    <style></style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Xét duyệt hồ sơ - Hệ Thống Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="../wwwroot/css/XetDuyet.css" />
 </head>
 <body>
+    <!-- HEADER -->
+    <header class="admin-header">
+        <div class="header-title">
+            <i class="fas fa-clipboard-check"></i>
+            <span>XÉT DUYỆT HỒ SƠ</span>
+        </div>
+        <div class="user-info">
+            <img src="content/images/admin-avatar.jpg" alt="Admin Avatar" class="user-avatar" />
+            <button class="logout-btn" onclick="window.location.href='/Logout'">
+                <i class="fas fa-sign-out-alt"></i> Đăng xuất
+            </button>
+        </div>
+    </header>
 
-    <div class="verification-container">
-        <div class="info-box">
-            Thông tin từ người dùng
-
-            <img src="Img/error.png" alt="Các yêu cầu xét duyệt" onclick="toggleRequirements()" />
-
-            <div id="requirementBox" class="requirement-box">
-                <strong>Các yêu cầu:</strong>
-                <ul>
-                    <li>Yêu cầu 1</li>
-                    <li>Không</li>
-                    <li>Sai</li>
-                </ul>
-                <button onclick="toggleRequirements()">Đóng</button>
+    <!-- MAIN CONTENT -->
+    <div class="admin-container">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <i class="fas fa-info-circle"></i>
+                    Thông tin xét duyệt
+                </div>
             </div>
-        </div>
 
-        <div class="note-section">
-            <label>Ghi chú</label><br />
-            <textarea placeholder="Nhập ghi chú ở đây..."></textarea>
-        </div>
+            <div class="info-box">
+                Thông tin từ người dùng
+                <img src="Img/error.png" alt="Các yêu cầu xét duyệt" onclick="toggleRequirements()" />
+                <div id="requirementBox" class="requirement-box">
+                    <strong>Các yêu cầu:</strong>
+                    <ul>
+                        <li>Yêu cầu 1</li>
+                        <li>Không</li>
+                        <li>Sai</li>
+                    </ul>
+                    <button class="btn close-btn" onclick="toggleRequirements()">Đóng</button>
+                </div>
+            </div>
 
-        <div class="action-buttons">
-            <button class="invalid-btn">Không hợp lệ</button>
-            <button class="valid-btn">Hợp lệ</button>
+            <div class="note-section">
+                <label for="note">Ghi chú</label><br />
+                <textarea id="note" placeholder="Nhập ghi chú ở đây..."></textarea>
+            </div>
+
+            <div class="button-group">
+                <button class="btn invalid-btn">Không hợp lệ</button>
+                <button class="btn valid-btn">Hợp lệ</button>
+            </div>
         </div>
     </div>
 
@@ -41,6 +64,5 @@
             box.style.display = (box.style.display === "block") ? "none" : "block";
         }
     </script>
-
 </body>
 </html>

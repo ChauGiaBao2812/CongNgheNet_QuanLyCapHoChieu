@@ -52,15 +52,15 @@ body {
     transition: background-color 0.3s;
 }
 
-    .logout-btn svg {
-        width: 18px;
-        height: 18px;
-        margin-left: 8px;
-    }
+.logout-btn svg {
+    width: 18px;
+    height: 18px;
+    margin-left: 8px;
+}
 
-    .logout-btn:hover {
-        background-color: #c82333;
-    }
+.logout-btn:hover {
+    background-color: #c82333;
+}
 
 .form-title {
     max-width: 800px;
@@ -136,15 +136,15 @@ body {
     transition: border-color 0.3s;
 }
 
-    .form-control:focus {
-        outline: none;
-        border-color: #007bff;
-        box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
-    }
+.form-control:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
 
-    .form-control::placeholder {
-        color: #adb5bd;
-    }
+.form-control::placeholder {
+    color: #adb5bd;
+}
 
 .text-danger {
     font-size: 12px;
@@ -177,15 +177,15 @@ body {
     transition: background-color 0.3s;
 }
 
-    .submit-btn svg {
-        width: 20px;
-        height: 20px;
-        margin-left: 10px;
-    }
+.submit-btn svg {
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+}
 
-    .submit-btn:hover {
-        background-color: #0056b3;
-    }
+.submit-btn:hover {
+    background-color: #0056b3;
+}
 
 @media (max-width: 768px) {
     .form-title {
