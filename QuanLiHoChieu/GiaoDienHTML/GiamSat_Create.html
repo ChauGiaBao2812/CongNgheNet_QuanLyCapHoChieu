@@ -1,95 +1,137 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
-    <meta charset="UTF-8" />
-    <title>Create User Account</title>
-    <link href="../wwwroot/css/bootstrap.css" rel="stylesheet" /> <!-- optional -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tạo Tài Khoản Người Dùng</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap">
+    <link href="../wwwroot/css/bootstrap.css" rel="stylesheet" />
+    <link href="../wwwroot/css/GiamSat_Create.css" rel="stylesheet" />
 </head>
 <body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <span class="username">Xin chào, <strong>NguyenVanA</strong></span>
+            <button class="logout-btn" onclick="window.location.href='/Logout'">
+                Đăng Xuất
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" />
+                </svg>
+            </button>
+        </div>
+    </header>
 
-    <h2>Create User Account</h2>
-
-    <form action="/GiamSat/Create" method="post" id="createAccountForm">
-        <!-- Validation summary placeholder -->
-        <div id="validationSummary" class="text-danger"></div>
-
-        <div class="form-group">
-            <label for="Username">Username</label>
-            <input id="Username" name="Username" class="form-control" type="text" />
-            <span id="UsernameError" class="text-danger"></span>
+    <!-- Form Container -->
+    <div class="form-container">
+        <div class="form-sidebar">
+            <div class="sidebar-header">
+                <h2>TẠO TÀI KHOẢN NGƯỜI DÙNG</h2>
+                <p>Vui lòng điền đầy đủ thông tin bên dưới</p>
+            </div>
+            <ul class="sidebar-features">
+                <li>Bảo mật thông tin 100%</li>
+                <li>Quy trình đơn giản, nhanh chóng</li>
+                <li>Hỗ trợ 24/7 khi cần giúp đỡ</li>
+            </ul>
         </div>
 
-        <div class="form-group">
-            <label for="Password">Password</label>
-            <input id="Password" name="Password" class="form-control" type="password" />
-            <span id="PasswordError" class="text-danger"></span>
+        <div class="form-content">
+            <form action="/GiamSat/Create" method="post" id="createAccountForm">
+                <!-- Validation Summary -->
+                <div id="validationSummary" class="text-danger validation-summary"></div>
+
+                <!-- Form Section -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <div class="section-number">1</div>
+                        <div class="section-title">Thông tin tài khoản</div>
+                        <div class="section-divider"></div>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="Username" class="form-label">Tên đăng nhập</label>
+                            <input id="Username" name="Username" class="form-control" type="text" placeholder="Nhập tên đăng nhập" />
+                            <span id="UsernameError" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Password" class="form-label">Mật khẩu</label>
+                            <input id="Password" name="Password" class="form-control" type="password" placeholder="Nhập mật khẩu" />
+                            <span id="PasswordError" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="HoTen" class="form-label">Họ và tên</label>
+                            <input id="HoTen" name="HoTen" class="form-control" type="text" placeholder="Nhập họ và tên" />
+                            <span id="HoTenError" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="GioiTinh" class="form-label">Giới tính</label>
+                            <select id="GioiTinh" name="GioiTinh" class="form-control">
+                                <option value="">-- Chọn giới tính --</option>
+                                <option value="Male">Nam</option>
+                                <option value="Female">Nữ</option>
+                                <option value="Other">Khác</option>
+                            </select>
+                            <span id="GioiTinhError" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="NgaySinh" class="form-label">Ngày sinh</label>
+                            <input id="NgaySinh" name="NgaySinh" class="form-control" type="date" />
+                            <span id="NgaySinhError" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="QueQuan" class="form-label">Quê quán</label>
+                            <input id="QueQuan" name="QueQuan" class="form-control" type="text" placeholder="Nhập quê quán" />
+                            <span id="QueQuanError" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="SDT" class="form-label">Số điện thoại</label>
+                            <input id="SDT" name="SDT" class="form-control" type="text" placeholder="Nhập số điện thoại" />
+                            <span id="SDTError" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Email" class="form-label">Email</label>
+                            <input id="Email" name="Email" class="form-control" type="email" placeholder="Nhập email" />
+                            <span id="EmailError" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="ChucVu" class="form-label">Chức vụ</label>
+                            <select id="ChucVu" name="ChucVu" class="form-control">
+                                <option value="">-- Chọn chức vụ --</option>
+                                <option value="GiamSat">Giám Sát</option>
+                                <option value="XuLy">Xử Lý</option>
+                                <option value="LuuTru">Lưu Trữ</option>
+                                <option value="XacThuc">Xác Thực</option>
+                                <option value="XetDuyet">Xét Duyệt</option>
+                            </select>
+                            <span id="ChucVuError" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="submit-btn">
+                        Tạo tài khoản
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                </div>
+            </form>
         </div>
-
-        <div class="form-group">
-            <label for="HoTen">Họ Tên</label>
-            <input id="HoTen" name="HoTen" class="form-control" type="text" />
-            <span id="HoTenError" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
-            <label for="GioiTinh">Giới Tính</label>
-            <select id="GioiTinh" name="GioiTinh" class="form-control">
-                <option value="">-- Select Gender --</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
-            </select>
-            <span id="GioiTinhError" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
-            <label for="NgaySinh">Ngày Sinh</label>
-            <input id="NgaySinh" name="NgaySinh" class="form-control" type="date" />
-            <span id="NgaySinhError" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
-            <label for="QueQuan">Quê Quán</label>
-            <input id="QueQuan" name="QueQuan" class="form-control" type="text" />
-            <span id="QueQuanError" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
-            <label for="SDT">Số Điện Thoại</label>
-            <input id="SDT" name="SDT" class="form-control" type="text" />
-            <span id="SDTError" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
-            <label for="Email">Email</label>
-            <input id="Email" name="Email" class="form-control" type="email" />
-            <span id="EmailError" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
-            <label for="ChucVu">Chức Vụ</label>
-            <select id="ChucVu" name="ChucVu" class="form-control">
-                <option value="">-- Chọn chức vụ --</option>
-                <option value="GiamSat">Giám Sát</option>
-                <option value="XuLy">Xử Lý</option>
-                <option value="LuuTru">Lưu Trữ</option>
-                <option value="XacThuc">Xác Thực</option>
-                <option value="XetDuyet">Xét Duyệt</option>
-            </select>
-            <span id="ChucVuError" class="text-danger"></span>
-        </div>
-
-        <button type="submit" class="btn btn-primary">Create</button>
-    </form>
-
-    <!--
-      You will need to include validation scripts manually if needed.
-      In ASP.NET MVC, the _ValidationScriptsPartial includes jquery.validate and jquery.validate.unobtrusive.
-    -->
+    </div>
 
     <script src="../wwwroot/js/jquery.js"></script>
     <script src="../wwwroot/js/jquery.validate.js"></script>
     <script src="../wwwroot/js/jquery.validate.unobtrusive.js"></script>
-
 </body>
 </html>
