@@ -5,8 +5,21 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
 builder.Services.AddDbContext<PassportDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddAuthentication("MyCookieAuth")
+    .AddCookie("MyCookieAuth", options =>
+    {
+        options.LoginPath = "/Chung/Login";          // Redirect here if not logged in
+        options.AccessDeniedPath = "/Chung/AccessDenied"; // Redirect here if no permission
+        options.Cookie.Name = "MyCookieAuth";           // Cookie name in browser
+        options.Cookie.HttpOnly = true;
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(5); // Optional: cookie lifetime
+        options.SlidingExpiration = false;                // Optional: refresh cookie expiry on activity
+        options.Cookie.IsEssential = true;               // GDPR compliance
+    });
 
 var app = builder.Build();
 
@@ -23,6 +36,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

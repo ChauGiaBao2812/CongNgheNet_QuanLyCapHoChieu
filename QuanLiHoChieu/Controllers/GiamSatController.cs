@@ -5,9 +5,12 @@ using QuanLiHoChieu.Helpers;
 using QuanLiHoChieu.Models.ViewModels;
 using QuanLiHoChieu.Models;
 using QuanLiHoChieu.Data;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace QuanLiHoChieu.Controllers
 {
+    [Authorize(Roles = "GiamSat")]
     public class GiamSatController : Controller
     {
         private readonly PassportDbContext _context;
@@ -20,6 +23,21 @@ namespace QuanLiHoChieu.Controllers
         }
         public IActionResult Index()
         {
+            return View();
+        }
+
+        public IActionResult Create()
+        {
+            if (!User.Identity.IsAuthenticated)
+            {
+                _logger.LogWarning("User is NOT authenticated!");
+            }
+            else
+            {
+                _logger.LogInformation("Authenticated user: {User}", User.Identity.Name);
+                _logger.LogInformation("User roles: {Roles}", string.Join(",", User.Claims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value)));
+            }
+
             return View();
         }
 
@@ -69,11 +87,6 @@ namespace QuanLiHoChieu.Controllers
             );
 
             return RedirectToAction(nameof(Index));
-        }
-
-        public IActionResult Create()
-        {
-            return View();
         }
 
     }
