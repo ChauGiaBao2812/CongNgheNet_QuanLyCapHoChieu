@@ -1,82 +1,142 @@
 ﻿@model QuanLiHoChieu.Models.ViewModels.TaiKhoanUserViewModel
 
 @{
-    ViewData["Title"] = "Create User Account";
+    ViewData["Title"] = "Tạo Tài Khoản Người Dùng";
+    Layout = null;
 }
 
-<h2>Create User Account</h2>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" />
+    <link href="~/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/GiamSat_Create.css" rel="stylesheet" />
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            @{
+                var gioiTinh = ViewData["GioiTinh"] as string ?? "Other";
+                string avatarPath = gioiTinh switch
+                {
+                    "Nam" => Url.Content("~/public/male.png"),
+                    "Nữ" => Url.Content("~/public/female.png"),
+                    _ => Url.Content("~/public/user.png")
+                };
+            }
 
-<form asp-action="Create" method="post" id="createAccountForm">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <img src="@avatarPath" alt="Avatar" class="header-avatar" />
+            <button class="logout-btn" onclick="window.location.href='/Logout'">
+                Đăng Xuất
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"></path>
+                </svg>
+            </button>
+        </div>
+    </header>
 
-    <div class="form-group">
-        <label asp-for="Username"></label>
-        <input asp-for="Username" class="form-control" />
-        <span asp-validation-for="Username" class="text-danger"></span>
+    <h2 class="form-title">@ViewData["Title"]</h2>
+
+    <div class="form-container">
+        <div class="form-content">
+            <form asp-action="Create" method="post" id="createAccountForm">
+                @Html.AntiForgeryToken()
+                <div asp-validation-summary="ModelOnly" class="text-danger validation-summary"></div>
+
+                <div class="form-section">
+                    <div class="section-header">
+                        <div class="section-title">Thông tin tài khoản</div>
+                        <div class="section-divider"></div>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label asp-for="Username" class="form-label">Tên đăng nhập</label>
+                            <input asp-for="Username" class="form-control" placeholder="Nhập tên đăng nhập" />
+                            <span asp-validation-for="Username" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Password" class="form-label">Mật khẩu</label>
+                            <input asp-for="Password" type="password" class="form-control" placeholder="Nhập mật khẩu" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="HoTen" class="form-label">Họ và Tên</label>
+                            <input asp-for="HoTen" class="form-control" placeholder="Nhập họ và tên" />
+                            <span asp-validation-for="HoTen" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="GioiTinh" class="form-label">Giới Tính</label>
+                            <select asp-for="GioiTinh" class="form-control">
+                                <option value="">-- Chọn giới tính --</option>
+                                <option value="Nam">Nam</option>
+                                <option value="Nữ">Nữ</option>
+                                <option value="Khác">Khác</option>
+                            </select>
+                            <span asp-validation-for="GioiTinh" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="NgaySinh" class="form-label">Ngày sinh</label>
+                            <input asp-for="NgaySinh" type="date" class="form-control" />
+                            <span asp-validation-for="NgaySinh" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="QueQuan" class="form-label">Quê quán</label>
+                            <input asp-for="QueQuan" class="form-control" placeholder="Nhập quê quán" />
+                            <span asp-validation-for="QueQuan" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="SDT" class="form-label">Số điện thoại</label>
+                            <input asp-for="SDT" class="form-control" placeholder="Nhập số điện thoại" />
+                            <span asp-validation-for="SDT" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Email" class="form-label">Email</label>
+                            <input asp-for="Email" class="form-control" placeholder="Nhập email" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="ChucVu" class="form-label">Chức vụ</label>
+                            <select asp-for="ChucVu" class="form-control">
+                                <option value="">-- Chọn chức vụ --</option>
+                                <option value="GiamSat">Giám Sát</option>
+                                <option value="LuuTru">Lưu Trữ</option>
+                                <option value="XacThuc">Xác Thực</option>
+                                <option value="XetDuyet">Xét Duyệt</option>
+                            </select>
+                            <span asp-validation-for="ChucVu" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="submit-btn">
+                        Tạo tài khoản
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 12h14M12 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 
-    <div class="form-group">
-        <label asp-for="Password"></label>
-        <input asp-for="Password" type="password" class="form-control" />
-        <span asp-validation-for="Password" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="HoTen"></label>
-        <input asp-for="HoTen" class="form-control" />
-        <span asp-validation-for="HoTen" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="GioiTinh"></label>
-        <select asp-for="GioiTinh" class="form-control">
-            <option value="">-- Select Gender --</option>
-            <option>Male</option>
-            <option>Female</option>
-            <option>Other</option>
-        </select>
-        <span asp-validation-for="GioiTinh" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="NgaySinh"></label>
-        <input asp-for="NgaySinh" type="date" class="form-control" />
-        <span asp-validation-for="NgaySinh" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="QueQuan"></label>
-        <input asp-for="QueQuan" class="form-control" />
-        <span asp-validation-for="QueQuan" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="SDT"></label>
-        <input asp-for="SDT" class="form-control" />
-        <span asp-validation-for="SDT" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="Email"></label>
-        <input asp-for="Email" type="email" class="form-control" />
-        <span asp-validation-for="Email" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="ChucVu"></label>
-        <select asp-for="ChucVu" class="form-control">
-            <option value="">-- Chọn chức vụ --</option>
-            <option value="GiamSat">Giám Sát</option>
-            <option value="XuLy">Xử Lý</option>
-            <option value="LuuTru">Lưu Trữ</option>
-            <option value="XacThuc">Xác Thực</option>
-            <option value="XetDuyet">Xét Duyệt</option>
-        </select>
-        <span asp-validation-for="ChucVu" class="text-danger"></span>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Create</button>
-</form>
+    <script src="~/js/jquery.js"></script>
+    <script src="~/js/jquery.validate.js"></script>
+    <script src="~/js/jquery.validate.unobtrusive.js"></script>
+</body>
+</html>
 
 @section Scripts {
     @{
