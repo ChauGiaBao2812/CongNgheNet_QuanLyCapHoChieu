@@ -7,6 +7,7 @@ using QuanLiHoChieu.Models;
 using QuanLiHoChieu.Data;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using Microsoft.Extensions.Logging;
 
 namespace QuanLiHoChieu.Controllers
 {
@@ -37,6 +38,18 @@ namespace QuanLiHoChieu.Controllers
                 _logger.LogInformation("Authenticated user: {User}", User.Identity.Name);
                 _logger.LogInformation("User roles: {Roles}", string.Join(",", User.Claims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value)));
             }
+
+            var username = User.Identity.Name;
+
+            var user = _context.Users.FirstOrDefault(u => u.Username == username);
+            _logger.LogInformation(username);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            ViewData["GioiTinh"] = user.GioiTinh;
 
             return View();
         }
