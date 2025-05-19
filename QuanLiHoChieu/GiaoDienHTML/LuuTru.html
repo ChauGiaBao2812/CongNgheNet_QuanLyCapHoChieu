@@ -1,53 +1,68 @@
 <!DOCTYPE html>
 <html lang="vi">
-  <head>
+<head>
     <meta charset="UTF-8" />
-    <title>Lưu trữ hồ sơ</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <h1>Lưu trữ hồ sơ</h1>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Lưu trữ hồ sơ - Hệ Thống Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="../wwwroot/css/LuuTru.css" />
+</head>
+<body>
+    <header class="admin-header">
+        <div class="header-title">
+            <i class="fas fa-archive"></i>
+            <span>LƯU TRỮ HỒ SƠ</span>
+        </div>
+        <div class="user-info">
+            <img src="content/images/admin-avatar.jpg" alt="Admin Avatar" class="user-avatar" />
+            <button class="logout-btn" onclick="window.location.href='/Logout'">
+                <i class="fas fa-sign-out-alt"></i> Đăng xuất
+            </button>
+        </div>
+    </header>
 
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Mã hồ sơ</th>
-          <th>Tình trạng</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>HS01</td>
-          <td>Đồng ý cấp hộ chiếu</td>
-          <td></td>
-        </tr>
-        <tr>
-          <td>HS02</td>
-          <td>Không đồng ý cấp hộ chiếu</td>
-          <td></td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="admin-container">
+        <div class="card">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Mã hồ sơ</th>
+                        <th>Tình trạng</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>HS01</td>
+                        <td>Đồng ý cấp hộ chiếu</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>HS02</td>
+                        <td>Không đồng ý cấp hộ chiếu</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const rows = document.querySelectorAll("table tr");
+        document.addEventListener("DOMContentLoaded", function () {
+            const rows = document.querySelectorAll("table tbody tr");
 
-        rows.forEach((row, index) => {
-          if (index === 0) return; // Bỏ qua hàng tiêu đề
+            rows.forEach(row => {
+                const statusCell = row.cells[1];
+                const storageCell = row.cells[2];
 
-          const statusCell = row.cells[1];
-          const storageCell = row.cells[2];
-
-          if (statusCell.textContent.trim() === "Đồng ý cấp hộ chiếu") {
-            const button = document.createElement("button");
-            button.textContent = "Lưu";
-            button.className = "save-btn";
-            storageCell.appendChild(button);
-          }
+                if (statusCell.textContent.trim() === "Đồng ý cấp hộ chiếu") {
+                    const button = document.createElement("button");
+                    button.textContent = "Lưu";
+                    button.className = "save-btn";
+                    storageCell.appendChild(button);
+                }
+            });
         });
-      });
     </script>
-  </body>
+</body>
 </html>
