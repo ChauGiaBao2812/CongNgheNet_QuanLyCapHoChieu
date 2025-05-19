@@ -95,7 +95,7 @@ namespace QuanLiHoChieu.Controllers
             //return RedirectToAction("Index", "Home");
         }
 
-        public IActionResult Logout()
+        public IActionResult Forget()
         {
             return View();
         }
