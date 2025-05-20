@@ -23,11 +23,6 @@ namespace QuanLiHoChieu.Controllers
             _context = context;
             _logger = logger;
         }
-        public IActionResult Index()
-        {
-            return View();
-        }
-
         public IActionResult Create()
         {
             if (string.IsNullOrEmpty(User?.Identity?.Name))
@@ -35,17 +30,7 @@ namespace QuanLiHoChieu.Controllers
                 return RedirectToAction("AccessDenied", "Chung");
             }
 
-            var username = User.Identity.Name;
-
-            var user = _context.Users.FirstOrDefault(u => u.Username == username);
-            _logger.LogInformation(username);
-
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            ViewData["GioiTinh"] = user.GioiTinh;
+            LoadUserGender();
 
             return View();
         }
@@ -54,6 +39,8 @@ namespace QuanLiHoChieu.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(TaiKhoanUserViewModel model)
         {
+            LoadUserGender();
+
             model.UserID = Guid.NewGuid().ToString("N").Substring(0, 20);
 
             if (!ModelState.IsValid)
@@ -64,12 +51,13 @@ namespace QuanLiHoChieu.Controllers
             // Check if username already exists
             if (_context.TaiKhoans.Any(t => t.Username == model.Username))
             {
+                ViewBag.AlertMessage = "Tạo tài khoản không thành công. Đã có tên tài khoản của người dùng này";
                 ModelState.AddModelError(nameof(model.Username), "Username already exists.");
                 return View(model);
             }
 
             // Convert client-side hashed password hex string to byte[]
-            var hashedPasswordBytes = TypeConvertHelper.HexStringToByteArray(model.Password);
+            var hashedPasswordBytes = TypeConvertHelper.ComputeSHA256(model.Password);
 
             var taiKhoan = new TaiKhoan
             {
@@ -95,12 +83,30 @@ namespace QuanLiHoChieu.Controllers
                 new SqlParameter("@Username", model.Username)
             );
 
-            return RedirectToAction(nameof(Index));
+            // Set a success message in ViewData or ViewBag
+            ViewBag.AlertMessage = "Tạo tài khoản thành công!";
+
+            ModelState.Clear();
+
+            return View();
         }
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync("MyCookieAuth");
             return RedirectToAction("Login", "Chung");
+        }
+
+        private void LoadUserGender()
+        {
+            var username = User.Identity?.Name;
+            if (!string.IsNullOrEmpty(username))
+            {
+                var user = _context.Users.FirstOrDefault(u => u.Username == username);
+                if (user != null)
+                {
+                    ViewData["GioiTinh"] = user.GioiTinh;
+                }
+            }
         }
     }
 }
