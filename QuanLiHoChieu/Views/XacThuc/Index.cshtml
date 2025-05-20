@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hồ sơ xác thực - Hệ Thống Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="~/css/HoSoXT.css" />
+</head>
+<body>
+    <header class="admin-header">
+        <div class="header-title">
+            <i class="fas fa-folder-open"></i>
+            <span>XÁC THỰC HỒ SƠ</span>
+        </div>
+        <div class="user-info">
+            <img src="content/images/admin-avatar.jpg" alt="Admin Avatar" class="user-avatar" />
+            <button class="logout-btn" onclick="window.location.href='/Logout'">
+                <i class="fas fa-sign-out-alt"></i> Đăng xuất
+            </button>
+        </div>
+    </header>
+
+    <div class="admin-container">
+        <div class="card">
+            <div class="card-header">
+                <h2>Danh sách hồ sơ</h2>
+                <div class="actions">
+                    <button class="btn">
+                        <i class="fas fa-plus"></i> Tạo hồ sơ mới
+                    </button>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Mã hồ sơ</th>
+                            <th>Tình trạng</th>
+                            <th>Ngày nộp</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>HS01</td>
+                            <td><span class="status-badge pending">Chưa xác thực</span></td>
+                            <td>12/03/2025</td>
+                        </tr>
+                        <tr>
+                            <td>HS02</td>
+                            <td><span class="status-badge verified">Đã xác thực</span></td>
+                            <td>11/03/2025</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
