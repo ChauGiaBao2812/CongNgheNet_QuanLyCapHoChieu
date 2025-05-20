@@ -287,3 +287,78 @@ select.form-control {
         padding: 30px 20px;
     }
 }
+
+.image-upload-container {
+    margin-bottom: 15px;
+}
+
+.image-upload-input {
+    display: none;
+}
+
+.image-upload-label {
+    cursor: pointer;
+    display: block;
+}
+
+.image-upload-box {
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    transition: all 0.3s;
+    position: relative;
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f9f9f9;
+}
+
+.image-upload-box:hover {
+    border-color: #4a90e2;
+    background-color: #f0f7ff;
+}
+
+.image-preview {
+    max-width: 100%;
+    max-height: 120px;
+    display: none;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    object-fit: contain;
+}
+
+.upload-icon {
+    width: 40px;
+    height: 40px;
+    margin: 0 auto 10px;
+    color: #4a90e2;
+}
+
+.upload-text {
+    margin: 0 0 5px;
+    font-weight: 500;
+    color: #333;
+}
+
+.upload-hint {
+    margin: 0;
+    font-size: 12px;
+    color: #777;
+}
+
+.image-upload-box.has-image {
+    padding: 10px;
+}
+
+.image-upload-box.has-image .upload-icon,
+.image-upload-box.has-image .upload-text,
+.image-upload-box.has-image .upload-hint {
+    display: none;
+}
+
+.image-upload-box.has-image .image-preview {
+    display: block;
+}
