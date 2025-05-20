@@ -8,5 +8,9 @@ namespace QuanLiHoChieu.Controllers
         {
             return View();
         }
+        public IActionResult DetailProfile()
+        {
+            return View();
+        }
     }
 }
