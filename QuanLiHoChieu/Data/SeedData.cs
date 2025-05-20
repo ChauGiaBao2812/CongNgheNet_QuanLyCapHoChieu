@@ -16,9 +16,7 @@ namespace QuanLiHoChieu.Data
             {
                 try
                 {
-                    var key = "your-32-char-key-1234567890abcde";
-
-                    byte[] Encrypt(string? value) => value == null ? null! : AesEcbEncryption.EncryptAesEcb(value, key);
+                    byte[] Encrypt(string? value) => value == null ? null! : AesEcbEncryption.EncryptAesEcb(value);
 
                     var resident = new ResidentData
                     {

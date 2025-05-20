@@ -5,11 +5,12 @@ namespace QuanLiHoChieu.Helpers
 {
     public static class AesEcbEncryption
     {
-        public static byte[] EncryptAesEcb(string plaintext, string key)
+        private static readonly byte[] _key = Encoding.UTF8.GetBytes("your-32-char-key-1234567890abcde");
+        public static byte[] EncryptAesEcb(string plaintext)
         {
             using (Aes aes = Aes.Create())
             {
-                aes.Key = Encoding.UTF8.GetBytes(key);
+                aes.Key = _key;
                 aes.Mode = CipherMode.ECB;
                 aes.Padding = PaddingMode.PKCS7;
 
@@ -19,11 +20,11 @@ namespace QuanLiHoChieu.Helpers
             }
         }
 
-        public static string DecryptAesEcb(byte[] encryptedBytes, string key)
+        public static string DecryptAesEcb(byte[] encryptedBytes)
         {
             using (Aes aes = Aes.Create())
             {
-                aes.Key = Encoding.UTF8.GetBytes(key);
+                aes.Key = _key;
                 aes.Mode = CipherMode.ECB;
                 aes.Padding = PaddingMode.PKCS7;
 

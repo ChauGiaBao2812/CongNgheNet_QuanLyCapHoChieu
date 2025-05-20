@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Text;
-
+using QuanLiHoChieu.Helpers;
 using QuanLiHoChieu.Data;   // Your DbContext namespace
 using QuanLiHoChieu.Models; // Your ResidentData model namespace
 
@@ -9,26 +9,10 @@ using QuanLiHoChieu.Models; // Your ResidentData model namespace
 public class ResidentController : ControllerBase
 {
     private readonly PassportDbContext _context;
-    private readonly string _aesKey = "your-32-char-key-1234567890abcde";
 
     public ResidentController(PassportDbContext context)
     {
         _context = context;
-    }
-
-    // AES decrypt method
-    private string DecryptFromBytes(byte[] ciphertext)
-    {
-        using (var aes = System.Security.Cryptography.Aes.Create())
-        {
-            aes.Key = Encoding.UTF8.GetBytes(_aesKey);
-            aes.Mode = System.Security.Cryptography.CipherMode.ECB;
-            aes.Padding = System.Security.Cryptography.PaddingMode.PKCS7;
-
-            var decryptor = aes.CreateDecryptor();
-            var decryptedBytes = decryptor.TransformFinalBlock(ciphertext, 0, ciphertext.Length);
-            return Encoding.UTF8.GetString(decryptedBytes);
-        }
     }
 
     // GET api/resident/{cccd}
@@ -39,7 +23,7 @@ public class ResidentController : ControllerBase
         byte[] encryptedCCCD;
         try
         {
-            encryptedCCCD = EncryptToBytes(cccd);
+            encryptedCCCD = AesEcbEncryption.EncryptAesEcb(cccd);
         }
         catch
         {
@@ -56,50 +40,35 @@ public class ResidentController : ControllerBase
         var result = new
         {
             CCCD = cccd,
-            HoTen = DecryptFromBytes(resident.HoTen),
+            HoTen = AesEcbEncryption.DecryptAesEcb(resident.HoTen),
             GioiTinh = resident.GioiTinh,
             NgaySinh = resident.NgaySinh,
-            NoiSinh = DecryptFromBytes(resident.NoiSinh),
+            NoiSinh = AesEcbEncryption.DecryptAesEcb(resident.NoiSinh),
             NgayCap = resident.NgayCap,
-            NoiCap = DecryptFromBytes(resident.NoiCap),
+            NoiCap = AesEcbEncryption.DecryptAesEcb(resident.NoiCap),
             DanToc = resident.DanToc,
             TonGiao = resident.TonGiao,
-            SDT = DecryptFromBytes(resident.SĐT),
+            SDT = AesEcbEncryption.DecryptAesEcb(resident.SĐT),
 
             // Address thường trú
-            ttTinhThanh = DecryptFromBytes(resident.ttTinhThanh),
-            ttQuanHuyen = DecryptFromBytes(resident.ttQuanHuyen),
-            ttPhuongXa = DecryptFromBytes(resident.ttPhuongXa),
-            ttSoNhaDuong = DecryptFromBytes(resident.ttSoNhaDuong),
+            ttTinhThanh = AesEcbEncryption.DecryptAesEcb(resident.ttTinhThanh),
+            ttQuanHuyen = AesEcbEncryption.DecryptAesEcb(resident.ttQuanHuyen),
+            ttPhuongXa = AesEcbEncryption.DecryptAesEcb(resident.ttPhuongXa),
+            ttSoNhaDuong = AesEcbEncryption.DecryptAesEcb(resident.ttSoNhaDuong),
 
             // Address tạm trú
-            thtTinhThanh = DecryptFromBytes(resident.thtTinhThanh),
-            thtQuanHuyen = DecryptFromBytes(resident.thtQuanHuyen),
-            thtPhuongXa = DecryptFromBytes(resident.thtPhuongXa),
-            thtSoNhaDuong = DecryptFromBytes(resident.thtSoNhaDuong),
+            thtTinhThanh = AesEcbEncryption.DecryptAesEcb(resident.thtTinhThanh),
+            thtQuanHuyen = AesEcbEncryption.DecryptAesEcb(resident.thtQuanHuyen),
+            thtPhuongXa = AesEcbEncryption.DecryptAesEcb(resident.thtPhuongXa),
+            thtSoNhaDuong = AesEcbEncryption.DecryptAesEcb(resident.thtSoNhaDuong),
 
             // Parents info (nullable)
-            HoTenCha = resident.HoTenCha != null ? DecryptFromBytes(resident.HoTenCha) : null,
+            HoTenCha = resident.HoTenCha != null ? AesEcbEncryption.DecryptAesEcb(resident.HoTenCha) : null,
             NgaySinhCha = resident.NgaySinhCha,
-            HoTenMe = resident.HoTenMe != null ? DecryptFromBytes(resident.HoTenMe) : null,
+            HoTenMe = resident.HoTenMe != null ? AesEcbEncryption.DecryptAesEcb(resident.HoTenMe) : null,
             NgaySinhMe = resident.NgaySinhMe
         };
 
         return Ok(result);
-    }
-
-    // Helper: Encrypt string to bytes (same as used when inserting)
-    private byte[] EncryptToBytes(string plaintext)
-    {
-        using (var aes = System.Security.Cryptography.Aes.Create())
-        {
-            aes.Key = Encoding.UTF8.GetBytes(_aesKey);
-            aes.Mode = System.Security.Cryptography.CipherMode.ECB;
-            aes.Padding = System.Security.Cryptography.PaddingMode.PKCS7;
-
-            var encryptor = aes.CreateEncryptor();
-            byte[] inputBytes = Encoding.UTF8.GetBytes(plaintext);
-            return encryptor.TransformFinalBlock(inputBytes, 0, inputBytes.Length);
-        }
     }
 }
