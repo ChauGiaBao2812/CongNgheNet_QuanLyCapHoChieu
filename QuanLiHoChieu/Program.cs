@@ -41,7 +41,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Chung}/{action=Login}/{id?}");
 
 var context = app.Services.CreateScope().ServiceProvider.GetRequiredService<PassportDbContext>();
 SeedData.SeedDatabase(context);

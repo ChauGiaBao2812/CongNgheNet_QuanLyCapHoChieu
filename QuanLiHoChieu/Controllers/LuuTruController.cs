@@ -1,12 +1,24 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using QuanLiHoChieu.Data;
+using QuanLiHoChieu.Models;
+
 
 namespace QuanLiHoChieu.Controllers
 {
     public class LuuTruController : Controller
     {
-        public IActionResult Index()
+        private readonly PassportDbContext _context;
+
+        public LuuTruController(PassportDbContext context)
         {
-            return View();
+            _context = context;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            var luuTru = await _context.LuuTrus.ToListAsync();
+            return View(luuTru);
         }
     }
 }
