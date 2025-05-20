@@ -59,7 +59,7 @@ namespace QuanLiHoChieu.Migrations
                             CREATE PROCEDURE sp_CloseSymmetricKey
                             AS
                             BEGIN
-                                OPEN SYMMETRIC KEY SymmetricKey_AES DECRYPTION BY CERTIFICATE Cert_AES;
+                                CLOSE SYMMETRIC KEY SymmetricKey_AES;
                             END
                         ')
                     END

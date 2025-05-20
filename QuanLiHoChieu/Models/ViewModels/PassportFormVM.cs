@@ -68,9 +68,6 @@ namespace QuanLiHoChieu.Models.ViewModels
         public string thtSoNhaDuong { get; set; } = null!;
 
         // Optional fields
-        public string? NgheNghiep { get; set; }
-        public string? CoQuan { get; set; }
-        public string? DiaChiCoQuan { get; set; }
         public string? HoTenCha { get; set; }
         public DateTime? NgaySinhCha { get; set; }
         public string? HoTenMe { get; set; }

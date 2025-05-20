@@ -48,9 +48,9 @@ body {
     gap: 10px;
 }
 
-    .header-title i {
-        color: var(--accent-color);
-    }
+.header-title i {
+    color: var(--accent-color);
+}
 
 .user-info {
     display: flex;
@@ -180,15 +180,15 @@ transition: var(--transition);
     transition: border-color 0.3s;
 }
 
-    .form-control:focus {
-        outline: none;
-        border-color: var(--accent-color);
-        box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
-    }
+.form-control:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+}
 
-    .form-control::placeholder {
-        color: #adb5bd;
-    }
+.form-control::placeholder {
+    color: #adb5bd;
+}
 
 .text-danger {
     font-size: 12px;
