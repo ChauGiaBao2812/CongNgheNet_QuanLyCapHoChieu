@@ -86,6 +86,7 @@ namespace QuanLiHoChieu.Migrations
                     DanToc = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     TonGiao = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     SĐT = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    Hinh = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ttTinhThanh = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     ttQuanHuyen = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     ttPhuongXa = table.Column<byte[]>(type: "varbinary(max)", nullable: false),

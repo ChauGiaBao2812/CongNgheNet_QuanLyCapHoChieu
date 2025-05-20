@@ -3,6 +3,7 @@ using Microsoft.Data.SqlClient;
 using QuanLiHoChieu.Models;
 using System;
 using QuanLiHoChieu.Helpers;
+using System.Reflection.Emit;
 
 namespace QuanLiHoChieu.Data
 {
@@ -13,7 +14,7 @@ namespace QuanLiHoChieu.Data
             context.Database.Migrate();
 
             if (!context.ResidentDatas.Any()) 
-            {
+            { 
                 try
                 {
                     byte[] Encrypt(string? value) => value == null ? null! : AesEcbEncryption.EncryptAesEcb(value);
@@ -44,12 +45,64 @@ namespace QuanLiHoChieu.Data
                         NgaySinhMe = new DateTime(1972, 3, 20)
                     };
 
+
                     context.ResidentDatas.Add(resident);
                     context.SaveChanges();
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine($"Lỗi khi seed dữ liệu bằng stored procedure: {ex.Message}");
+                }
+            }
+
+            if (!context.PassportDatas.Any())
+            {
+                try
+                {
+                    byte[] Encrypt(string? value) => value == null ? null! : AesEcbEncryption.EncryptAesEcb(value);
+
+                    string FormId = Guid.NewGuid().ToString("N").Substring(0, 20);
+
+                    var passport = new PassportData
+                    {
+                        FormID = FormId,
+                        HoTen = Encrypt("Hoàng Thị D"),
+                        GioiTinh = "Nữ",
+                        NgaySinh = new DateTime(1995, 7, 10),
+                        NoiSinh = Encrypt("Cần Thơ"),
+                        CCCD = Encrypt("005432109876"), // FK to ResidentData
+                        NgayCap = new DateTime(2024, 1, 10),
+                        NoiCap = Encrypt("Cục Quản Lý Xuất Nhập Cảnh"),
+                        DanToc = "Kinh",
+                        TonGiao = null,
+                        SĐT = Encrypt("0932109876"),
+                        Hinh = $"{FormId}.jpg",
+                        ttTinhThanh = Encrypt("Cần Thơ"),
+                        ttQuanHuyen = Encrypt("Ninh Kiều"),
+                        ttPhuongXa = Encrypt("An Phú"),
+                        ttSoNhaDuong = Encrypt("77 Lê Lợi"),
+                        thtTinhThanh = Encrypt("Cần Thơ"),
+                        thtQuanHuyen = Encrypt("Cái Răng"),
+                        thtPhuongXa = Encrypt("Hưng Phú"),
+                        thtSoNhaDuong = Encrypt("99 Võ Văn Kiệt"),
+                        NgheNghiep = Encrypt("Nhân viên văn phòng"),
+                        CoQuan = Encrypt("Công ty TNHH ABC"),
+                        DiaChiCoQuan = Encrypt("123 Trần Hưng Đạo, Cần Thơ"),
+                        HoTenCha = Encrypt("Hoàng Văn E"),
+                        NgaySinhCha = new DateTime(1970, 1, 15),
+                        HoTenMe = Encrypt("Trần Thị F"),
+                        NgaySinhMe = new DateTime(1972, 3, 20),
+                        NoiDungDeNghi = "Cấp hộ chiếu phổ thông cho mục đích du lịch.",
+                        NoiTiepNhanHS = "Phòng Quản lý xuất nhập cảnh Công an TP. Cần Thơ",
+                        NgayNop = DateTime.Now
+                    };
+
+                    context.PassportDatas.Add(passport);
+                    context.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Lỗi khi seed PassportData: {ex.Message}");
                 }
             }
 

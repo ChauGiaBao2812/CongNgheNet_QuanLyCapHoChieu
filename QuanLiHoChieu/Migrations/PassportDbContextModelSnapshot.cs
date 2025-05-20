@@ -114,6 +114,9 @@ namespace QuanLiHoChieu.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
+                    b.Property<string>("Hinh")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<byte[]>("HoTen")
                         .IsRequired()
                         .HasColumnType("varbinary(max)");

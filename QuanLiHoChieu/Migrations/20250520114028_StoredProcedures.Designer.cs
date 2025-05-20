@@ -12,7 +12,7 @@ using QuanLiHoChieu.Data;
 namespace QuanLiHoChieu.Migrations
 {
     [DbContext(typeof(PassportDbContext))]
-    [Migration("20250517140241_StoredProcedures")]
+    [Migration("20250520114028_StoredProcedures")]
     partial class StoredProcedures
     {
         /// <inheritdoc />
@@ -116,6 +116,9 @@ namespace QuanLiHoChieu.Migrations
                         .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("Hinh")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("HoTen")
                         .IsRequired()

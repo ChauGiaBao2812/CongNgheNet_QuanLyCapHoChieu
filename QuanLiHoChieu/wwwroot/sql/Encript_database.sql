@@ -37,6 +37,7 @@ CREATE TABLE ResidentData (
     DanToc NVARCHAR(50) NOT NULL,
     TonGiao NVARCHAR(50),
     SĐT VARBINARY(128) NOT NULL,
+    Hinh NVARCHAR(256),
     
     -- Địa chỉ thường trú (tt)
     ttTinhThanh VARBINARY(256) NOT NULL,

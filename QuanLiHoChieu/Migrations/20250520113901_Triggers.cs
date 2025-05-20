@@ -4,8 +4,6 @@
 
 namespace QuanLiHoChieu.Migrations
 {
-    /// <inheritdoc />
-    /// <inheritdoc />
     public partial class Triggers : Migration
     {
         /// <inheritdoc />
