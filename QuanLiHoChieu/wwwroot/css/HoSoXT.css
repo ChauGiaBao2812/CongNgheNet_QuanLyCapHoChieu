@@ -24,6 +24,7 @@ body {
     color: var(--secondary-color);
 }
 
+/* Header giống admin */
 .admin-header {
     background-color: var(--primary-color);
     color: white;
@@ -50,6 +51,65 @@ body {
     .header-title i {
         color: var(--accent-color);
     }
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.user-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--accent-color);
+}
+
+.logout-btn {
+    background-color: var(--danger-color);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: var(--border-radius);
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: var(--transition);
+}
+
+    .logout-btn:hover {
+        background-color: #c0392b;
+        transform: translateY(-1px);
+    }
+
+.header-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.admin-nav {
+    margin-top: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+    .admin-nav a {
+        color: white;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 500;
+        transition: var(--transition);
+    }
+
+        .admin-nav a:hover {
+            text-decoration: underline;
+            color: var(--accent-color);
+        }
 
 .user-info {
     display: flex;

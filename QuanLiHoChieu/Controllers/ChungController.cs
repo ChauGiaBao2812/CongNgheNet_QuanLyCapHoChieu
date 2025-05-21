@@ -22,6 +22,19 @@ namespace QuanLiHoChieu.Controllers
 
         public IActionResult Login()
         {
+            if (User.Identity?.IsAuthenticated == true)
+            {
+                var role = User.FindFirst(ClaimTypes.Role)?.Value;
+                return role switch
+                {
+                    "GiamSat" => RedirectToAction("Create", "GiamSat"),
+                    "XacThuc" => RedirectToAction("List", "XacThuc"),
+                    "XetDuyet" => RedirectToAction("Index", "Home"),
+                    "LuuTru" => RedirectToAction("Index", "Home"),
+                    _ => RedirectToAction("Index", "Home")
+                };
+            }
+
             return View();
         }
 
@@ -35,8 +48,6 @@ namespace QuanLiHoChieu.Controllers
                 // Có thể return lại View(model) và xử lý lỗi nếu muốn
                 return View(model);
             }
-
-            _logger.LogInformation(model.Password);
 
             // Xác thực đăng nhập
             var hashedPasswordBytes = TypeConvertHelper.HexStringToByteArray(model.Password);
@@ -83,7 +94,7 @@ namespace QuanLiHoChieu.Controllers
             return user.ChucVu switch
             {
                 "GiamSat" => RedirectToAction("Create", "GiamSat"),
-                "XacThuc" => RedirectToAction("Index", "Home"),  // Or a ComingSoon page
+                "XacThuc" => RedirectToAction("List", "XacThuc"),
                 "XetDuyet" => RedirectToAction("Index", "Home"),
                 "LuuTru" => RedirectToAction("Index", "Home"),
                 _ => RedirectToAction("Index", "Home")

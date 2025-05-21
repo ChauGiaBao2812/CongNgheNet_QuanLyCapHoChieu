@@ -1,4 +1,16 @@
-﻿@model List<QuanLiHoChieu.Models.PassportData>
+﻿@model List<QuanLiHoChieu.Models.ViewModels.PassportStatusListVM>
+
+@{
+    Layout = null;
+
+    var gioiTinh = ViewData["GioiTinh"] as string ?? "Other";
+    string avatarPath = gioiTinh switch
+    {
+        "Nam" => Url.Content("~/public/male.png"),
+        "Nữ" => Url.Content("~/public/female.png"),
+        _ => Url.Content("~/public/user.png")
+    };
+}
 
 <!DOCTYPE html>
 <html lang="vi">
@@ -11,13 +23,20 @@
 </head>
 <body>
     <header class="admin-header">
-        <div class="header-title">
-            <i class="fas fa-folder-open"></i>
-            <span>XÁC THỰC HỒ SƠ</span>
+        <div class="header-left">
+            <div class="header-title">
+                <i class="fas fa-user-plus"></i>
+                <span>XÁC THỰC HỒ SƠ</span>
+            </div>
+            <nav class="admin-nav">
+                <a href="#">Trang chủ</a>
+                <a href="#">Xác thực hồ sơ</a>
+            </nav>
         </div>
+
         <div class="user-info">
-            <img src="content/images/admin-avatar.jpg" alt="Admin Avatar" class="user-avatar" />
-            <button class="logout-btn" onclick="window.location.href='/Logout'">
+            <img src="@avatarPath" alt="User Avatar" class="user-avatar" />
+            <button class="logout-btn" onclick="window.location.href='@Url.Action("Logout","XacThuc")'">
                 <i class="fas fa-sign-out-alt"></i> Đăng xuất
             </button>
         </div>
@@ -27,11 +46,6 @@
         <div class="card">
             <div class="card-header">
                 <h2>Danh sách hồ sơ</h2>
-                <div class="actions">
-                    <button class="btn">
-                        <i class="fas fa-plus"></i> Tạo hồ sơ mới
-                    </button>
-                </div>
             </div>
 
             <div class="table-container">
@@ -52,7 +66,18 @@
                                         @item.FormID
                                     </a>
                                 </td>
-                                <td><span class="status-badge pending">Chưa xác thực</span></td>
+                                <td>
+                                    @{
+                                        string statusClass = item.TrangThai switch
+                                        {
+                                            "Chưa xác thực" => "pending",
+                                            "Đã xác thực" => "verified",
+                                            "Từ chối" => "rejected",
+                                            _ => "unknown"
+                                        };
+                                    }
+                                    <span class="status-badge @statusClass">@item.TrangThai</span>
+                                </td>
                                 <td>@item.NgayNop</td>
                             </tr>
 

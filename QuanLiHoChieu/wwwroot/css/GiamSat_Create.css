@@ -99,11 +99,11 @@ body {
 }
 
 .admin-nav a {
-color: white;
-text-decoration: none;
-font-size: 14px;
-font-weight: 500;
-transition: var(--transition);
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: var(--transition);
 }
 
 .admin-nav a:hover {
