@@ -41,6 +41,11 @@ namespace QuanLiHoChieu.Models.ViewModels
         [Required]
         public string SDT { get; set; } = null!;
 
+        [Required]
+        public string Email {  get; set; } = null!;
+
+        public string? Hinh { get; set; }
+
         // Địa chỉ thường trú
         [Required]
         public string ttTinhThanh { get; set; } = null!;

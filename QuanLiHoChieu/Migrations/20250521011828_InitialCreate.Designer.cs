@@ -12,8 +12,8 @@ using QuanLiHoChieu.Data;
 namespace QuanLiHoChieu.Migrations
 {
     [DbContext(typeof(PassportDbContext))]
-    [Migration("20250520113901_Triggers")]
-    partial class Triggers
+    [Migration("20250521011828_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -110,6 +110,10 @@ namespace QuanLiHoChieu.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<byte[]>("DiaChiCoQuan")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<byte[]>("Email")
+                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<string>("GioiTinh")

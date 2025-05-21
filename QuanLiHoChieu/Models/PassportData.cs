@@ -41,6 +41,9 @@ namespace QuanLiHoChieu.Models
         [Required]
         public byte[] SĐT { get; set; } = null!;  // AES encrypted
 
+        [Required]
+        public byte[] Email {  get; set; } = null!;
+
         public string? Hinh { get; set; }
 
         // Địa chỉ thường trú (tt)

@@ -1,4 +1,6 @@
-﻿@{
+﻿@model QuanLiHoChieu.Models.ViewModels.PassportFormVM
+
+@{
     Layout = null;
 }
 
@@ -12,7 +14,29 @@
     <link rel="stylesheet" href="~/css/Form.css" />
 </head>
 <body>
-    <div class="form-container">
+    <div class="admin-theme">
+        <header class="admin-header">
+            <div class="header-left">
+                <div class="header-title">
+                    <i class="fas fa-user-plus"></i>
+                    <span>ĐĂNG KÝ CẤP HỘ CHIẾU</span>
+                </div>
+                <nav class="admin-nav">
+                    <a href="#">Trang chủ</a>
+                    <a href="#">Đăng ký hộ chiếu</a>
+                    <a href="#">Xem tình trạng hộ chiếu</a>
+                </nav>
+            </div>
+
+            <div class="user-info">
+                <button class="logout-btn" onclick="window.location.href='@Url.Action("Login","Chung")'">
+                    <i class="fas fa-sign-out-alt"></i> Đăng nhập
+                </button>
+            </div>
+        </header>
+    </div>
+
+    <div class="form-container" style="margin-top: 100px;">
         <div class="form-sidebar">
             <div class="sidebar-header">
                 <h2>THÔNG TIN CÁ NHÂN</h2>
@@ -39,24 +63,24 @@
                     <div class="form-grid">
                         <div class="form-group">
                             <label class="form-label">Họ và tên</label>
-                            <input type="text" class="form-control" placeholder="Nguyễn Văn A">
+                            <input asp-for="HoTen" type="text" class="form-control" placeholder="Nguyễn Văn A">
                         </div>
 
                         <div class="form-group">
                             <label class="form-label">Giới tính</label>
                             <div class="radio-group">
                                 <label class="radio-option">
-                                    <input type="radio" name="gender" checked> Nam
+                                    <input asp-for="GioiTinh" value="Nam" type="radio" name="gender" checked> Nam
                                 </label>
                                 <label class="radio-option">
-                                    <input type="radio" name="gender"> Nữ
+                                    <input asp-for="GioiTinh" value="Nữ" type="radio" name="gender"> Nữ
                                 </label>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="form-label">Ngày sinh</label>
-                            <input type="date" class="form-control">
+                            <input asp-for="NgaySinh" type="date" class="form-control">
                         </div>
 
                         <div class="form-group">
@@ -66,7 +90,7 @@
 
                         <div class="form-group">
                             <label class="form-label">Dân tộc</label>
-                            <select class="form-control">
+                            <select asp-for="DanToc" class="form-control">
                                 <option value="">-- Chọn dân tộc --</option>
                                 <option value="Ba Na">Ba Na</option>
                                 <option value="Bố Y">Bố Y</option>
@@ -127,7 +151,7 @@
 
                         <div class="form-group">
                             <label class="form-label">Tôn giáo</label>
-                            <select class="form-control">
+                            <select asp-for="TonGiao" class="form-control">
                                 <option value="">-- Chọn tôn giáo --</option>
                                 <option value="Không">Không</option>
                                 <option value="Phật giáo">Phật giáo</option>
@@ -162,17 +186,17 @@
                     <div class="form-grid">
                         <div class="form-group">
                             <label class="form-label">Số CCCD</label>
-                            <input type="text" class="form-control" placeholder="012345678901">
+                            <input asp-for="CCCD" type="text" class="form-control" placeholder="012345678901">
                         </div>
 
                         <div class="form-group">
                             <label class="form-label">Ngày cấp</label>
-                            <input type="date" class="form-control">
+                            <input asp-for="NgayCap" type="date" class="form-control">
                         </div>
 
                         <div class="form-group full-width">
                             <label class="form-label">Nơi cấp</label>
-                            <input type="text" class="form-control" placeholder="Cục Cảnh sát quản lý hành chính">
+                            <input asp-for="NoiCap" type="text" class="form-control" placeholder="Cục Cảnh sát quản lý hành chính">
                         </div>
                     </div>
                 </div>
@@ -188,7 +212,7 @@
                     <div class="form-grid">
                         <div class="form-group">
                             <label for="province" class="form-label">Tỉnh/Thành phố</label>
-                            <select id="province" class="form-control" onchange="loadDistricts()">
+                            <select asp-for="thtTinhThanh" id="province" class="form-control" onchange="loadDistricts()">
                                 <option value="">-- Chọn Tỉnh/Thành --</option>
                                 <option value="An Giang">An Giang</option>
                                 <option value="Bà Rịa - Vũng Tàu">Bà Rịa - Vũng Tàu</option>
@@ -256,14 +280,12 @@
 
                         <div class="form-group">
                             <label for="district" class="form-label">Quận/Huyện</label>
-                            <select id="district" class="form-control">
-                                <option value="">-- Chọn quận/huyện --</option>
-                            </select>
+                            <input asp-for="thtQuanHuyen" type="text" class="form-control" placeholder="Quận / Huyện">
                         </div>
 
                         <div class="form-group full-width">
                             <label class="form-label">Địa chỉ cụ thể</label>
-                            <input type="text" class="form-control" placeholder="Số nhà, đường, phường/xã">
+                            <input asp-for="thtSoNhaDuong" type="text" class="form-control" placeholder="Số nhà, đường, phường/xã">
                         </div>
                     </div>
                 </div>
@@ -279,12 +301,27 @@
                     <div class="form-grid">
                         <div class="form-group">
                             <label class="form-label">Số điện thoại</label>
-                            <input type="tel" class="form-control" placeholder="0987654321">
+                            <input asp-for="SDT" type="tel" class="form-control" placeholder="0987654321">
                         </div>
 
                         <div class="form-group">
                             <label class="form-label">Email</label>
                             <input type="email" class="form-control" placeholder="example@email.com">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 5: Ảnh -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <span class="section-number">5</span>
+                        <h3 class="section-title">Ảnh người đề nghị</h3>
+                        <div class="section-divider"></div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group full-width">
+                            <label for="avatar" class="form-label">Tải ảnh lên</label>
+                            <input type="file" id="avatar" name="avatar" class="form-control" accept="image/*" />
                         </div>
                     </div>
                 </div>

@@ -109,6 +109,10 @@ namespace QuanLiHoChieu.Migrations
                     b.Property<byte[]>("DiaChiCoQuan")
                         .HasColumnType("varbinary(max)");
 
+                    b.Property<byte[]>("Email")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
                     b.Property<string>("GioiTinh")
                         .IsRequired()
                         .HasMaxLength(10)
