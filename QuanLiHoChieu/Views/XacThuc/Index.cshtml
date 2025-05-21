@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@model List<QuanLiHoChieu.Models.PassportData>
+
+<!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8" />
@@ -42,16 +44,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>HS01</td>
-                            <td><span class="status-badge pending">Chưa xác thực</span></td>
-                            <td>12/03/2025</td>
-                        </tr>
-                        <tr>
-                            <td>HS02</td>
-                            <td><span class="status-badge verified">Đã xác thực</span></td>
-                            <td>11/03/2025</td>
-                        </tr>
+                        @foreach(var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <a asp-controller="XacThuc" asp-action="DetailProfile" asp-route-formId="@item.FormID">
+                                        @item.FormID
+                                    </a>
+                                </td>
+                                <td><span class="status-badge pending">Chưa xác thực</span></td>
+                                <td>@item.NgayNop</td>
+                            </tr>
+
+                        }
                     </tbody>
                 </table>
             </div>

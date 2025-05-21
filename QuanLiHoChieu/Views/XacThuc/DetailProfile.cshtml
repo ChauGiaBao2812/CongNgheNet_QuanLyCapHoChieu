@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@model QuanLiHoChieu.Models.PassportData
+
+<!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8" />
@@ -30,12 +32,78 @@
                 </div>
             </div>
 
-            <div class="info-boxes">
-                <div class="info-box">
-                    <h3>Thông tin từ người dùng</h3>
+            <div class="info-boxes" style="display: flex; gap: 2rem;">
+                <div class="info-box" style="flex: 1;">
+                    <h3>Thông tin từ người dùng (PassportData)</h3>
+                    <p><strong>Form ID:</strong> @Model.FormID</p>
+                    <p><strong>Họ tên:</strong> @System.Text.Encoding.UTF8.GetString(Model.HoTen)</p>
+                    <p><strong>Giới tính:</strong> @Model.GioiTinh</p>
+                    <p><strong>Ngày sinh:</strong> @Model.NgaySinh.ToString("dd/MM/yyyy")</p>
+                    <p><strong>Nơi sinh:</strong> @System.Text.Encoding.UTF8.GetString(Model.NoiSinh)</p>
+                    <p><strong>CCCD:</strong> @(Model.CCCD != null ? BitConverter.ToString(Model.CCCD).Replace("-", "") : "")</p>
+                    <p><strong>Ngày cấp:</strong> @Model.NgayCap.ToString("dd/MM/yyyy")</p>
+                    <p><strong>Nơi cấp:</strong> @System.Text.Encoding.UTF8.GetString(Model.NoiCap)</p>
+                    <p><strong>Dân tộc:</strong> @Model.DanToc</p>
+                    <p><strong>Tôn giáo:</strong> @Model.TonGiao ?? "Không có" </p>
+                    <p><strong>SĐT:</strong> @System.Text.Encoding.UTF8.GetString(Model.SĐT)</p>
+                    <p><strong>Email:</strong> @System.Text.Encoding.UTF8.GetString(Model.Email)</p>
+                    <p>
+                        <strong>Địa chỉ thường trú:</strong><br />
+                        @System.Text.Encoding.UTF8.GetString(Model.ttSoNhaDuong),
+                        @System.Text.Encoding.UTF8.GetString(Model.ttPhuongXa),
+                        @System.Text.Encoding.UTF8.GetString(Model.ttQuanHuyen),
+                        @System.Text.Encoding.UTF8.GetString(Model.ttTinhThanh)
+                    </p>
+                    <p>
+                        <strong>Địa chỉ tạm trú:</strong><br />
+                        @System.Text.Encoding.UTF8.GetString(Model.thtSoNhaDuong),
+                        @System.Text.Encoding.UTF8.GetString(Model.thtPhuongXa),
+                        @System.Text.Encoding.UTF8.GetString(Model.thtQuanHuyen),
+                        @System.Text.Encoding.UTF8.GetString(Model.thtTinhThanh)
+                    </p>
+                    <p><strong>Ghi chú đề nghị:</strong> @Model.NoiDungDeNghi</p>
+                    <p><strong>Nơi tiếp nhận hồ sơ:</strong> @Model.NoiTiepNhanHS</p>
+                    <p><strong>Ngày nộp:</strong> @Model.NgayNop.ToString("dd/MM/yyyy")</p>
                 </div>
-                <div class="info-box">
+
+                <div class="info-box" style="flex: 1;">
                     <h3>Thông tin lấy từ Resident Data</h3>
+
+                    @if (Model.ResidentData != null)
+                    {
+                        <p><strong>Họ tên cư trú:</strong> @System.Text.Encoding.UTF8.GetString(Model.ResidentData.HoTen)</p>
+                        <p><strong>Giới tính cư trú:</strong> @Model.ResidentData.GioiTinh</p>
+                        <p><strong>Ngày sinh cư trú:</strong> @Model.ResidentData.NgaySinh.ToString("dd/MM/yyyy")</p>
+                        <p><strong>Nơi sinh cư trú:</strong> @System.Text.Encoding.UTF8.GetString(Model.ResidentData.NoiSinh)</p>
+                        <p><strong>CCCD cư trú:</strong> @(Model.ResidentData.CCCD != null ? BitConverter.ToString(Model.ResidentData.CCCD).Replace("-", "") : "")</p>
+                        <p><strong>Ngày cấp cư trú:</strong> @Model.ResidentData.NgayCap.ToString("dd/MM/yyyy")</p>
+                        <p><strong>Nơi cấp cư trú:</strong> @System.Text.Encoding.UTF8.GetString(Model.ResidentData.NoiCap)</p>
+                        <p><strong>Dân tộc cư trú:</strong> @Model.ResidentData.DanToc</p>
+                        <p><strong>Tôn giáo cư trú:</strong> @Model.ResidentData.TonGiao ?? "Không có"</p>
+                        <p><strong>SĐT cư trú:</strong> @System.Text.Encoding.UTF8.GetString(Model.ResidentData.SĐT)</p>
+                        <p>
+                            <strong>Địa chỉ thường trú cư trú:</strong><br />
+                            @System.Text.Encoding.UTF8.GetString(Model.ResidentData.ttSoNhaDuong),
+                            @System.Text.Encoding.UTF8.GetString(Model.ResidentData.ttPhuongXa),
+                            @System.Text.Encoding.UTF8.GetString(Model.ResidentData.ttQuanHuyen),
+                            @System.Text.Encoding.UTF8.GetString(Model.ResidentData.ttTinhThanh)
+                        </p>
+                        <p>
+                            <strong>Địa chỉ tạm trú cư trú:</strong><br />
+                            @System.Text.Encoding.UTF8.GetString(Model.ResidentData.thtSoNhaDuong),
+                            @System.Text.Encoding.UTF8.GetString(Model.ResidentData.thtPhuongXa),
+                            @System.Text.Encoding.UTF8.GetString(Model.ResidentData.thtQuanHuyen),
+                            @System.Text.Encoding.UTF8.GetString(Model.ResidentData.thtTinhThanh)
+                        </p>
+                        <p><strong>Họ tên cha cư trú:</strong> @(Model.ResidentData.HoTenCha != null ? System.Text.Encoding.UTF8.GetString(Model.ResidentData.HoTenCha) : "Không có")</p>
+                        <p><strong>Ngày sinh cha cư trú:</strong> @(Model.ResidentData.NgaySinhCha?.ToString("dd/MM/yyyy") ?? "Không có")</p>
+                        <p><strong>Họ tên mẹ cư trú:</strong> @(Model.ResidentData.HoTenMe != null ? System.Text.Encoding.UTF8.GetString(Model.ResidentData.HoTenMe) : "Không có")</p>
+                        <p><strong>Ngày sinh mẹ cư trú:</strong> @(Model.ResidentData.NgaySinhMe?.ToString("dd/MM/yyyy") ?? "Không có")</p>
+                    }
+                    else
+                    {
+                        <p>Không có dữ liệu cư trú.</p>
+                    }
                 </div>
             </div>
 

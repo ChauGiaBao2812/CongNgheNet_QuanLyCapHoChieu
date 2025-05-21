@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using QuanLiHoChieu.Data;
+using QuanLiHoChieu.Helpers;
 
 namespace QuanLiHoChieu.Controllers
 {
@@ -13,11 +15,29 @@ namespace QuanLiHoChieu.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View();
+            var xacThuc = await _context.PassportDatas.ToListAsync();
+            return View(xacThuc);
         }
-        public async Task<IActionResult> DetailProfile()
+        public async Task<IActionResult> DetailProfile(string formId)
         {
-            return View();
+            if (string.IsNullOrEmpty(formId))
+            {
+                return NotFound();
+            }
+
+            // Lấy PassportData kèm ResidentData qua Include (Eager Loading)
+            var profile = await _context.PassportDatas
+                .Include(p => p.ResidentData)   // Bao gồm dữ liệu ResidentData liên kết
+                .FirstOrDefaultAsync(p => p.FormID == formId);
+
+            if (profile == null)
+            {
+                return NotFound();
+            }
+
+            // Trả về view kèm model PassportData (có ResidentData bên trong)
+            return View(profile);
         }
+
     }
 }
