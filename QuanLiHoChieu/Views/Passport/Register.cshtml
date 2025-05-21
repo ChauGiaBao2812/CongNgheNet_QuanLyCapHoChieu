@@ -389,10 +389,10 @@
                     </div>
                 </div>
 
-                <!-- Section 6: Thông tin cha, mẹ -->
+                <!-- Section 5: Thông tin cha, mẹ -->
                 <div class="form-section">
                     <div class="section-header">
-                        <div class="section-number">6</div>
+                        <div class="section-number">5</div>
                         <div class="section-title">Thông tin cha, mẹ</div>
                         <div class="section-divider"></div>
                     </div>
@@ -444,14 +444,38 @@
                 <!-- Section 7: Ảnh -->
                 <div class="form-section">
                     <div class="section-header">
-                        <span class="section-number">7</span>
-                        <h3 class="section-title">Ảnh người đề nghị</h3>
+                        <div class="section-number">7</div>
+                        <div class="section-title">Ảnh người đề nghị</div>
                         <div class="section-divider"></div>
                     </div>
-                    <div class="form-grid">
-                        <div class="form-group full-width">
-                            <label for="avatar" class="form-label">Tải ảnh lên</label>
-                            <input type="file" id="avatar" name="avatar" class="form-control" accept="image/*" />
+
+                    <div class="form-group">
+                        <label class="form-label">Ảnh chân dung (4x6)</label>
+                        <div class="image-upload-container">
+                            <input type="file" id="portrait" accept="image/*" name="avatar" class="image-upload-input">
+                            <label for="portrait" class="image-upload-label">
+                                <div class="image-upload-box portrait-upload-box">
+                                    <img id="portrait-preview" src="" alt="Ảnh chân dung 4x6" class="portrait-preview">
+                                    <div class="upload-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                            <polyline points="17 8 12 3 7 8"></polyline>
+                                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                                        </svg>
+                                    </div>
+                                    <p class="upload-text">Tải lên ảnh chân dung 4x6</p>
+                                    <p class="upload-hint">(Tỷ lệ 2:3, kích thước tối đa 5MB)</p>
+                                    <div class="remove-image-btn" onclick="removeImage('portrait', event)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="upload-guide">
+                            <strong>Lưu ý:</strong> Ảnh chân dung cần đúng tỷ lệ 4x6 (2:3), nền trắng, rõ mặt, không đeo kính.
                         </div>
                     </div>
                 </div>
