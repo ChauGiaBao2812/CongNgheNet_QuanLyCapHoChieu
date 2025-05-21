@@ -4,9 +4,7 @@ namespace QuanLiHoChieu.Models.ViewModels
 {
     public class PassportFormVM
     {
-        [Required]
-        [StringLength(20)]
-        public string FormID { get; set; } = null!;
+        public string? FormID { get; set; }
 
         [Required]
         [RegularExpression(@"^0\d{11}$", ErrorMessage = "CCCD không hợp lệ.")]

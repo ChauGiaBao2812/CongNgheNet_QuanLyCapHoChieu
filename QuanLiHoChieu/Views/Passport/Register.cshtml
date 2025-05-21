@@ -51,7 +51,7 @@
         </div>
 
         <div class="form-content">
-            <form>
+            <form asp-action="Register" method="post" enctype="multipart/form-data">
                 <!-- Section 1: Thông tin cơ bản -->
                 <div class="form-section">
                     <div class="section-header">
@@ -62,34 +62,34 @@
 
                     <div class="form-grid">
                         <div class="form-group">
-                            <label class="form-label">Họ và tên</label>
+                            <label class="form-label">Họ và tên (*)</label>
                             <input asp-for="HoTen" type="text" class="form-control" placeholder="Nguyễn Văn A">
                         </div>
 
                         <div class="form-group">
-                            <label class="form-label">Giới tính</label>
+                            <label class="form-label">Giới tính (*)</label>
                             <div class="radio-group">
                                 <label class="radio-option">
-                                    <input asp-for="GioiTinh" value="Nam" type="radio" name="gender" checked> Nam
+                                    <input asp-for="GioiTinh" value="Nam" type="radio" checked> Nam
                                 </label>
                                 <label class="radio-option">
-                                    <input asp-for="GioiTinh" value="Nữ" type="radio" name="gender"> Nữ
+                                    <input asp-for="GioiTinh" value="Nữ" type="radio"> Nữ
                                 </label>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="form-label">Ngày sinh</label>
+                            <label class="form-label">Ngày sinh (*)</label>
                             <input asp-for="NgaySinh" type="date" class="form-control">
                         </div>
 
                         <div class="form-group">
-                            <label class="form-label">Nơi sinh</label>
-                            <input type="text" class="form-control" placeholder="Nhập nơi sinh">
+                            <label class="form-label">Nơi sinh (*)</label>
+                            <input asp-for="NoiSinh" type="text" class="form-control" placeholder="Nhập nơi sinh">
                         </div>
 
                         <div class="form-group">
-                            <label class="form-label">Dân tộc</label>
+                            <label class="form-label">Dân tộc (*)</label>
                             <select asp-for="DanToc" class="form-control">
                                 <option value="">-- Chọn dân tộc --</option>
                                 <option value="Ba Na">Ba Na</option>
@@ -150,7 +150,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="form-label">Tôn giáo</label>
+                            <label class="form-label">Tôn giáo (*)</label>
                             <select asp-for="TonGiao" class="form-control">
                                 <option value="">-- Chọn tôn giáo --</option>
                                 <option value="Không">Không</option>
@@ -185,17 +185,17 @@
 
                     <div class="form-grid">
                         <div class="form-group">
-                            <label class="form-label">Số CCCD</label>
+                            <label class="form-label">Số CCCD (*)</label>
                             <input asp-for="CCCD" type="text" class="form-control" placeholder="012345678901">
                         </div>
 
                         <div class="form-group">
-                            <label class="form-label">Ngày cấp</label>
+                            <label class="form-label">Ngày cấp (*)</label>
                             <input asp-for="NgayCap" type="date" class="form-control">
                         </div>
 
                         <div class="form-group full-width">
-                            <label class="form-label">Nơi cấp</label>
+                            <label class="form-label">Nơi cấp (*)</label>
                             <input asp-for="NoiCap" type="text" class="form-control" placeholder="Cục Cảnh sát quản lý hành chính">
                         </div>
                     </div>
@@ -205,13 +205,107 @@
                 <div class="form-section">
                     <div class="section-header">
                         <div class="section-number">3</div>
-                        <div class="section-title">Địa chỉ thường trú</div>
+                        <div class="section-title">Địa chỉ thường trú (*)</div>
                         <div class="section-divider"></div>
                     </div>
 
                     <div class="form-grid">
                         <div class="form-group">
-                            <label for="province" class="form-label">Tỉnh/Thành phố</label>
+                            <label for="province" class="form-label">Tỉnh/Thành phố (*)</label>
+                            <select asp-for="ttTinhThanh" id="province" class="form-control" onchange="loadDistricts()">
+                                <option value="">-- Chọn Tỉnh/Thành --</option>
+                                <option value="An Giang">An Giang</option>
+                                <option value="Bà Rịa - Vũng Tàu">Bà Rịa - Vũng Tàu</option>
+                                <option value="Bắc Giang">Bắc Giang</option>
+                                <option value="Bắc Kạn">Bắc Kạn</option>
+                                <option value="Bắc Ninh">Bắc Ninh</option>
+                                <option value="Bạc Liêu">Bạc Liêu</option>
+                                <option value="Bến Tre">Bến Tre</option>
+                                <option value="Bình Dương">Bình Dương</option>
+                                <option value="Bình Định">Bình Định</option>
+                                <option value="Bình Phước">Bình Phước</option>
+                                <option value="Bình Thuận">Bình Thuận</option>
+                                <option value="Cà Mau">Cà Mau</option>
+                                <option value="Cao Bằng">Cao Bằng</option>
+                                <option value="Cần Thơ">Cần Thơ</option>
+                                <option value="Đà Nẵng">Đà Nẵng</option>
+                                <option value="Đồng Nai">Đồng Nai</option>
+                                <option value="Đồng Tháp">Đồng Tháp</option>
+                                <option value="Đắk Lắk">Đắk Lắk</option>
+                                <option value="Đắk Nông">Đắk Nông</option>
+                                <option value="Gia Lai">Gia Lai</option>
+                                <option value="Hà Giang">Hà Giang</option>
+                                <option value="Hà Nội">Hà Nội</option>
+                                <option value="Hà Tĩnh">Hà Tĩnh</option>
+                                <option value="Hải Dương">Hải Dương</option>
+                                <option value="Hải Phòng">Hải Phòng</option>
+                                <option value="Hậu Giang">Hậu Giang</option>
+                                <option value="Hòa Bình">Hòa Bình</option>
+                                <option value="Hưng Yên">Hưng Yên</option>
+                                <option value="TP. Hồ Chí Minh">TP. Hồ Chí Minh</option>
+                                <option value="Khánh Hòa">Khánh Hòa</option>
+                                <option value="Kiên Giang">Kiên Giang</option>
+                                <option value="Kon Tum">Kon Tum</option>
+                                <option value="Lai Châu">Lai Châu</option>
+                                <option value="Lâm Đồng">Lâm Đồng</option>
+                                <option value="Lạng Sơn">Lạng Sơn</option>
+                                <option value="Lào Cai">Lào Cai</option>
+                                <option value="Long An">Long An</option>
+                                <option value="Nam Định">Nam Định</option>
+                                <option value="Nghệ An">Nghệ An</option>
+                                <option value="Ninh Bình">Ninh Bình</option>
+                                <option value="Ninh Thuận">Ninh Thuận</option>
+                                <option value="Phú Thọ">Phú Thọ</option>
+                                <option value="Phú Yên">Phú Yên</option>
+                                <option value="Quảng Bình">Quảng Bình</option>
+                                <option value="Quảng Nam">Quảng Nam</option>
+                                <option value="Quảng Ngãi">Quảng Ngãi</option>
+                                <option value="Quảng Ninh">Quảng Ninh</option>
+                                <option value="Quảng Trị">Quảng Trị</option>
+                                <option value="Sóc Trăng">Sóc Trăng</option>
+                                <option value="Sơn La">Sơn La</option>
+                                <option value="Tây Ninh">Tây Ninh</option>
+                                <option value="Thái Bình">Thái Bình</option>
+                                <option value="Thái Nguyên">Thái Nguyên</option>
+                                <option value="Thanh Hóa">Thanh Hóa</option>
+                                <option value="Thừa Thiên Huế">Thừa Thiên Huế</option>
+                                <option value="Tiền Giang">Tiền Giang</option>
+                                <option value="Trà Vinh">Trà Vinh</option>
+                                <option value="Tuyên Quang">Tuyên Quang</option>
+                                <option value="Vĩnh Long">Vĩnh Long</option>
+                                <option value="Vĩnh Phúc">Vĩnh Phúc</option>
+                                <option value="Yên Bái">Yên Bái</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="district" class="form-label">Quận/Huyện (*)</label>
+                            <input asp-for="ttQuanHuyen" type="text" class="form-control" placeholder="Quận / Huyện">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Phường/Xã (*)</label>
+                            <input asp-for="ttPhuongXa" type="text" class="form-control" placeholder="Phường / Xã">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Địa chỉ cụ thể</label>
+                            <input asp-for="ttSoNhaDuong" type="text" class="form-control" placeholder="Số nhà, đường">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 4: Địa chỉ tạm trú -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <div class="section-number">4</div>
+                        <div class="section-title">Địa chỉ tạm trú</div>
+                        <div class="section-divider"></div>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="province" class="form-label">Tỉnh/Thành phố (*)</label>
                             <select asp-for="thtTinhThanh" id="province" class="form-control" onchange="loadDistricts()">
                                 <option value="">-- Chọn Tỉnh/Thành --</option>
                                 <option value="An Giang">An Giang</option>
@@ -279,42 +373,78 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="district" class="form-label">Quận/Huyện</label>
+                            <label for="district" class="form-label">Quận/Huyện (*)</label>
                             <input asp-for="thtQuanHuyen" type="text" class="form-control" placeholder="Quận / Huyện">
                         </div>
 
-                        <div class="form-group full-width">
-                            <label class="form-label">Địa chỉ cụ thể</label>
-                            <input asp-for="thtSoNhaDuong" type="text" class="form-control" placeholder="Số nhà, đường, phường/xã">
+                        <div class="form-group">
+                            <label class="form-label">Phường/Xã (*)</label>
+                            <input asp-for="thtPhuongXa" type="text" class="form-control" placeholder="Phường / Xã">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Địa chỉ cụ thể (*)</label>
+                            <input asp-for="thtSoNhaDuong" type="text" class="form-control" placeholder="Số nhà, đường">
                         </div>
                     </div>
                 </div>
 
-                <!-- Section 4: Liên hệ -->
+                <!-- Section 6: Thông tin cha, mẹ -->
                 <div class="form-section">
                     <div class="section-header">
-                        <div class="section-number">4</div>
+                        <div class="section-number">6</div>
+                        <div class="section-title">Thông tin cha, mẹ</div>
+                        <div class="section-divider"></div>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label">Hộ tên cha</label>
+                            <input asp-for="HoTenCha" type="tel" class="form-control" placeholder="Nguyễn Văn A">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Ngày sinh cha</label>
+                            <input asp-for="NgaySinhCha" type="date" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Hộ tên mẹ</label>
+                            <input asp-for="HoTenMe" type="tel" class="form-control" placeholder="Nguyễn Thị B">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Ngày sinh mẹ</label>
+                            <input asp-for="NgaySinhMe" type="date" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 6: Liên hệ -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <div class="section-number">6</div>
                         <div class="section-title">Thông tin liên hệ</div>
                         <div class="section-divider"></div>
                     </div>
 
                     <div class="form-grid">
                         <div class="form-group">
-                            <label class="form-label">Số điện thoại</label>
+                            <label class="form-label">Số điện thoại (*)</label>
                             <input asp-for="SDT" type="tel" class="form-control" placeholder="0987654321">
                         </div>
 
                         <div class="form-group">
-                            <label class="form-label">Email</label>
-                            <input type="email" class="form-control" placeholder="example@email.com">
+                            <label class="form-label">Email (*)</label>
+                            <input asp-for="Email" type="email" class="form-control" placeholder="example@email.com">
                         </div>
                     </div>
                 </div>
 
-                <!-- Section 5: Ảnh -->
+                <!-- Section 7: Ảnh -->
                 <div class="form-section">
                     <div class="section-header">
-                        <span class="section-number">5</span>
+                        <span class="section-number">7</span>
                         <h3 class="section-title">Ảnh người đề nghị</h3>
                         <div class="section-divider"></div>
                     </div>
