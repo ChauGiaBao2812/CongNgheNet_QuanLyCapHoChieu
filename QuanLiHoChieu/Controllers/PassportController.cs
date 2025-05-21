@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Linq;
+using Microsoft.AspNetCore.Mvc;
 using QuanLiHoChieu.Data;
 using QuanLiHoChieu.Helpers;
 using QuanLiHoChieu.Models;
@@ -36,8 +37,11 @@ namespace QuanLiHoChieu.Controllers
                         _logger.LogWarning("Validation error in field '{Field}': {ErrorMessage}", entry.Key, error.ErrorMessage);
                     }
                 }
+                ViewBag.AlertMessage = "Thiếu dũ liệu. Mời người đề nghị kiểm tra lại.";
                 return View(model);
             }
+
+            var GUID = Guid.NewGuid().ToString("N").Substring(0, 20);
 
             byte[] Encrypt(string? val) => val == null ? null! : AesEcbEncryption.EncryptAesEcb(val);
 
@@ -52,8 +56,35 @@ namespace QuanLiHoChieu.Controllers
                 return View(model);
             }
 
+            if (avatar == null)
+            {
+                _logger.LogInformation("Image Not Found");
+                ViewBag.AlertMessage = "Thiếu hình ảnh. Mời người đề nghị thêm vào. ";
+                return View(model);
+            }
+            else
+            {
+                _logger.LogInformation("Image Found");
+
+                var allowedExtensions = new[] { ".png", ".jpg", ".jpeg" };
+                var fileExtension = Path.GetExtension(avatar.FileName).ToLower();
+
+                if (allowedExtensions.Contains(fileExtension))
+                {
+                    var newFileName = $"{GUID}{fileExtension}";
+
+                    model.Hinh = newFileName;
+
+                    var fullPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img", newFileName);
+                    using (var fs = new FileStream(fullPath, FileMode.CreateNew))
+                    {
+                        avatar.CopyTo(fs);
+                    }
+                }
+            }
+
             // Tạo FormID cho PassportData
-            var formId = Guid.NewGuid().ToString("N").Substring(0, 20);
+            var formId = GUID;
 
             // Tạo PassportData mới
             var passportData = new PassportData
@@ -84,15 +115,19 @@ namespace QuanLiHoChieu.Controllers
                 HoTenMe = model.HoTenMe != null ? Encrypt(model.HoTenMe) : null,
                 NgaySinhMe = model.NgaySinhMe,
                 NoiDungDeNghi = "Đăng ký cấp hộ chiếu",  // Có thể lấy từ model nếu có thêm trường
-                NoiTiepNhanHS = "Phòng Quản lý xuất nhập cảnh", // Tùy chỉnh
+                NoiTiepNhanHS = "Hệ thống Tiếp nhận thông tin hộ chiếu Chính phủ", // Tùy chỉnh
                 NgayNop = DateTime.Now
             };
 
             _context.PassportDatas.Add(passportData);
             await _context.SaveChangesAsync();
 
+            ViewBag.AlertMessage = "Đơn của người đề nghị đã được gửi thành công";
+
+            ModelState.Clear();
+
             // Redirect hoặc trả về view thành công
-            return RedirectToAction("Success");  // Tạo view Success.cshtml để hiển thị kết quả
+            return View();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿@model QuanLiHoChieu.Models.ViewModels.PassportFormVM
 
 @{
+    ViewData["Title"] = "Đơn Đăng Ký Cấp Hộ Chiếu";
     Layout = null;
 }
 
@@ -491,7 +492,13 @@
             </form>
         </div>
     </div>
-
-    <script src="~/js/script.js"></script>
+    @* Sẽ thông báo lỗi hoặc thông báo thành công *@
+    @if (ViewBag.AlertMessage != null)
+    {
+        <script>
+            alert(@Html.Raw(Json.Serialize(ViewBag.AlertMessage)));
+        </script>
+    }
+    <script src="~/js/image-upload.js"></script>
 </body>
 </html>
