@@ -57,11 +57,6 @@ namespace QuanLiHoChieu.Controllers
         public async Task<IActionResult> Verify(string formId)
         {
             if (string.IsNullOrEmpty(formId))
-            {
-                return NotFound();
-            }
-
-            if (string.IsNullOrEmpty(formId))
                 return NotFound();
 
             var passportData = await _getDataService.GetPassportResidentVMByFormIdAsync(formId);

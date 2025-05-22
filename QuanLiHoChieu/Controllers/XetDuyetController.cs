@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuanLiHoChieu.Data;
+using QuanLiHoChieu.Models;
 using QuanLiHoChieu.Models.ViewModels;
+using QuanLiHoChieu.Services.Interface;
 
 namespace QuanLiHoChieu.Controllers
 {
@@ -12,11 +14,13 @@ namespace QuanLiHoChieu.Controllers
     {
         private readonly PassportDbContext _context;
         private readonly ILogger<XetDuyetController> _logger;
+        private readonly IGetDataByFormIdService _getDataService;
 
-        public XetDuyetController(PassportDbContext context, ILogger<XetDuyetController> logger)
+        public XetDuyetController(PassportDbContext context, ILogger<XetDuyetController> logger, IGetDataByFormIdService getDataService)
         {
             _context = context;
             _logger = logger;
+            _getDataService = getDataService;
         }
 
         public async Task<IActionResult> List()
@@ -50,8 +54,19 @@ namespace QuanLiHoChieu.Controllers
 
             return View(result);
         }
-        public IActionResult DetailProfile()
+        public async Task<IActionResult> Review(string formId)
         {
+            var passportData = await _getDataService.GetPassportVMByFormIdAsync(formId);
+
+            var model = new XetDuyetFormCompositeVM
+            {
+                PassportData = passportData,
+                Verification = new XacThucHoSoVM
+                {
+                    FormID = formId
+                }
+            };
+
             return View();
         }
 

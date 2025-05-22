@@ -3,6 +3,7 @@ using QuanLiHoChieu.Helpers;
 using QuanLiHoChieu.Services.Interface;
 using Microsoft.EntityFrameworkCore;
 using QuanLiHoChieu.Models.ViewModels;
+using Microsoft.SqlServer.Server;
 
 namespace QuanLiHoChieu.Services
 {
@@ -87,6 +88,48 @@ namespace QuanLiHoChieu.Services
                 NgaySinhMeRD = rd.NgaySinhMe,
 
                 isValidated = xuLy != null && (xuLy.TrangThai == "Verified" || xuLy.TrangThai == "Rejected")
+            };
+        }
+
+        public async Task<PassportFormReviewVM?> GetPassportVMByFormIdAsync(string formId)
+        {
+            var form = await _context.PassportDatas.FirstOrDefaultAsync(p => p.FormID == formId);
+
+            if (form == null || form.ResidentData == null)
+                return null;
+
+            return new PassportFormReviewVM
+            {
+                FormID = form.FormID,
+                CCCD = AesEcbEncryption.DecryptAesEcb(form.CCCD),
+                HoTen = AesEcbEncryption.DecryptAesEcb(form.HoTen),
+                GioiTinh = form.GioiTinh,
+                NgaySinh = form.NgaySinh,
+                NoiSinh = AesEcbEncryption.DecryptAesEcb(form.NoiSinh),
+                NgayCap = form.NgayCap,
+                NoiCap = AesEcbEncryption.DecryptAesEcb(form.NoiCap),
+                DanToc = form.DanToc,
+                TonGiao = form.TonGiao,
+                SDT = AesEcbEncryption.DecryptAesEcb(form.SĐT),
+                Email = AesEcbEncryption.DecryptAesEcb(form.Email),
+                Hinh = form.Hinh,
+
+                PermanentAddress = string.Join(", ",
+                    AesEcbEncryption.DecryptAesEcb(form.ttSoNhaDuong),
+                    AesEcbEncryption.DecryptAesEcb(form.ttPhuongXa),
+                    AesEcbEncryption.DecryptAesEcb(form.ttQuanHuyen),
+                    AesEcbEncryption.DecryptAesEcb(form.ttTinhThanh)),
+
+                TemporaryAddress = string.Join(", ",
+                    AesEcbEncryption.DecryptAesEcb(form.thtSoNhaDuong),
+                    AesEcbEncryption.DecryptAesEcb(form.thtPhuongXa),
+                    AesEcbEncryption.DecryptAesEcb(form.thtQuanHuyen),
+                    AesEcbEncryption.DecryptAesEcb(form.thtTinhThanh)),
+
+                HoTenCha = form.HoTenCha != null ? AesEcbEncryption.DecryptAesEcb(form.HoTenCha) : null,
+                NgaySinhCha = form.NgaySinhCha,
+                HoTenMe = form.HoTenMe != null ? AesEcbEncryption.DecryptAesEcb(form.HoTenMe) : null,
+                NgaySinhMe = form.NgaySinhMe
             };
         }
     }
