@@ -1,0 +1,307 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang chủ</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #e63946;
+            --primary-light: #ff758f;
+            --primary-dark: #c1121f;
+            --secondary: #1d3557;
+            --light: #f1faee;
+            --white: #ffffff;
+            --gray: #a8a8a8;
+            --dark: #2b2d42;
+            --radius: 12px;
+            --shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+            --danger-color: #e74c3c;
+            --gold: #ffd700;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Be Vietnam Pro', sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: var(--dark);
+            line-height: 1.6;
+            padding: 80px 20px 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            background: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 800 800"%3E%3Cg fill="none" stroke="%23e0e7d1" stroke-width="1"%3E%3Cpath d="M769 229L1037 260.9M927 880L731 737 520 660 309 538 354 426 173 284 200 100 382 39.9 529 55 702 50 800 200 900 250 1000 300 900 400 800 500 700 600 600 700 500 800 400 900 300 1000 200 900 100 800 50 700 0 600 0 500 0 400 0 300 0 200 0 100 50 0 150 200 300 400 500 600 700 800 900 1000 900 800 700 600 500 400 300 200 100 0"%3E%3C/path%3E%3Cpath d="M300 500L400 600 500 700 600 800 700 900 800 1000 900 900 1000 800 900 700 800 600 700 500 600 400 500 300 400 200 300 100 200 0 100 100 200 200 300 300 400 400 500 500 600 600 700 700 800 800 900 900 1000 1000 900 900 800 800 700 700 600 600 500 500 400 400 300 300 200 200 100 100 0 0"%3E%3C/path%3E%3C/g%3E%3C/svg%3E'), linear-gradient(to bottom, #f8f9fa, #e0e7d1);
+            background-size: cover, 100%;
+            background-position: bottom;
+            background-attachment: fixed;
+            filter: none;
+        }
+
+        .admin-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            filter: none;
+            backdrop-filter: none;
+        }
+
+        .header-title {
+            font-size: 20px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            white-space: nowrap;
+        }
+
+            .header-title i {
+                color: var(--accent-color);
+                font-size: 22px;
+            }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logout-btn {
+            background-color: var(--danger-color);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s;
+        }
+
+            .logout-btn:hover {
+                background-color: #c0392b;
+                transform: translateY(-1px);
+            }
+
+        .header-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .admin-nav {
+            margin-top: 0;
+            display: flex;
+            gap: 20px;
+            flex-wrap: nowrap;
+            max-width: 600px;
+        }
+
+            .admin-nav a {
+                color: white;
+                text-decoration: none;
+                font-weight: 500;
+                font-size: 14px;
+                transition: all 0.3s ease;
+                padding-bottom: 2px;
+                border-bottom: 2px solid transparent;
+            }
+
+                .admin-nav a:hover {
+                    color: var(--accent-color);
+                    text-decoration: underline;
+                }
+
+                .admin-nav a.active {
+                    color: var(--accent-color);
+                    font-weight: 700;
+                    border-bottom-color: var(--accent-color);
+                }
+
+        .main-content {
+            max-width: 1000px;
+            width: 100%;
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 40px;
+            margin-top: 20px;
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+            align-items: stretch; /* Ensure sections stretch to same height */
+        }
+
+        .advice-section {
+            flex: 1;
+            min-width: 300px;
+            background: var(--primary);
+            color: var(--white);
+            padding: 30px;
+            border: 5px solid var(--gold);
+            border-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"%3E%3Cpath fill="none" stroke="%23ffd700" stroke-width="2" d="M0 0 L10 10 L0 20 M20 0 L10 10 L20 20"%3E%3C/path%3E%3C/svg%3E') 10 stretch;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+            .advice-section h2 {
+                font-size: 24px;
+                color: var(--gold);
+                margin-bottom: 20px;
+                text-align: center;
+            }
+
+        .advice-quote {
+            font-style: italic;
+            font-size: 16px;
+            line-height: 1.8;
+            text-align: center;
+        }
+
+        .stats-section {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center content in the stats section */
+            justify-content: center; /* Vertically center content */
+            background: var(--light); /* Add a light background for contrast */
+            border-radius: var(--radius);
+            padding: 20px;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05); /* Subtle inset shadow */
+        }
+
+        .stats-text {
+            font-size: 16px;
+            color: var(--dark);
+            text-align: center; /* Center-align text */
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+            .stats-text p {
+                margin: 8px 0; /* Add spacing between lines */
+                padding: 5px 10px; /* Add padding for better readability */
+                border-left: 3px solid var(--primary); /* Add a red border on the left for style */
+            }
+
+                .stats-text p:first-child {
+                    font-weight: 700; /* Bold the "Năm 2025" line */
+                    color: var(--secondary);
+                    border-left-color: var(--secondary); /* Use secondary color for the year */
+                }
+
+        .pie-chart {
+            width: 160px; /* Slightly larger pie chart */
+            height: 160px;
+            background: conic-gradient(var(--primary) 91.3%, var(--white) 0);
+            border-radius: 50%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(230, 57, 70, 0.2); /* Add shadow for depth */
+            transition: var(--transition);
+        }
+
+            .pie-chart:hover {
+                transform: scale(1.05); /* Subtle hover effect */
+                box-shadow: 0 6px 16px rgba(230, 57, 70, 0.3);
+            }
+
+            .pie-chart::before {
+                content: '91,3%';
+                font-size: 24px;
+                font-weight: 700;
+                color: var(--dark);
+            }
+
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .stats-section {
+                align-items: center;
+            }
+
+            .stats-text {
+                text-align: center;
+            }
+
+            .pie-chart {
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-theme">
+        <header class="admin-header">
+            <div class="header-left">
+                <div class="header-title">
+                    <i class="fas fa-passport"></i>
+                    <span>ĐĂNG KÝ CẤP HỘ CHIẾU</span>
+                </div>
+                <nav class="admin-nav">
+                    <a href="#" class="active">Trang chủ</a>
+                    <a href="#">Đăng ký hộ chiếu</a>
+                    <a href="#">Xem tình trạng hộ chiếu</a>
+                </nav>
+            </div>
+            <div class="user-info">
+                <button class="logout-btn" onclick="window.location.href='/Login'">
+                    <i class="fas fa-sign-out-alt"></i> Đăng nhập
+                </button>
+            </div>
+        </header>
+    </div>
+    <div class="main-content">
+        <div class="advice-section">
+            <h2>6 ĐIỀU BÁC HỒ DẠY CÔNG AN NHÂN DÂN</h2>
+            <div class="advice-quote">
+                <p>“Tư cách người Công an Cách mạng là:</p>
+                <p>Đối với tư mình phải cần, kiệm, liêm, chính.</p>
+                <p>Đối với đồng sự phải thân ái giúp đỡ.</p>
+                <p>Đối với Chính phủ phải tuyệt đối trung thành.</p>
+                <p>Đối với nhân dân phải kính trọng, lễ phép</p>
+                <p>Đối với công việc phải tận tụy</p>
+                <p>Đối với địch phải cường quyết, khôn khéo.”</p>
+            </div>
+        </div>
+        <div class="stats-section">
+            <div class="stats-text">
+                <p>Năm 2025</p>
+                <p>Tổng số hộ: 24,23630</p>
+                <p>Giải quyết: 25,42687 hộ so</p>
+                <p>Đúng hạn: 23,21576 hộ so</p>
+            </div>
+            <div class="pie-chart"></div>
+        </div>
+    </div>
+</body>
+</html>
