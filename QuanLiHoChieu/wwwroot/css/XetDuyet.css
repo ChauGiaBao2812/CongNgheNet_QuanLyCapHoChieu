@@ -262,6 +262,35 @@ body {
     background-color: #27ae60;
 }
 
+.admin-nav {
+    margin-top: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.admin-nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: var(--transition);
+    padding-bottom: 2px;
+    border-bottom: 2px solid transparent;
+}
+
+.admin-nav a.active {
+    color: var(--accent-color);
+    font-weight: 700;
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 2px; 
+}
+
+.admin-nav a:hover {
+    text-decoration: underline;
+    color: var(--accent-color);
+}
+
 @media (max-width: 768px) {
     .applicant-section {
         flex-direction: column;

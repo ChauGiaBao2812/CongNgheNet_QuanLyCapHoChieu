@@ -24,7 +24,6 @@ body {
     color: var(--secondary-color);
 }
 
-/* Header giống admin */
 .admin-header {
     background-color: var(--primary-color);
     color: white;
@@ -48,9 +47,9 @@ body {
     gap: 10px;
 }
 
-    .header-title i {
-        color: var(--accent-color);
-    }
+.header-title i {
+    color: var(--accent-color);
+}
 
 .user-info {
     display: flex;
@@ -80,10 +79,10 @@ body {
     transition: var(--transition);
 }
 
-    .logout-btn:hover {
-        background-color: #c0392b;
-        transform: translateY(-1px);
-    }
+.logout-btn:hover {
+    background-color: #c0392b;
+    transform: translateY(-1px);
+}
 
 .header-left {
     display: flex;
@@ -104,6 +103,15 @@ body {
     font-size: 14px;
     font-weight: 500;
     transition: var(--transition);
+    padding-bottom: 2px;
+    border-bottom: 2px solid transparent;
+}
+
+.admin-nav a.active {
+    color: var(--accent-color);
+    font-weight: 700;
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 2px;
 }
 
 .admin-nav a:hover {
@@ -139,10 +147,10 @@ body {
     transition: var(--transition);
 }
 
-    .logout-btn:hover {
-        background-color: #c0392b;
-        transform: translateY(-1px);
-    }
+.logout-btn:hover {
+    background-color: #c0392b;
+    transform: translateY(-1px);
+}
 
 .admin-container {
     margin-top: 80px;
@@ -166,12 +174,12 @@ body {
     align-items: center;
 }
 
-    .card-header h2 {
-        font-size: 18px;
-        font-weight: 600;
-        color: var(--primary-color);
-        margin: 0;
-    }
+.card-header h2 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin: 0;
+}
 
 .actions .btn {
     background-color: var(--primary-color);
@@ -187,10 +195,10 @@ body {
     transition: var(--transition);
 }
 
-    .actions .btn:hover {
-        background-color: #1a2a3a;
-        transform: translateY(-1px);
-    }
+.actions .btn:hover {
+    background-color: #1a2a3a;
+    transform: translateY(-1px);
+}
 
 .table-container {
     overflow-x: auto;
@@ -233,20 +241,20 @@ tbody tr:hover {
     white-space: nowrap;
 }
 
-    .status-badge.pending {
-        background-color: rgba(243, 156, 18, 0.1);
-        color: var(--warning-color);
-    }
+.status-badge.pending {
+    background-color: rgba(243, 156, 18, 0.1);
+    color: var(--warning-color);
+}
 
-    .status-badge.verified {
-        background-color: rgba(46, 204, 113, 0.1);
-        color: var(--success-color);
-    }
+.status-badge.verified {
+    background-color: rgba(46, 204, 113, 0.1);
+    color: var(--success-color);
+}
 
-    .status-badge.rejected {
-        background-color: rgba(231, 76, 60, 0.1);
-        color: var(--danger-color);
-    }
+.status-badge.rejected {
+    background-color: rgba(231, 76, 60, 0.1);
+    color: var(--danger-color);
+}
 
 @media (max-width: 768px) {
     .card-header {

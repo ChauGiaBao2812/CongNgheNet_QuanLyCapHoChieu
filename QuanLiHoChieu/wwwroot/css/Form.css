@@ -16,6 +16,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
@@ -430,7 +431,6 @@ select.form-control {
     border-left: 3px solid var(--primary);
 }
 
-/* Header giống admin */
 .admin-theme {
     --primary-color: #2c3e50;
     --secondary-color: #34495e;
@@ -452,7 +452,7 @@ select.form-control {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: var(--box-shadow);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     position: fixed;
     top: 0;
     left: 0;
@@ -466,11 +466,14 @@ select.form-control {
     display: flex;
     align-items: center;
     gap: 10px;
+    white-space: nowrap; 
 }
 
-    .header-title i {
-        color: var(--accent-color);
-    }
+.header-title i {
+    color: var(--accent-color);
+    font-size: 22px; /* icon lớn hơn */
+    margin-right: 0; /* hoặc 4px nếu cần */
+}
 
 .user-info {
     display: flex;
@@ -491,19 +494,19 @@ select.form-control {
     color: white;
     border: none;
     padding: 8px 15px;
-    border-radius: var(--border-radius);
+    border-radius: 4px; /* Thay vì 8px */
     font-weight: 500;
     cursor: pointer;
     display: flex;
     align-items: center;
     gap: 5px;
-    transition: var(--transition);
+    transition: all 0.3s;
 }
 
-    .logout-btn:hover {
-        background-color: #c0392b;
-        transform: translateY(-1px);
-    }
+.logout-btn:hover {
+    background-color: #c0392b;
+    transform: translateY(-1px);
+}
 
 .header-left {
     display: flex;
@@ -512,21 +515,37 @@ select.form-control {
 }
 
 .admin-nav {
-    margin-top: 5px;
+    margin-top: 0;
     display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
+    gap: 20px;
+    flex-wrap: nowrap; 
 }
 
-    .admin-nav a {
-        color: white;
-        text-decoration: none;
-        font-size: 14px;
-        font-weight: 500;
-        transition: var(--transition);
-    }
+.admin-nav {
+    max-width: 600px; 
+}
 
-        .admin-nav a:hover {
-            text-decoration: underline;
-            color: var(--accent-color);
-        }
+.admin-nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    padding-bottom: 2px;
+    border-bottom: 2px solid transparent;
+}
+
+.admin-nav a:hover {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
+.admin-nav a.active {
+    color: var(--accent-color);
+    font-weight: 700;
+    border-bottom-color: var(--accent-color);
+}
+
+.header-title i {
+    color: var(--accent-color);
+}

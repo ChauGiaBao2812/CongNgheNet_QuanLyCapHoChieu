@@ -2,8 +2,8 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chi tiết hồ sơ - Hệ Thống Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Chi tiết hồ sơ - Giám sát</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <style>
         :root {
@@ -15,6 +15,9 @@
             --success-color: #2ecc71;
             --warning-color: #f39c12;
             --border-color: #dfe6e9;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            --transition: all 0.3s ease;
         }
 
         * {
@@ -37,12 +40,18 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--box-shadow);
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 1000;
+        }
+
+        .header-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .header-title {
@@ -56,6 +65,34 @@
             .header-title i {
                 color: var(--accent-color);
             }
+
+        .admin-nav {
+            margin-top: 5px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+            .admin-nav a {
+                color: white;
+                text-decoration: none;
+                font-size: 14px;
+                font-weight: 500;
+                transition: var(--transition);
+                padding-bottom: 2px;
+                border-bottom: 2px solid transparent;
+            }
+
+                .admin-nav a:hover {
+                    color: var(--accent-color);
+                    text-decoration: underline;
+                }
+
+                .admin-nav a.active {
+                    color: var(--accent-color);
+                    border-bottom-color: var(--accent-color);
+                    font-weight: 700;
+                }
 
         .user-info {
             display: flex;
@@ -76,13 +113,13 @@
             color: white;
             border: none;
             padding: 8px 15px;
-            border-radius: 4px;
+            border-radius: var(--border-radius);
             font-weight: 500;
             cursor: pointer;
             display: flex;
             align-items: center;
             gap: 5px;
-            transition: all 0.3s;
+            transition: var(--transition);
         }
 
             .logout-btn:hover {
@@ -92,7 +129,7 @@
 
         /* Main Content */
         .admin-container {
-            margin-top: 80px;
+            margin-top: 110px; /* đủ chừa header + nav */
             padding: 20px;
             max-width: 1200px;
             margin-left: auto;
@@ -111,8 +148,8 @@
 
         .card {
             background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
             overflow: hidden;
             margin-bottom: 20px;
         }
@@ -187,7 +224,7 @@
             }
 
             .admin-container {
-                margin-top: 100px;
+                margin-top: 140px;
                 padding: 10px;
             }
 
@@ -200,15 +237,23 @@
 <body>
     <!-- Header -->
     <header class="admin-header">
-        <div class="header-title">
-            <i class="fas fa-file-alt"></i>
-            <span>CHI TIẾT HỒ SƠ</span>
+        <div class="header-left">
+            <div class="header-title">
+                <i class="fas fa-chart-line"></i>
+                <span>GIÁM SÁT HỒ SƠ</span>
+            </div>
+            <nav class="admin-nav">
+                <a href="#">Danh sách hồ sơ</a>
+                <a href="#" class="active">Chi tiết hồ sơ</a>
+                <a href="#">Danh sách User</a>
+                <a href="#">Chi tiết User</a>
+                <a href="#">Tạo tài khoản</a>
+            </nav>
         </div>
         <div class="user-info">
-            <img src="content/images/admin-avatar.jpg" alt="Admin Avatar" class="user-avatar">
+            <img src="content/images/admin-avatar.jpg" alt="Admin Avatar" class="user-avatar" />
             <button class="logout-btn" onclick="logout()">
-                <i class="fas fa-sign-out-alt"></i>
-                Đăng xuất
+                <i class="fas fa-sign-out-alt"></i> Đăng xuất
             </button>
         </div>
     </header>
