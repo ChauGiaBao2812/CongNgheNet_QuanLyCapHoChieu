@@ -1,11 +1,14 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using QuanLiHoChieu.Data;
 using QuanLiHoChieu.Helpers;
+using QuanLiHoChieu.Models;
 using QuanLiHoChieu.Models.ViewModels;
+using QuanLiHoChieu.Services.Interface;
 
 namespace QuanLiHoChieu.Controllers
 {
@@ -14,10 +17,13 @@ namespace QuanLiHoChieu.Controllers
     {
         private readonly PassportDbContext _context;
         private readonly ILogger<XacThucController> _logger;
-        public XacThucController(PassportDbContext context, ILogger<XacThucController> logger)
+        private readonly IGetDataByFormIdService _getDataService;
+        public XacThucController(PassportDbContext context, ILogger<XacThucController> logger, IGetDataByFormIdService getDataService)
         {
             _context = context;
             _logger = logger;
+            _getDataService = getDataService;
+
         }
 
 
@@ -48,25 +54,55 @@ namespace QuanLiHoChieu.Controllers
 
             return View(result);
         }
-        public async Task<IActionResult> DetailProfile(string formId)
+        public async Task<IActionResult> Verify(string formId)
         {
             if (string.IsNullOrEmpty(formId))
             {
                 return NotFound();
             }
 
-            // Lấy PassportData kèm ResidentData qua Include (Eager Loading)
-            var profile = await _context.PassportDatas
-                .Include(p => p.ResidentData)   // Bao gồm dữ liệu ResidentData liên kết
-                .FirstOrDefaultAsync(p => p.FormID == formId);
-
-            if (profile == null)
-            {
+            if (string.IsNullOrEmpty(formId))
                 return NotFound();
+
+            var passportData = await _getDataService.GetPassportResidentVMByFormIdAsync(formId);
+
+            var model = new XacThucFormCompositeVM
+            {
+                PassportData = passportData,
+                Verification = new XacThucHoSoVM
+                {
+                    FormID = formId
+                }
+            };
+
+            LoadUserGender();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Verify(XacThucFormCompositeVM model, string TrangThai)
+        {
+            if (!ModelState.IsValid)
+            {
+                  return RedirectToAction("List");
             }
 
-            // Trả về view kèm model PassportData (có ResidentData bên trong)
-            return View(profile);
+            var xuLy = new XuLy
+            {
+                FormID = model.Verification!.FormID,
+                GhiChu = model.Verification.GhiChu,
+                TrangThai = TrangThai,
+                UserID = User.FindFirst("UserID")?.Value ?? "Unknown",
+                NgayXuLy = DateTime.Now,
+                LoaiXuLy = "XacThuc"
+            };
+
+            _context.XuLys.Add(xuLy);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("List");
         }
 
         public async Task<IActionResult> Logout()
@@ -83,6 +119,7 @@ namespace QuanLiHoChieu.Controllers
                 var user = _context.Users.FirstOrDefault(u => u.Username == username);
                 if (user != null)
                 {
+                    ViewData["Ten"] = user.Username;
                     ViewData["GioiTinh"] = user.GioiTinh;
                 }
             }

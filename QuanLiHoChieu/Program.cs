@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using QuanLiHoChieu.Data;
+using QuanLiHoChieu.Services.Interface;
+using QuanLiHoChieu.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +22,9 @@ builder.Services.AddAuthentication("MyCookieAuth")
         options.SlidingExpiration = false;                // Optional: refresh cookie expiry on activity
         options.Cookie.IsEssential = true;               // GDPR compliance
     });
+
+builder.Services.AddScoped<IGetDataByFormIdService, GetDataByFormIdService>();
+
 
 var app = builder.Build();
 

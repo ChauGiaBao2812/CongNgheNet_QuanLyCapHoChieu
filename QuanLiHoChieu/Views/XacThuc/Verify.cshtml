@@ -1,0 +1,135 @@
+﻿@model QuanLiHoChieu.Models.ViewModels.XacThucFormCompositeVM
+
+@{
+    Layout = null;
+    var gioiTinh = ViewData["GioiTinh"] as string ?? "Other";
+    var ten = ViewData["Ten"] as string ?? "Guest";
+    string avatarPath = gioiTinh switch
+    {
+        "Nam" => Url.Content("~/public/male.png"),
+        "Nữ" => Url.Content("~/public/female.png"),
+        _ => Url.Content("~/public/user.png")
+    };
+    
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Xác thực hồ sơ - Hệ Thống Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="~/css/XacThuc.css" />
+</head>
+<body>
+    <header class="admin-header">
+        <div class="header-left">
+            <div class="header-title">
+                <i class="fas fa-user-plus"></i>
+                <span>XÁC THỰC HỒ SƠ</span>
+            </div>
+            <nav class="admin-nav">
+                <a href="#">Trang chủ</a>
+                <a asp-action="List" class="go-back-btn">Xác thực hồ sơ</a>
+            </nav>
+        </div>
+
+        <div class="user-info">
+            <!--Tên người truy cập-->
+            @ten
+            <!--Tên người truy cập-->
+            <img src="@avatarPath" alt="User Avatar" class="user-avatar" />
+            <button class="logout-btn" onclick="window.location.href='@Url.Action("Logout","XacThuc")'">
+                <i class="fas fa-sign-out-alt"></i> Đăng xuất
+            </button>
+        </div>
+    </header>
+
+    <div class="admin-container">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <i class="fas fa-info-circle"></i>
+                    Thông tin hồ sơ
+                </div>
+                <span>FormId: @Model.PassportData?.FormID</span><br />
+                <span>CCCD: @Model.PassportData?.CCCD</span>
+            </div>
+
+            <div class="info-boxes" style="display: flex; gap: 2rem;">
+                <div class="info-box" style="flex: 1;">
+                    <h3>Thông tin được lấy từ Passport Data</h3>
+                </div>
+
+                <div class="info-box" style="flex: 1;">
+                    <h3>Thông tin lấy từ Resident Data</h3>
+                </div>
+            </div>
+
+            <div class="info-boxes" style="display: flex; gap: 2rem;">
+                <!--Passport Data-->
+                <div class="info-box" style="flex: 1; text-align: left; line-height: 1.8;">
+                    <p><strong>Họ tên:</strong> @Model.PassportData?.HoTenPD</p>
+                    <p><strong>Giới tính:</strong> @Model.PassportData?.GioiTinhPD</p>
+                    <p><strong>Ngày sinh:</strong> @Model.PassportData?.NgaySinhPD.ToString("dd/MM/yyyy")</p>
+                    <p><strong>Nơi sinh:</strong> @Model.PassportData?.NoiSinhPD</p>
+                    <p><strong>Ngày cấp:</strong> @Model.PassportData?.NgayCapPD.ToString("dd/MM/yyyy")</p>
+                    <p><strong>Nơi cấp:</strong> @Model.PassportData?.NoiCapPD</p>
+                    <p><strong>Dân tộc:</strong> @Model.PassportData?.DanTocPD</p>
+                    <p><strong>Tôn giáo:</strong> @Model.PassportData?.TonGiaoPD</p>
+                    <p><strong>SĐT:</strong> @Model.PassportData?.SDTPD</p>
+                    <p><strong>Địa chỉ thường trú:</strong> @Model.PassportData?.ttDiaChiPD</p>
+                    <p><strong>Địa chỉ tạm trú:</strong> @Model.PassportData?.thtDiaChiPD</p>
+                    <p><strong>Họ tên cha:</strong> @Model.PassportData?.HoTenChaPD</p>
+                    <p><strong>Ngày sinh cha:</strong> @Model.PassportData?.NgaySinhChaPD?.ToString("dd/MM/yyyy")</p>
+                    <p><strong>Họ tên mẹ:</strong> @Model.PassportData?.HoTenMePD</p>
+                    <p><strong>Ngày sinh mẹ:</strong> @Model.PassportData?.NgaySinhMePD?.ToString("dd/MM/yyyy")</p>
+                </div>
+
+                <!--Resident Data-->
+                <div class="info-box" style="flex: 1; text-align: left; line-height: 1.8;">
+                    <p><strong>Họ tên:</strong> @Model.PassportData?.HoTenRD</p>
+                    <p><strong>Giới tính:</strong> @Model.PassportData?.GioiTinhRD</p>
+                    <p><strong>Ngày sinh:</strong> @Model.PassportData?.NgaySinhRD.ToString("dd/MM/yyyy")</p>
+                    <p><strong>Nơi sinh:</strong> @Model.PassportData?.NoiSinhRD</p>
+                    <p><strong>Ngày cấp:</strong> @Model.PassportData?.NgayCapRD.ToString("dd/MM/yyyy")</p>
+                    <p><strong>Nơi cấp:</strong> @Model.PassportData?.NoiCapRD</p>
+                    <p><strong>Dân tộc:</strong> @Model.PassportData?.DanTocRD</p>
+                    <p><strong>Tôn giáo:</strong> @Model.PassportData?.TonGiaoRD</p>
+                    <p><strong>SĐT:</strong> @Model.PassportData?.SDTRD</p>
+                    <p><strong>Địa chỉ thường trú:</strong> @Model.PassportData?.ttDiaChiRD</p>
+                    <p><strong>Địa chỉ tạm trú:</strong> @Model.PassportData?.thtDiaChiRD</p>
+                    <p><strong>Họ tên cha:</strong> @Model.PassportData?.HoTenChaRD</p>
+                    <p><strong>Ngày sinh cha:</strong> @Model.PassportData?.NgaySinhChaRD?.ToString("dd/MM/yyyy")</p>
+                    <p><strong>Họ tên mẹ:</strong> @Model.PassportData?.HoTenMeRD</p>
+                    <p><strong>Ngày sinh mẹ:</strong> @Model.PassportData?.NgaySinhMeRD?.ToString("dd/MM/yyyy")</p>
+                </div>
+            </div>
+
+            <form asp-controller="XacThuc" asp-action="Verify" method="post">
+                @Html.AntiForgeryToken()
+                <input asp-for="Verification!.FormID" type="hidden" />
+
+                <div class="note-box">
+                    <textarea asp-for="Verification!.GhiChu" placeholder="Ghi chú"></textarea>
+                </div>
+
+                @if (Model.PassportData?.isValidated == false)
+                {
+                    <div class="button-group">
+                        <button type="submit" name="TrangThai" value="Rejected" class="invalid-btn">Không hợp lệ</button>
+                        <button type="submit" name="TrangThai" value="Verified" class="valid-btn">Hợp lệ</button>
+                    </div>
+                }
+                else
+                {
+                    <div class="button-group">
+                        <button type="button" onclick="location.href='@Url.Action("List")'" class="go-back-btn">Quay lại</button>
+                    </div>
+                }
+            </form>
+        </div>
+    </div>
+</body>
+</html>
