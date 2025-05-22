@@ -29,7 +29,7 @@ namespace QuanLiHoChieu.Controllers
                 {
                     "GiamSat" => RedirectToAction("Create", "GiamSat"),
                     "XacThuc" => RedirectToAction("List", "XacThuc"),
-                    "XetDuyet" => RedirectToAction("Index", "Home"),
+                    "XetDuyet" => RedirectToAction("List", "XetDuyet"),
                     "LuuTru" => RedirectToAction("Index", "Home"),
                     _ => RedirectToAction("Index", "Home")
                 };
@@ -95,7 +95,7 @@ namespace QuanLiHoChieu.Controllers
             {
                 "GiamSat" => RedirectToAction("Create", "GiamSat"),
                 "XacThuc" => RedirectToAction("List", "XacThuc"),
-                "XetDuyet" => RedirectToAction("Index", "Home"),
+                "XetDuyet" => RedirectToAction("List", "XetDuyet"),
                 "LuuTru" => RedirectToAction("Index", "Home"),
                 _ => RedirectToAction("Index", "Home")
             };

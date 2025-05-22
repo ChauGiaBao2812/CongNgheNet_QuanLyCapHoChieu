@@ -52,6 +52,32 @@ body {
         color: var(--accent-color);
     }
 
+.header-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.admin-nav {
+    margin-top: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.admin-nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.admin-nav a:hover {
+    text-decoration: underline;
+    color: var(--accent-color);
+}
+
 .user-info {
     display: flex;
     align-items: center;
