@@ -21,7 +21,6 @@ body {
     color: var(--secondary-color);
 }
 
-/* Header giống admin */
 .admin-header {
     background-color: var(--primary-color);
     color: white;
@@ -101,11 +100,19 @@ body {
     font-size: 14px;
     font-weight: 500;
     transition: var(--transition);
+    padding-bottom: 2px;
+    border-bottom: 2px solid transparent; 
 }
 
 .admin-nav a:hover {
     text-decoration: underline;
     color: var(--accent-color);
+}
+
+.admin-nav a.active {
+    color: var(--accent-color);
+    font-weight: 700;
+    border-bottom-color: var(--accent-color);
 }
 
 .admin-container {
