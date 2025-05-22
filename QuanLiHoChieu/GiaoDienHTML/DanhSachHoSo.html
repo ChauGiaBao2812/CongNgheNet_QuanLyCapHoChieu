@@ -1,10 +1,10 @@
 ﻿<!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Danh sách hồ sơ - Hệ Thống Admin</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Danh sách hồ sơ - Giám sát</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <style>
         :root {
             --primary-color: #2c3e50;
@@ -45,6 +45,12 @@
             z-index: 1000;
         }
 
+        .header-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
         .header-title {
             font-size: 20px;
             font-weight: 600;
@@ -56,6 +62,34 @@
             .header-title i {
                 color: var(--accent-color);
             }
+
+        .admin-nav {
+            margin-top: 6px;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+            .admin-nav a {
+                color: white;
+                text-decoration: none;
+                font-weight: 500;
+                font-size: 14px;
+                transition: all 0.3s ease;
+                padding-bottom: 2px;
+                border-bottom: 2px solid transparent;
+            }
+
+                .admin-nav a:hover {
+                    color: var(--accent-color);
+                    text-decoration: underline;
+                }
+
+                .admin-nav a.active {
+                    color: var(--accent-color);
+                    font-weight: 700;
+                    border-bottom-color: var(--accent-color);
+                }
 
         .user-info {
             display: flex;
@@ -203,12 +237,21 @@
 <body>
     <!-- Header -->
     <header class="admin-header">
-        <div class="header-title">
-            <i class="fas fa-list"></i>
-            <span>DANH SÁCH HỒ SƠ</span>
+        <div class="header-left">
+            <div class="header-title">
+                <i class="fas fa-chart-line"></i>
+                <span>GIÁM SÁT HỒ SƠ</span>
+            </div>
+            <nav class="admin-nav">
+                <a href="#" class="active">Danh sách hồ sơ</a>
+                <a href="#">Chi tiết hồ sơ</a>
+                <a href="#">Danh sách User</a>
+                <a href="#">Chi tiết User</a>
+                <a href="#">Tạo tài khoản</a>
+            </nav>
         </div>
         <div class="user-info">
-            <img src="content/images/admin-avatar.jpg" alt="Admin Avatar" class="user-avatar">
+            <img src="content/images/admin-avatar.jpg" alt="Admin Avatar" class="user-avatar" />
             <button class="logout-btn" onclick="logout()">
                 <i class="fas fa-sign-out-alt"></i>
                 Đăng xuất

@@ -3,26 +3,280 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Tạo Tài Khoản Người Dùng - Hệ Thống Admin</title>
+    <title>Tạo Tài Khoản Người Dùng - Giám sát</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <link rel="stylesheet" href="../wwwroot/css/GiamSat_Create.css" />
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --light-color: #ecf0f1;
+            --danger-color: #e74c3c;
+            --success-color: #2ecc71;
+            --warning-color: #f39c12;
+            --border-color: #dfe6e9;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: var(--secondary-color);
+        }
+
+        /* Header */
+        .admin-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--box-shadow);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .header-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .header-title {
+            font-size: 20px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+            .header-title i {
+                color: var(--accent-color);
+            }
+
+        .admin-nav {
+            margin-top: 5px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+            .admin-nav a {
+                color: white;
+                text-decoration: none;
+                font-size: 14px;
+                font-weight: 500;
+                transition: var(--transition);
+                padding-bottom: 2px;
+                border-bottom: 2px solid transparent;
+            }
+
+                .admin-nav a:hover {
+                    color: var(--accent-color);
+                    text-decoration: underline;
+                }
+
+                /* Highlight cho menu active */
+                .admin-nav a.active {
+                    color: var(--accent-color);
+                    font-weight: 700;
+                    border-bottom-color: var(--accent-color);
+                }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent-color);
+        }
+
+        .logout-btn {
+            background-color: var(--danger-color);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: var(--border-radius);
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: var(--transition);
+        }
+
+            .logout-btn:hover {
+                background-color: #c0392b;
+                transform: translateY(-1px);
+            }
+
+        /* Container chính */
+        .admin-container {
+            margin-top: 80px;
+            padding: 20px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Card */
+        .card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 30px;
+        }
+
+        /* Form Section */
+        .form-section {
+            margin-bottom: 30px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .section-divider {
+            flex: 1;
+            height: 1px;
+            background-color: #e0e0e0;
+            margin-left: 10px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .form-control {
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            background-color: #fff;
+            transition: border-color 0.3s;
+        }
+
+            .form-control:focus {
+                outline: none;
+                border-color: var(--accent-color);
+                box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+            }
+
+            .form-control::placeholder {
+                color: #adb5bd;
+            }
+
+        .text-danger {
+            font-size: 12px;
+            color: var(--danger-color);
+            margin-top: 5px;
+            display: block;
+        }
+
+        .validation-summary {
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .submit-btn {
+            display: flex;
+            align-items: center;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: var(--border-radius);
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+            .submit-btn svg {
+                width: 20px;
+                height: 20px;
+                margin-left: 10px;
+            }
+
+            .submit-btn:hover {
+                background-color: #2980b9;
+            }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .admin-container {
+                max-width: 95%;
+                padding: 10px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
     <header class="admin-header">
         <div class="header-left">
             <div class="header-title">
-                <i class="fas fa-user-plus"></i>
-                <span>TẠO TÀI KHOẢN NGƯỜI DÙNG</span>
+                <i class="fas fa-chart-line"></i>
+                <span>GIÁM SÁT HỒ SƠ</span>
             </div>
             <nav class="admin-nav">
-                <a href="#">Trang chủ</a>
-                <a href="#">Tạo tài khoản</a>
-                <a href="#">Xem lịch sử</a>
+                <a href="#">Danh sách hồ sơ</a>
+                <a href="#">Chi tiết hồ sơ</a>
+                <a href="#">Danh sách User</a>
+                <a href="#">Chi tiết User</a>
+                <a href="#" class="active">Tạo tài khoản</a>
             </nav>
         </div>
-
         <div class="user-info">
-            <img src="../wwwroot/public/user.png" alt="User Avatar" class="user-avatar" />
+            <img src="content/images/admin-avatar.jpg" alt="Admin Avatar" class="user-avatar" />
             <button class="logout-btn" onclick="window.location.href='/Logout'">
                 <i class="fas fa-sign-out-alt"></i> Đăng xuất
             </button>
