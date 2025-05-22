@@ -45,9 +45,9 @@ body {
     gap: 10px;
 }
 
-    .header-title i {
-        color: var(--accent-color);
-    }
+.header-title i {
+    color: var(--accent-color);
+}
 
 .user-info {
     display: flex;
@@ -77,10 +77,10 @@ body {
     transition: var(--transition);
 }
 
-    .logout-btn:hover {
-        background-color: #c0392b;
-        transform: translateY(-1px);
-    }
+.logout-btn:hover {
+    background-color: #c0392b;
+    transform: translateY(-1px);
+}
 
 .header-left {
     display: flex;

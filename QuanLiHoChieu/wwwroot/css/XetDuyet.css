@@ -262,6 +262,26 @@ body {
     background-color: #27ae60;
 }
 
+.admin-nav {
+    margin-top: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.admin-nav a {
+    color: white; 
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.admin-nav a:hover {
+    text-decoration: underline;
+    color: var(--accent-color);
+}
+
 @media (max-width: 768px) {
     .applicant-section {
         flex-direction: column;

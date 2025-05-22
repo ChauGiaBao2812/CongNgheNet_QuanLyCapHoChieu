@@ -9,18 +9,27 @@
 </head>
 <body>
     <!-- HEADER -->
-    <header class="admin-header">
+<header class="admin-header">
+    <div class="header-left">
         <div class="header-title">
             <i class="fas fa-clipboard-check"></i>
             <span>XÉT DUYỆT HỒ SƠ</span>
         </div>
-        <div class="user-info">
-            <img src="content/images/admin-avatar.jpg" alt="Admin Avatar" class="user-avatar" />
-            <button class="logout-btn" onclick="window.location.href='/Logout'">
-                <i class="fas fa-sign-out-alt"></i> Đăng xuất
-            </button>
-        </div>
-    </header>
+        <nav class="admin-nav">
+            <a href="#">Danh sách hồ sơ</a>
+            <a href="#">Xét duyệt hồ sơ</a>
+        </nav>
+    </div>
+    <div class="user-info">
+        <img src="content/images/admin-avatar.jpg" alt="Admin Avatar" class="user-avatar" />
+        <button class="logout-btn" onclick="window.location.href='/Logout'">
+            <i class="fas fa-sign-out-alt"></i> Đăng xuất
+        </button>
+    </div>
+</header>
+
+
+
 
     <!-- MAIN CONTENT -->
     <div class="admin-container">
@@ -31,7 +40,7 @@
                     Thông tin xét duyệt
                 </div>
             </div>
-            
+
             <!-- New applicant info section -->
             <div class="applicant-section">
                 <img src="content/images/applicant-avatar.jpg" alt="Người đề nghị" class="applicant-avatar" />
