@@ -1,4 +1,6 @@
-﻿namespace QuanLiHoChieu.Models.ViewModels
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace QuanLiHoChieu.Models.ViewModels
 {
     public class PassportFormReviewVM
     {
@@ -39,6 +41,13 @@
         public DateTime? NgaySinhCha { get; set; }
         public string? HoTenMe { get; set; }
         public DateTime? NgaySinhMe { get; set; }
+
+        // Acquirement
+        public string? NoiDungDeNghi { get; set; }
+        public string? NoiTiepNhanHS { get; set; }
+        public DateTime? NgayNop { get; set; }
+
+        public bool isValidated { get; set; }
     }
 
 }

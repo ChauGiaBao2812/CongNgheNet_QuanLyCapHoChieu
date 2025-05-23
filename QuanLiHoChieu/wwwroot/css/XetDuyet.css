@@ -176,8 +176,8 @@ body {
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius);
     padding: 15px;
-    font-size: 1em;
-    width: 280px;
+    font-size: 0.70em;
+    width: 320px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     z-index: 10;
 }
@@ -245,12 +245,12 @@ body {
 }
 
 .invalid-btn {
-    background-color: var(--warning-color);
+    background-color: #e74c3c;
     color: white;
 }
 
 .invalid-btn:hover {
-    background-color: #d78c0c;
+    background-color: #c0392b;
 }
 
 .valid-btn {
@@ -260,6 +260,15 @@ body {
 
 .valid-btn:hover {
     background-color: #27ae60;
+}
+
+.go-back-btn {
+    background-color: #f39c12;
+    color: white;
+}
+
+.go-back-btn:hover {
+    background-color: #d78c0c;
 }
 
 .admin-nav {
@@ -296,10 +305,12 @@ body {
         flex-direction: column;
         text-align: center;
     }
-    
+
     .applicant-avatar {
         width: 100px;
         height: 100px;
+        object-fit: cover;
+        object-position: top;
     }
     
     .info-box {
@@ -323,3 +334,23 @@ body {
         width: 100%;
     }
 }
+
+
+.table {
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    .table th {
+        width: 15%;
+        text-align: left;
+        padding: 0.3rem 0.5rem;
+    }
+
+    .table td {
+        width: 85%;
+        text-align: left;
+        padding: 0.3rem 0.5rem;
+        word-wrap: break-word;
+    }

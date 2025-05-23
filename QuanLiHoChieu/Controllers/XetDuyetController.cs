@@ -56,6 +56,8 @@ namespace QuanLiHoChieu.Controllers
         }
         public async Task<IActionResult> Review(string formId)
         {
+            _logger.LogInformation($"Id: {formId}");
+
             var passportData = await _getDataService.GetPassportVMByFormIdAsync(formId);
 
             var model = new XetDuyetFormCompositeVM
@@ -67,7 +69,36 @@ namespace QuanLiHoChieu.Controllers
                 }
             };
 
-            return View();
+            _logger.LogInformation(model.PassportData?.Hinh);
+
+            LoadUserGender();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Review(XetDuyetFormCompositeVM model, string TrangThai)
+        {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("List");
+            }
+
+            var xuLy = new XuLy
+            {
+                FormID = model.Verification!.FormID,
+                GhiChu = model.Verification.GhiChu,
+                TrangThai = TrangThai,
+                UserID = User.FindFirst("UserID")?.Value ?? "Unknown",
+                NgayXuLy = DateTime.Now,
+                LoaiXuLy = "XetDuyet"
+            };
+
+            _context.XuLys.Add(xuLy);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("List");
         }
 
         public async Task<IActionResult> Logout()

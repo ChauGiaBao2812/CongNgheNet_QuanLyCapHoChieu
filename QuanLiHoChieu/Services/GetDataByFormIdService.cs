@@ -4,6 +4,7 @@ using QuanLiHoChieu.Services.Interface;
 using Microsoft.EntityFrameworkCore;
 using QuanLiHoChieu.Models.ViewModels;
 using Microsoft.SqlServer.Server;
+using QuanLiHoChieu.Models;
 
 namespace QuanLiHoChieu.Services
 {
@@ -95,13 +96,15 @@ namespace QuanLiHoChieu.Services
         {
             var form = await _context.PassportDatas.FirstOrDefaultAsync(p => p.FormID == formId);
 
-            if (form == null || form.ResidentData == null)
-                return null;
+            var xuLy = await _context.XuLys
+                .Where(x => x.FormID == formId && x.LoaiXuLy == "XetDuyet")
+                .OrderByDescending(x => x.NgayXuLy)
+                .FirstOrDefaultAsync();
 
             return new PassportFormReviewVM
             {
-                FormID = form.FormID,
-                CCCD = AesEcbEncryption.DecryptAesEcb(form.CCCD),
+                FormID = form?.FormID,
+                CCCD = AesEcbEncryption.DecryptAesEcb(form!.CCCD),
                 HoTen = AesEcbEncryption.DecryptAesEcb(form.HoTen),
                 GioiTinh = form.GioiTinh,
                 NgaySinh = form.NgaySinh,
@@ -129,7 +132,13 @@ namespace QuanLiHoChieu.Services
                 HoTenCha = form.HoTenCha != null ? AesEcbEncryption.DecryptAesEcb(form.HoTenCha) : null,
                 NgaySinhCha = form.NgaySinhCha,
                 HoTenMe = form.HoTenMe != null ? AesEcbEncryption.DecryptAesEcb(form.HoTenMe) : null,
-                NgaySinhMe = form.NgaySinhMe
+                NgaySinhMe = form.NgaySinhMe,
+
+                NoiDungDeNghi = form.NoiDungDeNghi,
+                NoiTiepNhanHS = form.NoiTiepNhanHS,
+                NgayNop = form.NgayNop,
+
+                isValidated = xuLy != null && (xuLy.TrangThai == "Verified" || xuLy.TrangThai == "Rejected")
             };
         }
     }

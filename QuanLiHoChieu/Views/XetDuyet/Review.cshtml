@@ -1,22 +1,42 @@
-﻿<!DOCTYPE html>
+﻿@model QuanLiHoChieu.Models.ViewModels.XetDuyetFormCompositeVM;
+
+@{
+    Layout = null;
+    var gioiTinh = ViewData["GioiTinh"] as string ?? "Other";
+    var ten = ViewData["Ten"] as string ?? "Guest";
+    string avatarPath = gioiTinh switch
+    {
+        "Nam" => Url.Content("~/public/male.png"),
+        "Nữ" => Url.Content("~/public/female.png"),
+        _ => Url.Content("~/public/user.png")
+    };
+}
+
+<!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Xét duyệt hồ sơ - Hệ Thống Admin</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="~/css/XetDuyet.css" />
 </head>
 <body>
     <!-- HEADER -->
     <header class="admin-header">
-        <div class="header-title">
-            <i class="fas fa-clipboard-check"></i>
-            <span>XÉT DUYỆT HỒ SƠ</span>
+        <div class="header-left">
+            <div class="header-title">
+                <i class="fas fa-clipboard-check"></i>
+                <span>XÉT DUYỆT HỒ SƠ</span>
+            </div>
+            <nav class="admin-nav">
+                <a href="@Url.Action("List")">Danh sách hồ sơ</a>
+            </nav>
         </div>
         <div class="user-info">
-            <img src="content/images/admin-avatar.jpg" alt="Admin Avatar" class="user-avatar" />
-            <button class="logout-btn" onclick="window.location.href='/Logout'">
+            <img src="@avatarPath" alt="Admin Avatar" class="user-avatar" />
+            <button class="logout-btn" onclick="window.location.href='@Url.Action("Logout", "XetDuyet")'">
                 <i class="fas fa-sign-out-alt"></i> Đăng xuất
             </button>
         </div>
@@ -30,31 +50,166 @@
                     <i class="fas fa-info-circle"></i>
                     Thông tin xét duyệt
                 </div>
+                FormId: @Model.PassportData?.FormID
+            </div>
+
+            <!-- New applicant info section -->
+            <div class="applicant-section">
+                <img src="~/img/@Model.PassportData?.Hinh" alt="Người đề nghị" class="applicant-avatar" />
+                <div class="applicant-info">
+                    <div class="applicant-name">@Model.PassportData?.HoTen</div>
+                    <div class="applicant-id">CCCD: @Model.PassportData?.CCCD</div>
+                </div>
             </div>
 
             <div class="info-box">
-                Thông tin từ người dùng
-                <img src="Img/error.png" alt="Các yêu cầu xét duyệt" onclick="toggleRequirements()" />
+                <b>Thông tin từ người dùng</b>
+                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'><circle cx='12' cy='12' r='10' stroke='%231E90FF' stroke-width='2' fill='%23E6F2FF'/><line x1='12' y1='7' x2='12' y2='13' stroke='%231E90FF' stroke-width='2' stroke-linecap='round'/><circle cx='12' cy='17' r='1.5' fill='%231E90FF'/></svg>"
+                     alt="Các yêu cầu xét duyệt"
+                     onclick="toggleRequirements()" />
+
                 <div id="requirementBox" class="requirement-box">
-                    <strong>Các yêu cầu:</strong>
+                    <strong>Các yêu cầu cần lưu ý ở bước xét duyệt:</strong>
                     <ul>
-                        <li>Yêu cầu 1</li>
-                        <li>Không</li>
-                        <li>Sai</li>
+                        <li>Ảnh chân dung cần rõ nét, không bị mờ hoặc thiếu sáng.</li>
+                        <li>Email phải hợp lệ và không để trống.</li>
+                        <li>Số điện thoại cần đủ độ dài, không chứa ký tự đặc biệt.</li>
+                        <li>Đảm bảo nội dung đề nghị rõ ràng, không chứa từ ngữ không phù hợp.</li>
+                        <li>Địa chỉ cư trú cần chi tiết và đúng định dạng.</li>
                     </ul>
+
                     <button class="btn close-btn" onclick="toggleRequirements()">Đóng</button>
                 </div>
             </div>
 
-            <div class="note-section">
-                <label for="note">Ghi chú</label><br />
-                <textarea id="note" placeholder="Nhập ghi chú ở đây..."></textarea>
+            <div class="info-box" style="text-align: left;">
+                <strong>Thông tin cơ bản</strong> <br />
+                <table class="table table-bordered" style="font-size: 0.85rem; width: 100%; border: 2px solid #000; margin-top:1rem">
+                    <tr>
+                        <th style="text-align: left;">Họ tên</th>
+                        <td style="text-align: left;">@Model?.PassportData?.HoTen</td>
+                    </tr>
+                    <tr>
+                        <th style="text-align: left;">Giới tính</th>
+                        <td style="text-align: left;">@Model?.PassportData?.GioiTinh</td>
+                    </tr>
+                    <tr>
+                        <th style="text-align: left;">Ngày sinh</th>
+                        <td style="text-align: left;">@Model?.PassportData?.NgaySinh.ToString("dd/MM/yyyy")</td>
+                    </tr>
+                    <tr>
+                        <th style="text-align: left;">Nơi sinh</th>
+                        <td style="text-align: left;">@Model?.PassportData?.NoiSinh</td>
+                    </tr>
+                    <tr>
+                        <th style="text-align: left;">Dân tộc</th>
+                        <td style="text-align: left;">@Model?.PassportData?.DanToc</td>
+                    </tr>
+                    <tr>
+                        <th style="text-align: left;">Tôn giáo</th>
+                        <td style="text-align: left;">@Model?.PassportData?.TonGiao</td>
+                    </tr>
+                </table>
+
+                <strong>Thông tin CCCD</strong> <br />
+                <table class="table table-bordered" style="font-size: 0.85rem; width: 100%; border: 2px solid #000; margin-top:1rem">
+                    <tr>
+                        <th style="text-align: left;">Số CCCD</th>
+                        <td style="text-align: left;">@Model?.PassportData?.CCCD</td>
+                    </tr>
+                    <tr>
+                        <th style="text-align: left;">Ngày cấp</th>
+                        <td style="text-align: left;">@Model?.PassportData?.NgayCap.ToString("dd/MM/yyyy")</td>
+                    </tr>
+                    <tr>
+                        <th style="text-align: left;">Nơi cấp</th>
+                        <td style="text-align: left;">@Model?.PassportData?.NoiCap</td>
+                    </tr>
+                </table>
+
+                <strong>Thông tin cư trú</strong><br />
+                <table class="table table-bordered" style="font-size: 0.85rem; width: 100%; border: 2px solid #000; margin-top:1rem">
+                    <tr>
+                        <th style="text-align: left;">Địa chỉ thường trú</th>
+                        <td style="text-align: left;">@Model?.PassportData?.PermanentAddress</td>
+                    </tr>
+                    <tr>
+                        <th style="text-align: left;">Địa chỉ tạm trú</th>
+                        <td style="text-align: left;">@Model?.PassportData?.TemporaryAddress</td>
+                    </tr>
+                </table>
+
+                <strong>Thông tin cha, mẹ</strong> <br />
+                <table class="table table-bordered" style="font-size: 0.85rem; width: 100%; border: 2px solid #000; margin-top:1rem">
+                    <tr>
+                        <th style="text-align: left;">Họ tên Cha</th>
+                        <td style="text-align: left;">@Model?.PassportData?.HoTenCha</td>
+                    </tr>
+                    <tr>
+                        <th style="text-align: left;">Ngày sinh Cha</th>
+                        <td style="text-align: left;">@Model?.PassportData?.NgaySinhCha?.ToString("dd/MM/yyyy")</td>
+                    </tr>
+                    <tr>
+                        <th style="text-align: left;">Họ tên Mẹ</th>
+                        <td style="text-align: left;">@Model?.PassportData?.HoTenMe</td>
+                    </tr>
+                    <tr>
+                        <th style="text-align: left;">Ngày sinh Mẹ</th>
+                        <td style="text-align: left;">@Model?.PassportData?.NgaySinhMe?.ToString("dd/MM/yyyy")</td>
+                    </tr>
+                </table>
+
+                <strong>Thông tin liên hệ</strong> <br />
+                <table class="table table-bordered" style="font-size: 0.85rem; width: 100%; border: 2px solid #000; margin-top:1rem">
+                    <tr>
+                        <th style="text-align: left;">Số điện thoại</th>
+                        <td style="text-align: left;">@Model?.PassportData?.SDT</td>
+                    </tr>
+                    <tr>
+                        <th style="text-align: left;">Email</th>
+                        <td style="text-align: left;">@Model?.PassportData?.Email</td>
+                    </tr>
+                </table>
+
+                <strong>Nội dung đề nghị</strong> <br />
+                <table class="table table-bordered" style="font-size: 0.85rem; width: 100%; border: 2px solid #000; margin-top:1rem">
+                    <tr>
+                        <th style="text-align: left;">Nội dung đề nghị</th>
+                        <td style="text-align: left;">@Model?.PassportData?.NoiDungDeNghi</td>
+                    </tr>
+                    <tr>
+                        <th style="text-align: left;">Nơi tiếp nhận hồ sơ</th>
+                        <td style="text-align: left;">@Model?.PassportData?.NoiTiepNhanHS</td>
+                    </tr>
+                    <tr>
+                        <th style="text-align: left;">Ngày nộp hồ sơ</th>
+                        <td style="text-align: left;">@Model?.PassportData?.NgayNop</td>
+                    </tr>
+                </table>
             </div>
 
-            <div class="button-group">
-                <button class="btn invalid-btn">Không hợp lệ</button>
-                <button class="btn valid-btn">Hợp lệ</button>
-            </div>
+            <form asp-controller="XetDuyet" asp-action="Review" method="post">
+                @Html.AntiForgeryToken()
+                <input asp-for="Verification!.FormID" type="hidden" />
+
+                <div class="note-section">
+                    <textarea asp-for="Verification!.GhiChu" placeholder="Ghi chú"></textarea>
+                </div>
+
+                @if (Model?.PassportData?.isValidated == false)
+                {
+                    <div class="button-group">
+                        <button type="submit" name="TrangThai" value="Rejected" class="btn invalid-btn">Không hợp lệ</button>
+                        <button type="submit" name="TrangThai" value="Verified" class="btn valid-btn">Hợp lệ</button>
+                    </div>
+                }
+                else
+                {
+                    <div class="button-group">
+                        <button type="button" onclick="location.href='@Url.Action("List")'" class="btn go-back-btn">Quay lại</button>
+                    </div>
+                }
+            </form>
         </div>
     </div>
 
@@ -66,3 +221,4 @@
     </script>
 </body>
 </html>
+

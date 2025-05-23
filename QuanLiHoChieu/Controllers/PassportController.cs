@@ -56,6 +56,8 @@ namespace QuanLiHoChieu.Controllers
                 return View(model);
             }
 
+            var newFileName = "";
+
             if (avatar == null)
             {
                 _logger.LogInformation("Image Not Found");
@@ -71,7 +73,7 @@ namespace QuanLiHoChieu.Controllers
 
                 if (allowedExtensions.Contains(fileExtension))
                 {
-                    var newFileName = $"{GUID}{fileExtension}";
+                    newFileName = $"{GUID}{fileExtension}";
 
                     model.Hinh = newFileName;
 
@@ -101,7 +103,7 @@ namespace QuanLiHoChieu.Controllers
                 TonGiao = model.TonGiao,
                 SĐT = Encrypt(model.SDT),
                 Email = Encrypt(model.Email),
-                Hinh = "",
+                Hinh = newFileName,
                 ttTinhThanh = Encrypt(model.ttTinhThanh),
                 ttQuanHuyen = Encrypt(model.ttQuanHuyen),
                 ttPhuongXa = Encrypt(model.ttPhuongXa),
@@ -122,7 +124,7 @@ namespace QuanLiHoChieu.Controllers
             _context.PassportDatas.Add(passportData);
             await _context.SaveChangesAsync();
 
-            ViewBag.AlertMessage = "Đơn của người đề nghị đã được gửi thành công";
+            ViewBag.AlertMessage = $"Đơn của người đề nghị đã được gửi thành công. Mã đơn:{formId}";
 
             ModelState.Clear();
 
