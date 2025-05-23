@@ -56,8 +56,6 @@ namespace QuanLiHoChieu.Controllers
         }
         public async Task<IActionResult> Review(string formId)
         {
-            _logger.LogInformation($"Id: {formId}");
-
             var passportData = await _getDataService.GetPassportVMByFormIdAsync(formId);
 
             var model = new XetDuyetFormCompositeVM
@@ -68,8 +66,6 @@ namespace QuanLiHoChieu.Controllers
                     FormID = formId
                 }
             };
-
-            _logger.LogInformation(model.PassportData?.Hinh);
 
             LoadUserGender();
 
