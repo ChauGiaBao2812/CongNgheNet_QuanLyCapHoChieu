@@ -1,0 +1,356 @@
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #34495e;
+    --accent-color: #3498db;
+    --light-color: #ecf0f1;
+    --danger-color: #e74c3c;
+    --success-color: #2ecc71;
+    --warning-color: #f39c12;
+    --border-color: #dfe6e9;
+    --border-radius: 8px;
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f5f7fa;
+    color: var(--secondary-color);
+}
+
+.admin-header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--box-shadow);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+.header-title {
+    font-size: 20px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-title i {
+    color: var(--accent-color);
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.user-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--accent-color);
+}
+
+.logout-btn {
+    background-color: var(--danger-color);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: var(--border-radius);
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: var(--transition);
+}
+
+.logout-btn:hover {
+    background-color: #c0392b;
+    transform: translateY(-1px);
+}
+
+.admin-container {
+    margin-top: 80px;
+    padding: 20px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card {
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 20px;
+}
+
+.card-header {
+    margin-bottom: 20px;
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.applicant-section {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: var(--light-color);
+    border-radius: var(--border-radius);
+}
+
+.applicant-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--accent-color);
+    box-shadow: var(--box-shadow);
+}
+
+.applicant-info {
+    flex: 1;
+}
+
+.applicant-name {
+    font-size: 1.2em;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 5px;
+}
+
+.applicant-id {
+    color: var(--secondary-color);
+    font-size: 0.9em;
+}
+
+.info-box {
+    background-color: var(--light-color);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    font-size: 1.3em;
+    color: var(--secondary-color);
+    text-align: center;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.info-box img {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+}
+
+.requirement-box {
+    display: none;
+    position: absolute;
+    top: 65px;
+    right: 15px;
+    background-color: white;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 15px;
+    font-size: 0.70em;
+    width: 320px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    z-index: 10;
+}
+
+.requirement-box ul {
+    padding-left: 20px;
+    margin-top: 10px;
+    text-align: left;
+    color: var(--secondary-color);
+}
+
+.requirement-box button.close-btn {
+    margin-top: 10px;
+    padding: 6px 12px;
+    font-size: 0.9em;
+    border: none;
+    border-radius: var(--border-radius);
+    background-color: var(--danger-color);
+    color: white;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.requirement-box button.close-btn:hover {
+    background-color: #c0392b;
+}
+
+.note-section {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.note-section label {
+    font-weight: 600;
+    color: var(--primary-color);
+    display: block;
+    margin-bottom: 8px;
+}
+
+.note-section textarea {
+    width: 100%;
+    height: 100px;
+    resize: vertical;
+    padding: 10px;
+    font-size: 1em;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    color: var(--secondary-color);
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.button-group .btn {
+    padding: 12px 40px;
+    font-size: 1em;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.invalid-btn {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.invalid-btn:hover {
+    background-color: #c0392b;
+}
+
+.valid-btn {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.valid-btn:hover {
+    background-color: #27ae60;
+}
+
+.go-back-btn {
+    background-color: #f39c12;
+    color: white;
+}
+
+.go-back-btn:hover {
+    background-color: #d78c0c;
+}
+
+.admin-nav {
+    margin-top: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.admin-nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: var(--transition);
+    padding-bottom: 2px;
+    border-bottom: 2px solid transparent;
+}
+
+.admin-nav a.active {
+    color: var(--accent-color);
+    font-weight: 700;
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 2px; 
+}
+
+.admin-nav a:hover {
+    text-decoration: underline;
+    color: var(--accent-color);
+}
+
+@media (max-width: 768px) {
+    .applicant-section {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .applicant-avatar {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        object-position: top;
+    }
+    
+    .info-box {
+        font-size: 1.1em;
+        padding: 20px;
+    }
+
+    .requirement-box {
+        width: 90vw;
+        left: 5vw;
+        right: 5vw;
+        top: 60px;
+    }
+
+    .button-group {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .button-group .btn {
+        width: 100%;
+    }
+}
+
+
+.table {
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    .table th {
+        width: 15%;
+        text-align: left;
+        padding: 0.3rem 0.5rem;
+    }
+
+    .table td {
+        width: 85%;
+        text-align: left;
+        padding: 0.3rem 0.5rem;
+        word-wrap: break-word;
+    }

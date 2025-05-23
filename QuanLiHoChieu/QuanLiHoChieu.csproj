@@ -14,6 +14,20 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="GiaoDienHTML\css-old\Admin.css" />
+    <Content Include="GiaoDienHTML\css-old\Form.css" />
+    <Content Include="GiaoDienHTML\css-old\GiamSat_Create.css" />
+    <Content Include="GiaoDienHTML\css-old\HoSoXD.css" />
+    <Content Include="GiaoDienHTML\css-old\HoSoXT.css" />
+    <Content Include="GiaoDienHTML\css-old\Login.css" />
+    <Content Include="GiaoDienHTML\css-old\LuuTru.css" />
+    <Content Include="GiaoDienHTML\css-old\site.css" />
+    <Content Include="GiaoDienHTML\css-old\styles.css" />
+    <Content Include="GiaoDienHTML\css-old\XacThuc.css" />
+    <Content Include="GiaoDienHTML\css-old\XetDuyet.css" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.13" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.13" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.13">

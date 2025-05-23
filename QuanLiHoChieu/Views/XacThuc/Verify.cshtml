@@ -52,8 +52,9 @@
                     <i class="fas fa-info-circle"></i>
                     Thông tin hồ sơ
                 </div>
-                <span>FormId: @Model.PassportData?.FormID</span><br />
-                <span>CCCD: @Model.PassportData?.CCCD</span>
+                <div>
+                    <span>FormId: @Model.PassportData?.FormID</span>
+                </div>
             </div>
 
             <div class="info-boxes" style="display: flex; gap: 2rem;">
@@ -70,11 +71,12 @@
                 <!--Passport Data-->
                 <div class="info-box" style="flex: 1; text-align: left; line-height: 1.8;">
                     <p><strong>Họ tên:</strong> @Model.PassportData?.HoTenPD</p>
+                    <p><strong>CCCD: </strong>@Model.PassportData?.CCCD</p>
+                    <p><strong>Ngày cấp:</strong> @Model.PassportData?.NgayCapPD.ToString("dd/MM/yyyy")</p>
+                    <p><strong>Nơi cấp:</strong> @Model.PassportData?.NoiCapPD</p>
                     <p><strong>Giới tính:</strong> @Model.PassportData?.GioiTinhPD</p>
                     <p><strong>Ngày sinh:</strong> @Model.PassportData?.NgaySinhPD.ToString("dd/MM/yyyy")</p>
                     <p><strong>Nơi sinh:</strong> @Model.PassportData?.NoiSinhPD</p>
-                    <p><strong>Ngày cấp:</strong> @Model.PassportData?.NgayCapPD.ToString("dd/MM/yyyy")</p>
-                    <p><strong>Nơi cấp:</strong> @Model.PassportData?.NoiCapPD</p>
                     <p><strong>Dân tộc:</strong> @Model.PassportData?.DanTocPD</p>
                     <p><strong>Tôn giáo:</strong> @Model.PassportData?.TonGiaoPD</p>
                     <p><strong>SĐT:</strong> @Model.PassportData?.SDTPD</p>
@@ -89,11 +91,12 @@
                 <!--Resident Data-->
                 <div class="info-box" style="flex: 1; text-align: left; line-height: 1.8;">
                     <p><strong>Họ tên:</strong> @Model.PassportData?.HoTenRD</p>
+                    <p><strong>CCCD:</strong> @Model.PassportData?.CCCD</p>
+                    <p><strong>Ngày cấp:</strong> @Model.PassportData?.NgayCapRD.ToString("dd/MM/yyyy")</p>
+                    <p><strong>Nơi cấp:</strong> @Model.PassportData?.NoiCapRD</p>
                     <p><strong>Giới tính:</strong> @Model.PassportData?.GioiTinhRD</p>
                     <p><strong>Ngày sinh:</strong> @Model.PassportData?.NgaySinhRD.ToString("dd/MM/yyyy")</p>
                     <p><strong>Nơi sinh:</strong> @Model.PassportData?.NoiSinhRD</p>
-                    <p><strong>Ngày cấp:</strong> @Model.PassportData?.NgayCapRD.ToString("dd/MM/yyyy")</p>
-                    <p><strong>Nơi cấp:</strong> @Model.PassportData?.NoiCapRD</p>
                     <p><strong>Dân tộc:</strong> @Model.PassportData?.DanTocRD</p>
                     <p><strong>Tôn giáo:</strong> @Model.PassportData?.TonGiaoRD</p>
                     <p><strong>SĐT:</strong> @Model.PassportData?.SDTRD</p>
