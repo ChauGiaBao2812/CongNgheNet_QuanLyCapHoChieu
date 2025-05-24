@@ -18,7 +18,7 @@ builder.Services.AddAuthentication("MyCookieAuth")
         options.AccessDeniedPath = "/Chung/AccessDenied"; // Redirect here if no permission
         options.Cookie.Name = "MyCookieAuth";           // Cookie name in browser
         options.Cookie.HttpOnly = true;
-        options.ExpireTimeSpan = TimeSpan.FromMinutes(5); // Optional: cookie lifetime
+        options.ExpireTimeSpan = TimeSpan.FromHours(1); // Optional: cookie lifetime
         options.SlidingExpiration = false;                // Optional: refresh cookie expiry on activity
         options.Cookie.IsEssential = true;               // GDPR compliance
     });
