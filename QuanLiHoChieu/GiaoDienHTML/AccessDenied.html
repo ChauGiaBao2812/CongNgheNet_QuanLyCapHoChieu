@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Truy cập bị từ chối</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../css/Login.css" />
+  </head>
+  <body>
+    <div class="login-container">
+      <div class="login-card">
+        <div class="card-header">
+          <h1 class="title">TRUY CẬP BỊ TỪ CHỐI</h1>
+        </div>
+
+        <div class="card-body" style="text-align: center">
+          <i
+            class="fas fa-ban fa-7x"
+            style="color: red; margin-bottom: 20px"
+          ></i>
+          <p style="font-size: 1.2rem; margin-bottom: 30px">
+            Bạn không có quyền truy cập vào trang này.<br />
+            Vui lòng liên hệ quản trị viên để được cấp quyền.
+          </p>
+          <button class="login-btn" onclick="redirectToLogin()">
+            <i class="fas fa-arrow-left"></i> Quay về trang chủ
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="../js/GiamSat.js"></script>
+  </body>
+</html>
