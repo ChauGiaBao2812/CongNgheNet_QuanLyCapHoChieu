@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Chi tiết hồ sơ - Giám sát</title>
+    <link rel="stylesheet" href="../css/GiamSat.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="admin-header">
+      <div class="header-left">
+        <div class="header-title">
+          <i class="fas fa-user-shield"></i>
+          <span>GIÁM SÁT HỒ SƠ</span>
+        </div>
+        <nav class="admin-nav">
+          <a href="#">Danh sách hồ sơ</a>
+          <a href="#" class="active">Chi tiết hồ sơ</a>
+          <a href="#">Danh sách User</a>
+          <a href="#">Chi tiết User</a>
+          <a href="#">Tạo tài khoản</a>
+        </nav>
+      </div>
+      <div class="user-info">
+        <img
+          src="content/images/admin-avatar.jpg"
+          alt="Admin Avatar"
+          class="user-avatar"
+        />
+        <button class="logout-btn" onclick="logout()">
+          <i class="fas fa-sign-out-alt"></i> Đăng xuất
+        </button>
+      </div>
+    </header>
+
+    <div class="page-wrapper">
+      <div class="admin-container">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-header">
+                <i class="fas fa-info-circle"></i>
+                Thông tin hồ sơ
+              </div>
+              <div class="card-body">
+                <div class="form-group">
+                  <label>Mã hồ sơ:</label>
+                  <p class="form-control-plaintext">Mã hồ sơ(ABC)</p>
+                </div>
+                <div class="form-group">
+                  <label>Ngày nộp:</label>
+                  <p class="form-control-plaintext">12/12/2025</p>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header accent">
+                <i class="fas fa-sticky-note"></i>
+                Ghi chú (Xác thực)
+              </div>
+              <div class="card-body note-box">Ghi chú xác thực gì đó!</div>
+            </div>
+            <div class="card">
+              <div class="card-header accent">
+                <i class="fas fa-sticky-note"></i>
+                Ghi chú (Xét duyệt)
+              </div>
+              <div class="card-body note-box">Ghi chú xét duyệt gì đó!</div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-header accent">
+                <i class="fas fa-tasks"></i>
+                Tình trạng
+              </div>
+              <div class="card-body">
+                <div class="form-group">
+                  <label>Xác thực:</label>
+                  <div class="status-box">Id user xác thực</div>
+                </div>
+                <div class="form-group">
+                  <label>Xét duyệt:</label>
+                  <div class="status-box">Id user xét duyệt</div>
+                </div>
+                <div class="form-group">
+                  <label>Lưu trữ:</label>
+                  <div class="status-box">Id user lưu trữ</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="simple-footer">
+      <p>&copy; 2025 Quản lý cấp hộ chiếu lần đầu. All rights reserved.</p>
+    </footer>
+
+    <script src="../js/GiamSat.js"></script>
+  </body>
+</html>

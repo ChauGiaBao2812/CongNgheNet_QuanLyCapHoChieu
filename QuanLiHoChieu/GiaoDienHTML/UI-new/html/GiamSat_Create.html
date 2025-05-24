@@ -1,0 +1,197 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tạo Tài Khoản Người Dùng - Giám sát</title>
+    <link rel="stylesheet" href="../css/GiamSat.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header class="admin-header">
+      <div class="header-left">
+        <div class="header-title">
+          <i class="fas fa-user-shield"></i>
+          <span>GIÁM SÁT HỒ SƠ</span>
+        </div>
+        <nav class="admin-nav">
+          <a href="#">Danh sách hồ sơ</a>
+          <a href="#">Chi tiết hồ sơ</a>
+          <a href="#">Danh sách User</a>
+          <a href="#">Chi tiết User</a>
+          <a href="#" class="active">Tạo tài khoản</a>
+        </nav>
+      </div>
+      <div class="user-info">
+        <img
+          src="content/images/admin-avatar.jpg"
+          alt="Admin Avatar"
+          class="user-avatar"
+        />
+        <button class="logout-btn" onclick="logout()">
+          <i class="fas fa-sign-out-alt"></i> Đăng xuất
+        </button>
+      </div>
+    </header>
+
+    <div class="page-wrapper">
+      <div class="admin-container">
+        <div class="card" style="padding: 30px">
+          <form
+            action="/GiamSat/Create"
+            method="post"
+            id="createAccountForm"
+            class="form-content"
+          >
+            <div
+              id="validationSummary"
+              class="text-danger validation-summary"
+            ></div>
+
+            <div class="form-section">
+              <div class="section-header">
+                <div class="section-title">Thông tin tài khoản</div>
+                <div class="section-divider"></div>
+              </div>
+
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="Username" class="form-label">Tên đăng nhập</label>
+                  <input
+                    id="Username"
+                    name="Username"
+                    class="form-control"
+                    type="text"
+                    placeholder="Nhập tên đăng nhập"
+                  />
+                  <span id="UsernameError" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                  <label for="Password" class="form-label">Mật khẩu</label>
+                  <input
+                    id="Password"
+                    name="Password"
+                    class="form-control"
+                    type="password"
+                    placeholder="Nhập mật khẩu"
+                  />
+                  <span id="PasswordError" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                  <label for="HoTen" class="form-label">Họ và tên</label>
+                  <input
+                    id="HoTen"
+                    name="HoTen"
+                    class="form-control"
+                    type="text"
+                    placeholder="Nhập họ và tên"
+                  />
+                  <span id="HoTenError" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                  <label for="GioiTinh" class="form-label">Giới tính</label>
+                  <select id="GioiTinh" name="GioiTinh" class="form-control">
+                    <option value="">-- Chọn giới tính --</option>
+                    <option value="Male">Nam</option>
+                    <option value="Female">Nữ</option>
+                    <option value="Other">Khác</option>
+                  </select>
+                  <span id="GioiTinhError" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                  <label for="NgaySinh" class="form-label">Ngày sinh</label>
+                  <input
+                    id="NgaySinh"
+                    name="NgaySinh"
+                    class="form-control"
+                    type="date"
+                  />
+                  <span id="NgaySinhError" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                  <label for="QueQuan" class="form-label">Quê quán</label>
+                  <input
+                    id="QueQuan"
+                    name="QueQuan"
+                    class="form-control"
+                    type="text"
+                    placeholder="Nhập quê quán"
+                  />
+                  <span id="QueQuanError" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                  <label for="SDT" class="form-label">Số điện thoại</label>
+                  <input
+                    id="SDT"
+                    name="SDT"
+                    class="form-control"
+                    type="text"
+                    placeholder="Nhập số điện thoại"
+                  />
+                  <span id="SDTError" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                  <label for="Email" class="form-label">Email</label>
+                  <input
+                    id="Email"
+                    name="Email"
+                    class="form-control"
+                    type="email"
+                    placeholder="Nhập email"
+                  />
+                  <span id="EmailError" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                  <label for="ChucVu" class="form-label">Chức vụ</label>
+                  <select id="ChucVu" name="ChucVu" class="form-control">
+                    <option value="">-- Chọn chức vụ --</option>
+                    <option value="GiamSat">Giám Sát</option>
+                    <option value="XuLy">Xử Lý</option>
+                    <option value="LuuTru">Lưu Trữ</option>
+                    <option value="XacThuc">Xác Thực</option>
+                    <option value="XetDuyet">Xét Duyệt</option>
+                  </select>
+                  <span id="ChucVuError" class="text-danger"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="submit-btn">
+                Tạo tài khoản
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7"></path>
+                </svg>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <footer class="simple-footer">
+      <p>&copy; 2025 Quản lý cấp hộ chiếu lần đầu. All rights reserved.</p>
+    </footer>
+
+    <script src="../js/GiamSat.js"></script>
+  </body>
+</html>

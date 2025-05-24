@@ -1,0 +1,237 @@
+﻿:root {
+  --primary-color: #8b0000; /* Đỏ đô truyền thống */
+  --secondary-color: #2c2c2c; /* Xám đậm cho chữ */
+  --accent-color: #ffd700; /* Vàng kim */
+  --light-color: #f9f9f9; /* Nền sáng dịu */
+  --danger-color: #a52a2a; /* Nâu đỏ cho cảnh báo */
+  --success-color: #2e8b57; /* Xanh lá thành công */
+  --warning-color: #c47f00; /* Vàng đậm cảnh báo */
+  --border-color: #d0d0d0; /* Viền nhẹ */
+  --border-radius: 4px;
+  --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --transition: all 0.2s ease-in-out;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html,
+body {
+  background-image: url("../public/bg-LoginForm.png");
+  color: var(--secondary-color);
+  margin: 0;
+}
+
+.page-wrapper {
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+/* ===== Header ===== */
+.admin-header {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 16px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 5px solid var(--accent-color);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  box-shadow: var(--box-shadow);
+}
+
+.header-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.header-title {
+  font-size: 40px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.admin-nav {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+.admin-nav a {
+  color: white;
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+  padding-bottom: 3px;
+  border-bottom: 2px solid transparent;
+  transition: var(--transition);
+}
+
+.admin-nav a:hover,
+.admin-nav a.active {
+  color: var(--accent-color);
+  border-bottom-color: var(--accent-color);
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.user-avatar {
+  width: 60px;
+  height: 60px;
+  margin-left: 20px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid var(--accent-color);
+}
+
+.logout-btn {
+  background-color: var(--accent-color);
+  color: black;
+  padding: 8px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: var(--transition);
+}
+
+.logout-btn:hover {
+  background-color: var(--warning-color);
+  transform: translateY(-1px);
+}
+
+/* ===== Footer ===== */
+.simple-footer {
+  background-color: var(--primary-color);
+  color: white;
+  text-align: center;
+  padding: 15px 0;
+  font-size: 14px;
+  margin-top: auto;
+  margin-bottom: 0;
+}
+
+/* ===== Container ===== */
+.admin-container {
+  flex: 1;
+  padding: 20px 30px;
+  max-width: 90%;
+  margin: 140px auto 0 auto;
+}
+
+/* ===== Card & Table ===== */
+.card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  margin-bottom: 20px;
+  overflow: hidden;
+  padding: 20px;
+}
+
+.card-header {
+  background-color: var(--secondary-color);
+  color: white;
+  padding: 15px 20px;
+  font-size: 23px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead th {
+  background-color: var(--light-color);
+  color: var(--primary-color);
+  padding: 12px 15px;
+  text-align: left;
+  font-size: 22px;
+  font-weight: 600;
+  border-bottom: 2px solid var(--border-color);
+}
+
+tbody td {
+  color: var(--secondary-color);
+  padding: 25px 15px;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 20px;
+}
+
+tbody tr:hover {
+  background-color: rgba(219, 52, 52, 0.05);
+}
+
+/* ===== Buttons ===== */
+.save-btn {
+  background-color: var(--success-color);
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.save-btn:hover {
+  background-color: var(--accent-color);
+}
+
+/* ===== Form ===== */
+.form-group {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .admin-header {
+    padding: 12px 15px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .user-info {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .admin-container {
+    margin-top: 100px;
+    padding: 10px;
+  }
+
+  .save-btn {
+    padding: 5px 10px;
+    font-size: 14px;
+  }
+}

@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Xem tình trạng hộ chiếu</title>
+    <link rel="stylesheet" href="../css/DangKy.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header class="admin-header">
+      <div class="header-left">
+        <div class="header-title">
+          <i class="fas fa-passport"></i>
+          <span>ĐĂNG KÝ CẤP HỘ CHIẾU</span>
+        </div>
+        <nav class="admin-nav">
+          <a href="#">Trang chủ</a>
+          <a href="#">Đăng ký hộ chiếu</a>
+          <a href="#" class="active">Xem tình trạng hộ chiếu</a>
+        </nav>
+      </div>
+      <div class="user-info">
+        <button class="logout-btn" onclick="logout()">
+          <i class="fas fa-sign-out-alt"></i> Đăng nhập
+        </button>
+      </div>
+    </header>
+
+    <div class="page-wrapper">
+      <div class="status-container">
+        <div class="status-header">
+          <h2><i class="fas fa-search"></i> Tra cứu tiến độ xử lý hộ chiếu</h2>
+          <p>Nhập mã hồ sơ để kiểm tra tình trạng cấp hộ chiếu</p>
+        </div>
+
+        <div class="status-form">
+          <div class="form-group">
+            <label class="form-label">Mã hồ sơ</label>
+            <div class="input-group">
+              <i class="fas fa-file-alt input-icon"></i>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Nhập mã hồ sơ (VD: HS12345678)"
+                id="applicationNumber"
+              />
+            </div>
+          </div>
+
+          <button class="submit-btn" style="margin-top: 20px; margin-left: 80%;" onclick="checkStatus()">
+            <i class="fas fa-search"></i> Tra cứu
+          </button>
+        </div>
+
+        <div class="status-result" id="statusResult">
+          <div class="result-header">
+            <h3><i class="fas fa-info-circle"></i> Thông tin hồ sơ</h3>
+          </div>
+          <div class="result-content">
+            <div class="info-item">
+              <span class="info-label">Mã hồ sơ:</span>
+              <span class="info-value" id="fileNumber">-</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Tình trạng:</span>
+              <span class="info-value status-badge" id="statusMessage"
+                >Chưa tra cứu</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="simple-footer">
+      <p>&copy; 2025 Quản lý cấp hộ chiếu lần đầu. All rights reserved.</p>
+    </footer>
+
+    <script src="../js/GiamSat.js"></script>
+    <script src="../js/DangKy.js"></script>
+  </body>
+</html>

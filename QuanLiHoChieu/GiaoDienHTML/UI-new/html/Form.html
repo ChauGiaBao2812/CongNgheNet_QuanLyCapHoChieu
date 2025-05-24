@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thông tin cá nhân</title>
+    <link rel="stylesheet" href="../css/DangKy.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header class="admin-header">
+      <div class="header-left">
+        <div class="header-title">
+          <i class="fas fa-passport"></i>
+          <span>ĐĂNG KÝ CẤP HỘ CHIẾU</span>
+        </div>
+        <nav class="admin-nav">
+          <a href="#">Trang chủ</a>
+          <a href="#" class="active">Đăng ký hộ chiếu</a>
+          <a href="#">Xem tình trạng hộ chiếu</a>
+        </nav>
+      </div>
+
+      <div class="user-info">
+        <img
+          src="content/images/admin-avatar.jpg"
+          alt="Admin Avatar"
+          class="user-avatar"
+        />
+        <button class="logout-btn" onclick="logout()">
+          <i class="fas fa-sign-out-alt"></i> Đăng xuất
+        </button>
+      </div>
+    </header>
+
+    <div class="page-wrapper">
+      <div class="form-container">
+        <div class="form-sidebar">
+          <div class="sidebar-header">
+            <h2>THÔNG TIN CÁ NHÂN</h2>
+            <p>Vui lòng điền đầy đủ thông tin bên dưới</p>
+          </div>
+
+          <ul class="sidebar-features">
+            <li>Bảo mật thông tin 100%</li>
+            <li>Quy trình đơn giản, nhanh chóng</li>
+            <li>Hỗ trợ 24/7 khi cần giúp đỡ</li>
+          </ul>
+        </div>
+
+        <div class="form-content">
+          <form>
+            <!-- Section 1: Thông tin cơ bản -->
+            <div class="form-section">
+              <div class="section-header">
+                <div class="section-number">1</div>
+                <div class="section-title">Thông tin cơ bản</div>
+                <div class="section-divider"></div>
+              </div>
+
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">Họ và tên</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Nguyễn Văn A"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Giới tính</label>
+                  <div class="radio-group">
+                    <label class="radio-option">
+                      <input type="radio" name="gender" checked /> Nam
+                    </label>
+                    <label class="radio-option">
+                      <input type="radio" name="gender" /> Nữ
+                    </label>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Ngày sinh</label>
+                  <input type="date" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Nơi sinh</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Nhập nơi sinh"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Dân tộc</label>
+                  <select class="form-control">
+                    <option value="">-- Chọn dân tộc --</option>
+                    <option value="Ba Na">Ba Na</option>
+                    <option value="Bố Y">Bố Y</option>
+                    <option value="Brâu">Brâu</option>
+                    <option value="Bru-Vân Kiều">Bru-Vân Kiều</option>
+                    <option value="Chăm">Chăm</option>
+                    <option value="Chơ Ro">Chơ Ro</option>
+                    <option value="Chu Ru">Chu Ru</option>
+                    <option value="Chứt">Chứt</option>
+                    <option value="Co">Co</option>
+                    <option value="Cơ Ho">Cơ Ho</option>
+                    <option value="Cơ Lao">Cơ Lao</option>
+                    <option value="Cơ Tu">Cơ Tu</option>
+                    <option value="Cống">Cống</option>
+                    <option value="Dao">Dao</option>
+                    <option value="Ê-đê">Ê-đê</option>
+                    <option value="Gia Rai">Gia Rai</option>
+                    <option value="Giáy">Giáy</option>
+                    <option value="Gié-Triêng">Gié-Triêng</option>
+                    <option value="Hà Nhì">Hà Nhì</option>
+                    <option value="Hoa">Hoa</option>
+                    <option value="Hrê">Hrê</option>
+                    <option value="Kháng">Kháng</option>
+                    <option value="Khmer">Khmer</option>
+                    <option value="Khơ Mú">Khơ Mú</option>
+                    <option value="Kinh">Kinh</option>
+                    <option value="La Chí">La Chí</option>
+                    <option value="La Ha">La Ha</option>
+                    <option value="La Hủ">La Hủ</option>
+                    <option value="Lào">Lào</option>
+                    <option value="Lô Lô">Lô Lô</option>
+                    <option value="Lự">Lự</option>
+                    <option value="Mạ">Mạ</option>
+                    <option value="Mảng">Mảng</option>
+                    <option value="Mnông">Mnông</option>
+                    <option value="Mông">Mông</option>
+                    <option value="Mường">Mường</option>
+                    <option value="Ngái">Ngái</option>
+                    <option value="Nùng">Nùng</option>
+                    <option value="Ơ Đu">Ơ Đu</option>
+                    <option value="Pà Thẻn">Pà Thẻn</option>
+                    <option value="Phù Lá">Phù Lá</option>
+                    <option value="Pu Péo">Pu Péo</option>
+                    <option value="Ra Glai">Ra Glai</option>
+                    <option value="Rơ Măm">Rơ Măm</option>
+                    <option value="Sán Chay">Sán Chay</option>
+                    <option value="Sán Dìu">Sán Dìu</option>
+                    <option value="Si La">Si La</option>
+                    <option value="Tà Ôi">Tà Ôi</option>
+                    <option value="Tày">Tày</option>
+                    <option value="Thái">Thái</option>
+                    <option value="Thổ">Thổ</option>
+                    <option value="Xinh Mun">Xinh Mun</option>
+                    <option value="Xơ Đăng">Xơ Đăng</option>
+                    <option value="Xtiêng">Xtiêng</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Tôn giáo</label>
+                  <select class="form-control">
+                    <option value="">-- Chọn tôn giáo --</option>
+                    <option value="Không">Không</option>
+                    <option value="Phật giáo">Phật giáo</option>
+                    <option value="Công giáo">Công giáo</option>
+                    <option value="Tin lành">Tin lành</option>
+                    <option value="Cao Đài">Cao Đài</option>
+                    <option value="Phật giáo Hòa Hảo">Phật giáo Hòa Hảo</option>
+                    <option value="Hồi giáo">Hồi giáo</option>
+                    <option value="Tôn giáo Baha'i">Tôn giáo Baha'i</option>
+                    <option value="Tịnh độ Cư sỹ Phật hội Việt Nam">
+                      Tịnh độ Cư sỹ Phật hội Việt Nam
+                    </option>
+                    <option value="Đạo Tứ Ân Hiếu nghĩa">
+                      Đạo Tứ Ân Hiếu nghĩa
+                    </option>
+                    <option value="Bửu Sơn Kỳ hương">Bửu Sơn Kỳ hương</option>
+                    <option value="Giáo hội Phật đường Nam Tông Minh Sư đạo">
+                      Giáo hội Phật đường Nam Tông Minh Sư đạo
+                    </option>
+                    <option value="Hội thánh Minh lý đạo - Tam Tông Miếu">
+                      Hội thánh Minh lý đạo - Tam Tông Miếu
+                    </option>
+                    <option value="Chăm Bà la môn">Chăm Bà la môn</option>
+                    <option
+                      value="Giáo hội Các thánh hữu Ngày sau của Chúa Giê su Ky tô (Mormon)"
+                    >
+                      Giáo hội Các thánh hữu Ngày sau của Chúa Giê su Ky tô
+                      (Mormon)
+                    </option>
+                    <option
+                      value="Phật giáo Hiếu Nghĩa Tà Lơn (Cấp đăng ký hoạt động)"
+                    >
+                      Phật giáo Hiếu Nghĩa Tà Lơn (Cấp đăng ký hoạt động)
+                    </option>
+                    <option value="Giáo hội Cơ đốc Phục lâm Việt Nam">
+                      Giáo hội Cơ đốc Phục lâm Việt Nam
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 2: Thông tin CCCD -->
+            <div class="form-section">
+              <div class="section-header">
+                <div class="section-number">2</div>
+                <div class="section-title">Thông tin CCCD</div>
+                <div class="section-divider"></div>
+              </div>
+
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">Số CCCD</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="012345678901"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Ngày cấp</label>
+                  <input type="date" class="form-control" />
+                </div>
+
+                <div class="form-group full-width">
+                  <label class="form-label">Nơi cấp</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Cục Cảnh sát quản lý hành chính"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 3: Tải lên ảnh -->
+            <div class="form-section">
+              <div class="section-header">
+                <div class="section-number">3</div>
+                <div class="section-title">Tải lên ảnh</div>
+                <div class="section-divider"></div>
+              </div>
+
+              <div class="form-grid">
+                <div class="form-group full-width">
+                  <label class="form-label">Ảnh chân dung (4x6)</label>
+                  <div class="image-upload-container">
+                    <input
+                      type="file"
+                      id="portrait"
+                      accept="image/*"
+                      class="image-upload-input"
+                    />
+                    <label for="portrait" class="image-upload-label">
+                      <div class="image-upload-box portrait-upload-box">
+                        <img
+                          id="portrait-preview"
+                          src=""
+                          alt="Ảnh chân dung 4x6"
+                          class="portrait-preview"
+                        />
+                        <div class="upload-icon">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          >
+                            <path
+                              d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"
+                            ></path>
+                            <polyline points="17 8 12 3 7 8"></polyline>
+                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                          </svg>
+                        </div>
+                        <p class="upload-text">Tải lên ảnh chân dung 4x6</p>
+                        <p class="upload-hint">
+                          (Tỷ lệ 2:3, kích thước tối đa 5MB)
+                        </p>
+                        <div
+                          class="remove-image-btn"
+                          onclick="removeImage('portrait', event)"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          >
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                          </svg>
+                        </div>
+                      </div>
+                    </label>
+                  </div>
+                  <div class="upload-guide">
+                    <strong>Lưu ý:</strong> Ảnh chân dung cần đúng tỷ lệ 4x6
+                    (2:3), nền trắng, rõ mặt, không đeo kính.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 4: Địa chỉ thường trú -->
+            <div class="form-section">
+              <div class="section-header">
+                <div class="section-number">4</div>
+                <div class="section-title">Địa chỉ thường trú</div>
+                <div class="section-divider"></div>
+              </div>
+
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="province" class="form-label"
+                    >Tỉnh/Thành phố</label
+                  >
+                  <select
+                    id="province"
+                    class="form-control"
+                    onchange="loadDistricts()"
+                  >
+                    <option value="">-- Chọn Tỉnh/Thành --</option>
+                    <option value="An Giang">An Giang</option>
+                    <option value="Bà Rịa - Vũng Tàu">Bà Rịa - Vũng Tàu</option>
+                    <option value="Bắc Giang">Bắc Giang</option>
+                    <option value="Bắc Kạn">Bắc Kạn</option>
+                    <option value="Bắc Ninh">Bắc Ninh</option>
+                    <option value="Bạc Liêu">Bạc Liêu</option>
+                    <option value="Bến Tre">Bến Tre</option>
+                    <option value="Bình Dương">Bình Dương</option>
+                    <option value="Bình Định">Bình Định</option>
+                    <option value="Bình Phước">Bình Phước</option>
+                    <option value="Bình Thuận">Bình Thuận</option>
+                    <option value="Cà Mau">Cà Mau</option>
+                    <option value="Cao Bằng">Cao Bằng</option>
+                    <option value="Cần Thơ">Cần Thơ</option>
+                    <option value="Đà Nẵng">Đà Nẵng</option>
+                    <option value="Đồng Nai">Đồng Nai</option>
+                    <option value="Đồng Tháp">Đồng Tháp</option>
+                    <option value="Đắk Lắk">Đắk Lắk</option>
+                    <option value="Đắk Nông">Đắk Nông</option>
+                    <option value="Gia Lai">Gia Lai</option>
+                    <option value="Hà Giang">Hà Giang</option>
+                    <option value="Hà Nội">Hà Nội</option>
+                    <option value="Hà Tĩnh">Hà Tĩnh</option>
+                    <option value="Hải Dương">Hải Dương</option>
+                    <option value="Hải Phòng">Hải Phòng</option>
+                    <option value="Hậu Giang">Hậu Giang</option>
+                    <option value="Hòa Bình">Hòa Bình</option>
+                    <option value="Hưng Yên">Hưng Yên</option>
+                    <option value="TP. Hồ Chí Minh">TP. Hồ Chí Minh</option>
+                    <option value="Khánh Hòa">Khánh Hòa</option>
+                    <option value="Kiên Giang">Kiên Giang</option>
+                    <option value="Kon Tum">Kon Tum</option>
+                    <option value="Lai Châu">Lai Châu</option>
+                    <option value="Lâm Đồng">Lâm Đồng</option>
+                    <option value="Lạng Sơn">Lạng Sơn</option>
+                    <option value="Lào Cai">Lào Cai</option>
+                    <option value="Long An">Long An</option>
+                    <option value="Nam Định">Nam Định</option>
+                    <option value="Nghệ An">Nghệ An</option>
+                    <option value="Ninh Bình">Ninh Bình</option>
+                    <option value="Ninh Thuận">Ninh Thuận</option>
+                    <option value="Phú Thọ">Phú Thọ</option>
+                    <option value="Phú Yên">Phú Yên</option>
+                    <option value="Quảng Bình">Quảng Bình</option>
+                    <option value="Quảng Nam">Quảng Nam</option>
+                    <option value="Quảng Ngãi">Quảng Ngãi</option>
+                    <option value="Quảng Ninh">Quảng Ninh</option>
+                    <option value="Quảng Trị">Quảng Trị</option>
+                    <option value="Sóc Trăng">Sóc Trăng</option>
+                    <option value="Sơn La">Sơn La</option>
+                    <option value="Tây Ninh">Tây Ninh</option>
+                    <option value="Thái Bình">Thái Bình</option>
+                    <option value="Thái Nguyên">Thái Nguyên</option>
+                    <option value="Thanh Hóa">Thanh Hóa</option>
+                    <option value="Thừa Thiên Huế">Thừa Thiên Huế</option>
+                    <option value="Tiền Giang">Tiền Giang</option>
+                    <option value="Trà Vinh">Trà Vinh</option>
+                    <option value="Tuyên Quang">Tuyên Quang</option>
+                    <option value="Vĩnh Long">Vĩnh Long</option>
+                    <option value="Vĩnh Phúc">Vĩnh Phúc</option>
+                    <option value="Yên Bái">Yên Bái</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="district" class="form-label">Quận/Huyện</label>
+                  <select id="district" class="form-control">
+                    <option value="">-- Chọn quận/huyện --</option>
+                  </select>
+                </div>
+
+                <div class="form-group full-width">
+                  <label class="form-label">Địa chỉ cụ thể</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Số nhà, đường, phường/xã"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 5: Liên hệ -->
+            <div class="form-section">
+              <div class="section-header">
+                <div class="section-number">5</div>
+                <div class="section-title">Thông tin liên hệ</div>
+                <div class="section-divider"></div>
+              </div>
+
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">Số điện thoại</label>
+                  <input
+                    type="tel"
+                    class="form-control"
+                    placeholder="0987654321"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Email</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    placeholder="example@email.com"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="submit-btn">
+                Gửi thông tin
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <footer class="simple-footer">
+      <p>&copy; 2025 Quản lý cấp hộ chiếu lần đầu. All rights reserved.</p>
+    </footer>
+
+    <script src="../js/DangKy.js"></script>
+    <script src="../js/GiamSat.js"></script>
+    <script src="../js/Form.js"></script>
+  </body>
+</html>

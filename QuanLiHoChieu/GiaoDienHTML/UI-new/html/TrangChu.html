@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trang chủ</title>
+    <link rel="stylesheet" href="../css/DangKy.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header class="admin-header">
+      <div class="header-left">
+        <div class="header-title">
+          <i class="fas fa-passport"></i>
+          <span>ĐĂNG KÝ CẤP HỘ CHIẾU</span>
+        </div>
+        <nav class="admin-nav">
+          <a href="#" class="active">Trang chủ</a>
+          <a href="#">Đăng ký hộ chiếu</a>
+          <a href="#">Xem tình trạng hộ chiếu</a>
+        </nav>
+      </div>
+      <div class="user-info">
+        <button class="logout-btn" onclick="logout()">
+          <i class="fas fa-sign-out-alt"></i> Đăng nhập
+        </button>
+      </div>
+    </header>
+
+    <div class="page-wrapper">
+      <div class="main-content">
+        <div class="advice-section">
+          <h2>6 ĐIỀU BÁC HỒ DẠY CÔNG AN NHÂN DÂN</h2>
+          <div class="advice-quote">
+            <p>“Tư cách người Công an Cách mạng là:</p>
+            <p>Đối với tư mình phải cần, kiệm, liêm, chính.</p>
+            <p>Đối với đồng sự phải thân ái giúp đỡ.</p>
+            <p>Đối với Chính phủ phải tuyệt đối trung thành.</p>
+            <p>Đối với nhân dân phải kính trọng, lễ phép</p>
+            <p>Đối với công việc phải tận tụy</p>
+            <p>Đối với địch phải cường quyết, khôn khéo.”</p>
+          </div>
+        </div>
+
+        <div class="stats-section">
+          <div class="stats-text">
+            <p>Năm 2025</p>
+            <p><b>Tổng: </b> 24,23630 hồ sơ</p>
+            <p><b>Đã giải quyết: </b> 25,42687 hồ sơ</p>
+            <p><b>Đúng hạn:</b> 23,21576 hồ sơ</p>
+          </div>
+          <div class="pie-chart-container">
+            <div class="pie-chart"></div>
+          </div>
+          <p style="color: var(--primary-color);">Biểu đồ tròn thể hiện số hồ sơ đã giải quyết trong tổng số hồ sơ năm 2025</p>
+        </div>
+      </div>
+    </div>
+    </div>
+    <footer class="simple-footer">
+      <p>&copy; 2025 Quản lý cấp hộ chiếu lần đầu. All rights reserved.</p>
+    </footer>
+    <script src="../js/GiamSat.js"></script>
+  </body>
+</html>

@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Xác thực hồ sơ - Hệ Thống Admin</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../css/XacThuc.css" />
+  </head>
+  <body>
+    <header class="admin-header">
+      <div class="header-left">
+        <div class="header-title">
+          <i class="fas fa-clipboard-check"></i>
+          <span>XÁC THỰC HỒ SƠ</span>
+        </div>
+        <nav class="admin-nav">
+          <a href="#">Danh sách hồ sơ</a>
+          <a href="#" class="active">Xác thực hồ sơ</a>
+        </nav>
+      </div>
+
+      <div class="user-info">
+        <img
+          src="content/images/admin-avatar.jpg"
+          alt="Admin Avatar"
+          class="user-avatar"
+        />
+        <button class="logout-btn" onclick="logout()">
+          <i class="fas fa-sign-out-alt"></i> Đăng xuất
+        </button>
+      </div>
+    </header>
+
+    <div class="page-wrapper">
+      <div class="admin-container">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">
+              <i class="fas fa-info-circle"></i>
+              Thông tin hồ sơ
+            </div>
+          </div>
+
+          <div class="info-boxes">
+            <div class="info-box">
+              <h3>Thông tin từ người dùng</h3>
+            </div>
+            <div class="info-box">
+              <h3>Thông tin lấy từ Resident Data</h3>
+            </div>
+          </div>
+
+          <div class="note-box">
+            <textarea placeholder="Ghi chú"></textarea>
+          </div>
+
+          <div class="button-group">
+            <button class="invalid-btn">Không hợp lệ</button>
+            <button class="valid-btn">Hợp lệ</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="simple-footer">
+      <p>&copy; 2025 Quản lý cấp hộ chiếu lần đầu. All rights reserved.</p>
+    </footer>
+    <script src="../js/GiamSat.js"></script>
+  </body>
+</html>

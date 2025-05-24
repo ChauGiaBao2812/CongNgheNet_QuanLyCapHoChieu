@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Danh sách user xử lí - Hệ Thống Admin</title>
+    <link rel="stylesheet" href="../css/GiamSat.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header class="admin-header">
+      <div class="header-left">
+        <div class="header-title">
+          <i class="fas fa-user-shield"></i>
+          <span>GIÁM SÁT HỒ SƠ</span>
+        </div>
+        <nav class="admin-nav">
+          <a href="#">Danh sách hồ sơ</a>
+          <a href="#">Chi tiết hồ sơ</a>
+          <a href="#" class="active">Danh sách User</a>
+          <a href="#">Chi tiết User</a>
+          <a href="#">Tạo tài khoản</a>
+        </nav>
+      </div>
+      <div class="user-info">
+        <img
+          src="content/images/admin-avatar.jpg"
+          alt="Admin Avatar"
+          class="user-avatar"
+        />
+        <button class="logout-btn" onclick="logout()">
+          <i class="fas fa-sign-out-alt"></i> Đăng xuất
+        </button>
+      </div>
+    </header>
+
+    <div class="page-wrapper">
+      <div class="admin-container">
+        <div class="table-controls">
+          <div class="search-container">
+            <input type="text" class="search-input" placeholder="Tìm kiếm..." />
+            <i class="fas fa-search search-icon"></i>
+          </div>
+          <select class="filter-select">
+            <option value="all">All</option>
+            <option value="approved">Approved</option>
+            <option value="pending">Pending</option>
+          </select>
+        </div>
+        <div class="card">
+          <div class="profile-table-container">
+            <table class="profile-table">
+              <thead>
+                <tr>
+                  <th>Mã User</th>
+                  <th>Hồ sơ duyệt</th>
+                  <th>Thời gian duyệt</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>USER001</td>
+                  <td>HS2023001</td>
+                  <td>15/05/2023</td>
+                </tr>
+                <tr>
+                  <td>USER002</td>
+                  <td>HS2023002</td>
+                  <td>16/05/2023</td>
+                </tr>
+                <tr>
+                  <td>USER003</td>
+                  <td>HS2023003</td>
+                  <td>17/05/2023</td>
+                </tr>
+                <tr>
+                  <td>USER004</td>
+                  <td>HS2023004</td>
+                  <td>18/05/2023</td>
+                </tr>
+                <tr>
+                  <td>USER_XT01</td>
+                  <td>Id hồ sơ</td>
+                  <td>12/03/2025</td>
+                </tr>
+                <tr>
+                  <td>USER_XD01</td>
+                  <td>Id hồ sơ</td>
+                  <td>11/03/2025</td>
+                </tr>
+                <tr>
+                  <td>USER_LT01</td>
+                  <td>Id hồ sơ</td>
+                  <td>10/03/2025</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="simple-footer">
+      <p>&copy; 2025 Quản lý cấp hộ chiếu lần đầu. All rights reserved.</p>
+    </footer>
+
+    <script src="../js/GiamSat.js"></script>
+  </body>
+</html>

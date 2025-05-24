@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Xét duyệt hồ sơ - Hệ Thống Admin</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../css/XetDuyet.css" />
+  </head>
+  <body>
+    <!-- HEADER -->
+    <header class="admin-header">
+      <div class="header-left">
+        <div class="header-title">
+          <i class="fas fa-clipboard-list"></i>
+          <span>XÉT DUYỆT HỒ SƠ</span>
+        </div>
+        <nav class="admin-nav">
+          <a href="#">Danh sách hồ sơ</a>
+          <a href="#" class="active">Xét duyệt hồ sơ</a>
+        </nav>
+      </div>
+      <div class="user-info">
+        <img
+          src="content/images/admin-avatar.jpg"
+          alt="Admin Avatar"
+          class="user-avatar"
+        />
+        <button class="logout-btn" onclick="logout()">
+          <i class="fas fa-sign-out-alt"></i> Đăng xuất
+        </button>
+      </div>
+    </header>
+
+    <div class="page-wrapper">
+      <div class="admin-container">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">
+              <i class="fas fa-info-circle"></i>
+              Thông tin xét duyệt
+            </div>
+          </div>
+
+          <!-- Applicant Info -->
+          <div class="applicant-section">
+            <img
+              src="content/images/applicant-avatar.jpg"
+              alt="Người đề nghị"
+              class="applicant-avatar"
+            />
+            <div class="applicant-info">
+              <div class="applicant-name">NGUYỄN VĂN A</div>
+              <div class="applicant-id">Mã số: NV123456</div>
+            </div>
+          </div>
+
+          <!-- Requirement box -->
+          <div class="info-box">
+            <p>Thông tin từ người dùng</p>
+            <img
+              id="error-icon"
+              src="../public/error.png"
+              alt="Các yêu cầu xét duyệt"
+              onclick="toggleRequirements()"
+            />
+            <div id="requirementBox" class="requirement-box">
+              <strong>Các yêu cầu:</strong>
+              <ul>
+                <li>Yêu cầu 1</li>
+                <li>Không</li>
+                <li>Sai</li>
+              </ul>
+              <button class="btn close-btn" onclick="toggleRequirements()">
+                Đóng
+              </button>
+            </div>
+          </div>
+
+          <!-- Notes -->
+          <div class="note-section">
+            <label for="note">Ghi chú</label><br />
+            <textarea id="note" placeholder="Nhập ghi chú ở đây..."></textarea>
+          </div>
+
+          <!-- Buttons -->
+          <div class="button-group">
+            <button class="btn invalid-btn">Không hợp lệ</button>
+            <button class="btn valid-btn">Hợp lệ</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="simple-footer">
+      <p>&copy; 2025 Quản lý cấp hộ chiếu lần đầu. All rights reserved.</p>
+    </footer>
+
+    <script src="../js/XetDuyet.js"></script>
+    <script src="../js/GiamSat.js"></script>
+  </body>
+</html>
