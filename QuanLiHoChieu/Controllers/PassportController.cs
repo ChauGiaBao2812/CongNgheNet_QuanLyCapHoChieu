@@ -37,7 +37,7 @@ namespace QuanLiHoChieu.Controllers
                         _logger.LogWarning("Validation error in field '{Field}': {ErrorMessage}", entry.Key, error.ErrorMessage);
                     }
                 }
-                ViewBag.AlertMessage = "Thiếu dũ liệu. Mời người đề nghị kiểm tra lại.";
+                ViewBag.AlertMessage = "Thiếu dữ liệu. Mời người đề nghị kiểm tra lại.";
                 return View(model);
             }
 
@@ -124,7 +124,7 @@ namespace QuanLiHoChieu.Controllers
             _context.PassportDatas.Add(passportData);
             await _context.SaveChangesAsync();
 
-            ViewBag.AlertMessage = $"Đơn của người đề nghị đã được gửi thành công. Mã đơn:{formId}";
+            ViewBag.AlertMessage = $"Đơn của người đề nghị đã được gửi thành công. Mã đơn: {formId}";
 
             ModelState.Clear();
 

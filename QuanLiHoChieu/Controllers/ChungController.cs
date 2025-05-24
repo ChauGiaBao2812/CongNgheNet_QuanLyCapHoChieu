@@ -108,7 +108,7 @@ namespace QuanLiHoChieu.Controllers
             return View();
         }
 
-        public async Task<IActionResult> TrangChu()
+        public async Task<IActionResult> Home()
         {
             var passports = await _context.PassportDatas.ToListAsync();
 
@@ -136,7 +136,7 @@ namespace QuanLiHoChieu.Controllers
                 DungHan = dungHan
             };
 
-            return View(vm);
+            return View();
         }
 
         [AllowAnonymous]

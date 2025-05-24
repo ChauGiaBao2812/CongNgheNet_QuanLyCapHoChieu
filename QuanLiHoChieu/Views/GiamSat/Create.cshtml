@@ -1,10 +1,9 @@
 ﻿@model QuanLiHoChieu.Models.ViewModels.TaiKhoanUserViewModel
 
 @{
-    ViewData["Title"] = "Tạo Tài Khoản Người Dùng";
     Layout = null;
-
     var gioiTinh = ViewData["GioiTinh"] as string ?? "Other";
+    var ten = ViewData["Ten"] as string ?? "Guest";
     string avatarPath = gioiTinh switch
     {
         "Nam" => Url.Content("~/public/male.png"),
@@ -30,13 +29,16 @@
                 <span>GIÁM SÁT HỒ SƠ</span>
             </div>
             <nav class="admin-nav">
-                <a href="#">Trang chủ</a>
-                <a href="#">Tạo tài khoản</a>
-                <a href="#">Xem lịch sử</a>
+                <a href="@Url.Action("Home", "Chung")">Trang chủ</a>
+                <a href="#">Danh sách hồ sơ</a>
+                <a href="#">Chi tiết hồ sơ</a>
+                <a href="#">Danh sách User</a>
+                <a href="#" class="active">Thêm tài khoản</a>
             </nav>
         </div>
 
         <div class="user-info">
+        @ten
             <img src="@avatarPath" alt="User Avatar" class="user-avatar" />
             <button class="logout-btn" onclick="window.location.href='@Url.Action("Logout","GiamSat")'">
                 <i class="fas fa-sign-out-alt"></i> Đăng xuất

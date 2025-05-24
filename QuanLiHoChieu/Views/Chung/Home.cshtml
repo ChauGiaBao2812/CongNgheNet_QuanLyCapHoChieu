@@ -1,6 +1,4 @@
-﻿@model QuanLiHoChieu.Models.ViewModels.HoSoStatisticsViewModel;
-
-@{
+﻿@{
     Layout = null;
 }
 
@@ -10,7 +8,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Trang chủ</title>
-    <link rel="stylesheet" href="../css/DangKy.css" />
+    <link rel="stylesheet" href="~/css/DangKy.css" />
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
@@ -23,12 +21,12 @@
             </div>
             <nav class="admin-nav">
                 <a href="#" class="active">Trang chủ</a>
-                <a href="#">Đăng ký hộ chiếu</a>
+                <a href="@Url.Action("Register", "Passport")">Đăng ký hộ chiếu</a>
                 <a href="#">Xem tình trạng hộ chiếu</a>
             </nav>
         </div>
         <div class="user-info">
-            <button class="logout-btn" onclick="logout()">
+            <button class="logout-btn" onclick="window.location.href='@Url.Action("Login","Chung")'">
                 <i class="fas fa-sign-out-alt"></i> Đăng nhập
             </button>
         </div>
@@ -52,9 +50,9 @@
             <div class="stats-section">
                 <div class="stats-text">
                     <p>Năm 2025</p>
-                    <p><b>Tổng: </b> @Model.TongHoSo hồ sơ</p>
-                    <p><b>Đã giải quyết: </b> @Model.DaGiaiQuyet hồ sơ</p>
-                    <p><b>Đúng hạn: </b> @Model.DungHan hồ sơ</p>
+                    <p><b>Tổng: </b></p>
+                    <p><b>Đã giải quyết: </b></p>
+                    <p><b>Đúng hạn: </b></p>
                 </div>
                 <div class="pie-chart-container">
                     <div class="pie-chart"></div>
@@ -63,10 +61,9 @@
             </div>
         </div>
     </div>
-    </div>
     <footer class="simple-footer">
         <p>&copy; 2025 Quản lý cấp hộ chiếu lần đầu. All rights reserved.</p>
     </footer>
-    <script src="../js/GiamSat.js"></script>
+    <script src="~/js/GiamSat.js"></script>
 </body>
 </html>

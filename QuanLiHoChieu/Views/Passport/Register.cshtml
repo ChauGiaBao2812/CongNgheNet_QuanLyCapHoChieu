@@ -24,8 +24,8 @@
                     <span>ĐĂNG KÝ CẤP HỘ CHIẾU</span>
                 </div>
                 <nav class="admin-nav">
-                    <a href="#">Trang chủ</a>
-                    <a href="#">Đăng ký hộ chiếu</a>
+                    <a href="@Url.Action("Home", "Chung")">Trang chủ</a>
+                    <a href="#" class="active">Đăng ký hộ chiếu</a>
                     <a href="#">Xem tình trạng hộ chiếu</a>
                 </nav>
             </div>
@@ -291,7 +291,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="form-label">Địa chỉ cụ thể</label>
+                            <label class="form-label">Địa chỉ cụ thể (*)</label>
                             <input asp-for="ttSoNhaDuong" type="text" class="form-control" placeholder="Số nhà, đường">
                         </div>
                     </div>
@@ -493,6 +493,11 @@
             </form>
         </div>
     </div>
+
+    <footer class="simple-footer">
+        <p>&copy; 2025 Quản lý cấp hộ chiếu lần đầu. All rights reserved.</p>
+    </footer>
+
     @* Sẽ thông báo lỗi hoặc thông báo thành công *@
     @if (ViewBag.AlertMessage != null)
     {

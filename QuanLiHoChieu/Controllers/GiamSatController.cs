@@ -104,6 +104,7 @@ namespace QuanLiHoChieu.Controllers
                 var user = _context.Users.FirstOrDefault(u => u.Username == username);
                 if (user != null)
                 {
+                    ViewData["Ten"] = user.Username;
                     ViewData["GioiTinh"] = user.GioiTinh;
                 }
             }
