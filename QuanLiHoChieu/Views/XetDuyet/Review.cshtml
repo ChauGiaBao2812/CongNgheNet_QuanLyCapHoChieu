@@ -30,8 +30,7 @@
                 <span>XÉT DUYỆT HỒ SƠ</span>
             </div>
             <nav class="admin-nav">
-                <a asp-action="Home" asp-controller="Chung">Trang chủ</a>
-                <a href="#">Danh sách hồ sơ</a>
+                <a asp-action="List">Danh sách hồ sơ</a>
             </nav>
         </div>
 
@@ -66,8 +65,9 @@
                 </div>
 
                 <div class="info-box">
-                    <b>Thông tin từ người dùng</b>
-                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'><circle cx='12' cy='12' r='10' stroke='%231E90FF' stroke-width='2' fill='%23E6F2FF'/><line x1='12' y1='7' x2='12' y2='13' stroke='%231E90FF' stroke-width='2' stroke-linecap='round'/><circle cx='12' cy='17' r='1.5' fill='%231E90FF'/></svg>"
+                    <p>Thông tin từ người dùng</p>
+                    <img id="error-icon"
+                         src="~/public/error.png"
                          alt="Các yêu cầu xét duyệt"
                          onclick="toggleRequirements()" />
 

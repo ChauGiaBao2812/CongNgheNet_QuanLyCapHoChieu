@@ -230,7 +230,7 @@ tbody td {
 }
 
 tbody tr:hover {
-  background-color: rgba(52, 152, 219, 0.05);
+    background-color: rgba(219, 52, 52, 0.05);
 }
 
 /* ===== STATUS BADGES ===== */
