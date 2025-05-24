@@ -145,5 +145,11 @@ namespace QuanLiHoChieu.Controllers
             Response.StatusCode = 403;
             return View();
         }
+
+        public IActionResult NotFoundPage()
+        {
+            Response.StatusCode = 404;
+            return View("NotFound");
+        }
     }
 }

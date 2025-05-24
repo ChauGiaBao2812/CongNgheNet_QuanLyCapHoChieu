@@ -1,15 +1,41 @@
 ﻿@{
-    ViewData["Title"] = "Access Denied";
+    Layout = null;
 }
 
-<h1>Access Denied</h1>
-<p>You do not have permission to access this page.</p>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Truy cập bị từ chối</title>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="~/css/Login.css" />
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <div class="card-header">
+                <h1 class="title">TRUY CẬP BỊ TỪ CHỐI</h1>
+                <div style="font-size: 1rem; color: #888;">HTTP 403 - Forbidden</div>
+            </div>
 
-<p>
-    <a asp-controller="Chung" asp-action="Login">Return to Login</a>
-</p>
+            <div class="card-body" style="text-align: center">
+                <i class="fas fa-ban fa-7x"
+                   style="color: red; margin-bottom: 20px"></i>
+                <span style="text-align:justify;">
+                        <p style="font-size: 1.2rem; margin-bottom: 30px">
+                            Bạn không có quyền truy cập vào trang này do vai trò tài khoản của bạn không được phép sử dụng chức năng này. <br />
+                            Nếu bạn cho rằng đây là sự nhầm lẫn, vui lòng liên hệ bộ phận quản trị hệ thống để biết thêm chi tiết.
+                        </p>
+                </span>
+                <button class="login-btn" onclick="window.location.href='@Url.Action("Home", "Chung")'">
+                    <i class="fas fa-arrow-left"></i> Quay về trang chủ
+                </button>
+            </div>
+        </div>
+    </div>
 
-@*
-    Bằng cách nào đó
-    Bạn lại lạc vào page này
-*@
+    <script src="~/js/GiamSat.js"></script>
+</body>
+</html>

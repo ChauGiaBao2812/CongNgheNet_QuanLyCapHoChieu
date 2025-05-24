@@ -46,7 +46,12 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Chung}/{action=Login}/{id?}");
+    pattern: "{controller=Chung}/{action=Home}/{id?}");
+
+app.MapControllerRoute(
+    name: "catchall",
+    pattern: "{*url}",
+    defaults: new { controller = "Chung", action = "NotFoundPage" });
 
 var context = app.Services.CreateScope().ServiceProvider.GetRequiredService<PassportDbContext>();
 SeedData.SeedDatabase(context);
