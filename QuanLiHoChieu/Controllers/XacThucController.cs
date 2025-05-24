@@ -103,7 +103,7 @@ namespace QuanLiHoChieu.Controllers
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync("MyCookieAuth");
-            return RedirectToAction("Login", "Chung");
+            return RedirectToAction("Home", "Chung");
         }
 
         private void LoadUserGender()

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuanLiHoChieu.Data;
 using QuanLiHoChieu.Helpers;
+using QuanLiHoChieu.Models;
 using QuanLiHoChieu.Models.ViewModels;
 namespace QuanLiHoChieu.Controllers
 {
@@ -30,7 +31,7 @@ namespace QuanLiHoChieu.Controllers
                     "XacThuc" => RedirectToAction("List", "XacThuc"),
                     "XetDuyet" => RedirectToAction("List", "XetDuyet"),
                     "LuuTru" => RedirectToAction("List", "LuuTru"),
-                    _ => RedirectToAction("Index", "Home")
+                    _ => RedirectToAction("Chung", "Home")
                 };
             }
 
@@ -96,7 +97,7 @@ namespace QuanLiHoChieu.Controllers
                 "XacThuc" => RedirectToAction("List", "XacThuc"),
                 "XetDuyet" => RedirectToAction("List", "XetDuyet"),
                 "LuuTru" => RedirectToAction("List", "LuuTru"),
-                _ => RedirectToAction("Index", "Home")
+                _ => RedirectToAction("Chung", "Home")
             };
 
             //// Thành công -> tạo session hoặc chuyển hướng
@@ -150,6 +151,26 @@ namespace QuanLiHoChieu.Controllers
         {
             Response.StatusCode = 404;
             return View("NotFound");
+        }
+
+        public IActionResult Logout()
+        {
+            if (User.Identity?.IsAuthenticated == true)
+            {
+                var role = User.FindFirst(ClaimTypes.Role)?.Value;
+                return role switch
+                {
+                    "GiamSat" => RedirectToAction("Logout", "GiamSat"),
+                    "XacThuc" => RedirectToAction("Logout", "XacThuc"),
+                    "XetDuyet" => RedirectToAction("Logout", "XetDuyet"),
+                    "LuuTru" => RedirectToAction("Logout", "LuuTru"),
+                    _ => RedirectToAction("Chung", "Home")
+                };
+            }
+            else
+            {
+                return RedirectToAction("Home");
+            }
         }
     }
 }
