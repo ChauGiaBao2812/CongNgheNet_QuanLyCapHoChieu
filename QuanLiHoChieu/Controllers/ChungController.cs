@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using QuanLiHoChieu.Data;
 using QuanLiHoChieu.Helpers;
 using QuanLiHoChieu.Models.ViewModels;
-
 namespace QuanLiHoChieu.Controllers
 {
     public class ChungController : Controller
@@ -107,6 +106,37 @@ namespace QuanLiHoChieu.Controllers
         public IActionResult Forget()
         {
             return View();
+        }
+
+        public async Task<IActionResult> TrangChu()
+        {
+            var passports = await _context.PassportDatas.ToListAsync();
+
+            // Lấy toàn bộ xử lý (để lấy ngày xử lý và trạng thái)
+            var xuLys = await _context.XuLys.ToListAsync();
+
+            // Tổng số hồ sơ
+            int tongHoSo = passports.Count;
+
+            // Số hồ sơ đã giải quyết = số bản ghi XuLy tương ứng
+            int daGiaiQuyet = xuLys.Count;
+
+            // Số hồ sơ đúng hạn = số hồ sơ đã xử lý mà ngày xử lý <= ngày nộp + 5 ngày (ví dụ quy định)
+            int dungHan = xuLys.Count(x =>
+            {
+                var passport = passports.FirstOrDefault(p => p.FormID == x.FormID);
+                if (passport == null) return false;
+                return x.NgayXuLy < passport.NgayNop.AddDays(5);  // giới hạn 5 ngày xử lý
+            });
+
+            var vm = new HoSoStatisticsViewModel
+            {
+                TongHoSo = tongHoSo,
+                DaGiaiQuyet = daGiaiQuyet,
+                DungHan = dungHan
+            };
+
+            return View(vm);
         }
 
         [AllowAnonymous]
