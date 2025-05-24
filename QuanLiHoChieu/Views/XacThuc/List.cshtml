@@ -27,11 +27,11 @@
         <div class="header-left">
             <div class="header-title">
                 <i class="fas fa-clipboard-check"></i>
-                <span>XÁC THỰC HỒ SƠ</span>
+                <span>DANH SÁCH HỒ SƠ</span>
             </div>
             <nav class="admin-nav">
                 <a href="#">Trang chủ</a>
-                <a asp-action="List" class="go-back-btn">Xác thực hồ sơ</a>
+                <a asp-action="List" class="active">Xác thực hồ sơ</a>
             </nav>
         </div>
 
@@ -46,50 +46,57 @@
         </div>
     </header>
 
-    <div class="admin-container">
-        <div class="card">
-            <div class="card-header">
-                <h2>Danh sách hồ sơ</h2>
-            </div>
+    <div class="page-wrapper">
+        <div class="admin-container">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Danh sách hồ sơ</h2>
+                </div>
 
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Mã hồ sơ</th>
-                            <th>Tình trạng</th>
-                            <th>Ngày nộp</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach(var item in Model)
-                        {
+                <div class="table-container">
+                    <table>
+                        <thead>
                             <tr>
-                                <td>
-                                    <a asp-controller="XacThuc" asp-action="Verify" asp-route-formId="@item.FormID">
-                                        @item.FormID
-                                    </a>
-                                </td>
-                                <td>
-                                    @{
-                                        string statusClass = item.TrangThai switch
-                                        {
-                                            "Chưa xác thực" => "pending",
-                                            "Đã xác thực" => "verified",
-                                            "Từ chối" => "rejected",
-                                            _ => "unknown"
-                                        };
-                                    }
-                                    <span class="status-badge @statusClass">@item.TrangThai</span>
-                                </td>
-                                <td>@item.NgayNop</td>
+                                <th>Mã hồ sơ</th>
+                                <th>Tình trạng</th>
+                                <th>Ngày nộp</th>
                             </tr>
+                        </thead>
+                        <tbody>
+                            @foreach(var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <a asp-controller="XacThuc" asp-action="Verify" asp-route-formId="@item.FormID">
+                                            @item.FormID
+                                        </a>
+                                    </td>
+                                    <td>
+                                        @{
+                                            string statusClass = item.TrangThai switch
+                                            {
+                                                "Chưa xác thực" => "pending",
+                                                "Đã xác thực" => "verified",
+                                                "Từ chối" => "rejected",
+                                                _ => "unknown"
+                                            };
+                                        }
+                                        <span class="status-badge @statusClass">@item.TrangThai</span>
+                                    </td>
+                                    <td>@item.NgayNop</td>
+                                </tr>
 
-                        }
-                    </tbody>
-                </table>
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
+
+    <footer class="simple-footer">
+        <p>&copy; 2025 Quản lý cấp hộ chiếu lần đầu. All rights reserved.</p>
+    </footer>
+
 </body>
 </html>

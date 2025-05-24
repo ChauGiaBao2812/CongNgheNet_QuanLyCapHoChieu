@@ -36,7 +36,7 @@ namespace QuanLiHoChieu.Controllers
 
                     if (luuTru != null && luuTru.TrangThai == "Verified")
                     {
-                        status = "Đã đồng ý cấp hộ chiếu";
+                        status = "Đã lưu vào danh sách hộ chiếu";
                     }
                     else if (xetDuyet != null && xetDuyet.TrangThai == "Rejected")
                     {
