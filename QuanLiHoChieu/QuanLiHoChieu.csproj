@@ -14,6 +14,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\css\DangKy.css" />
+    <Content Remove="wwwroot\css\LuuTru.css" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="GiaoDienHTML\css-old\Admin.css" />
     <Content Include="GiaoDienHTML\css-old\Form.css" />
     <Content Include="GiaoDienHTML\css-old\GiamSat_Create.css" />
@@ -25,6 +30,11 @@
     <Content Include="GiaoDienHTML\css-old\styles.css" />
     <Content Include="GiaoDienHTML\css-old\XacThuc.css" />
     <Content Include="GiaoDienHTML\css-old\XetDuyet.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\css\DangKy.css" />
+    <None Include="wwwroot\css\LuuTru.css" />
   </ItemGroup>
 
   <ItemGroup>
