@@ -103,7 +103,7 @@ namespace QuanLiHoChieu.Controllers.Api
                     if (duration <= 5)
                         onTime++;
                 }
-            }
+            }   
 
             return Ok(new
             {
