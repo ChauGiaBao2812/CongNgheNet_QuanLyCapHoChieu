@@ -35,6 +35,63 @@ namespace QuanLiHoChieu.Controllers
             return View();
         }
 
+        public IActionResult UserList()
+        {
+            var model = _context.XuLys.ToList();
+
+            LoadUserGender();
+
+            return View(model);
+        }
+
+        public async Task<IActionResult> UserActionDetail(string? userId)
+        {
+            LoadUserGender();
+
+            _logger.LogInformation(userId);
+
+            if (string.IsNullOrEmpty(userId))
+            {
+                return NotFound("Không tìm thấy người dùng.");
+            }
+
+            var formIDs = await _context.XuLys
+                .Where(x => x.UserID == userId)
+                .Select(x => x.FormID)
+                .Distinct()
+                .ToListAsync();
+
+            var logs = await _context.XuLys
+                .Where(x => formIDs.Contains(x.FormID))
+                .ToListAsync();
+
+            var passportDatas = await _context.PassportDatas
+                .Where(p => formIDs.Contains(p.FormID))
+                .ToDictionaryAsync(p => p.FormID, p => p.NgayNop);
+
+            var formStatusList = formIDs.Select(formID =>
+            {
+                var formLogs = logs.Where(l => l.FormID == formID).ToList();
+
+                bool? xacThucStatus = GetStatus(formLogs, "XacThuc");
+                bool? xetDuyetStatus = GetStatus(formLogs, "XetDuyet");
+                bool? luuTruStatus = GetStatus(formLogs, "LuuTru");
+
+                passportDatas.TryGetValue(formID, out var ngayNop);
+
+                return new FormStatusVM
+                {
+                    FormID = formID,
+                    XacThucStatus = xacThucStatus,
+                    XetDuyetStatus = xetDuyetStatus,
+                    LuuTruStatus = luuTruStatus,
+                    NgayNop = ngayNop
+                };
+            }).ToList();
+
+            return View(formStatusList);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(TaiKhoanUserViewModel model)
@@ -90,6 +147,8 @@ namespace QuanLiHoChieu.Controllers
 
             return View();
         }
+
+        
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync("MyCookieAuth");
@@ -108,6 +167,21 @@ namespace QuanLiHoChieu.Controllers
                     ViewData["GioiTinh"] = user.GioiTinh;
                 }
             }
+        }
+
+        private bool? GetStatus(List<XuLy> logs, string loaiXuLy)
+        {
+            var xuLy = logs.FirstOrDefault(x => x.LoaiXuLy == loaiXuLy);
+
+            if (xuLy == null)
+                return null; // Not yet processed (pending)
+
+            return xuLy.TrangThai switch
+            {
+                "Verified" => true,
+                "Rejected" => false,
+                _ => null
+            };
         }
     }
 }

@@ -1,0 +1,105 @@
+﻿@model List<QuanLiHoChieu.Models.ViewModels.FormStatusVM>
+
+@functions {
+    string RenderStatusIcon(bool? status)
+    {
+        if (status == true)
+            return "<span class='status-icon approved'><i class='fas fa-check'></i></span>";
+        else if (status == false)
+            return "<span class='status-icon rejected'><i class='fas fa-times'></i></span>";
+        else
+            return "<span class='status-icon pending'><i class='fas fa-minus'></i></span>";
+    }
+}
+
+@{
+    Layout = null;
+    var gioiTinh = ViewData["GioiTinh"] as string ?? "Other";
+    var ten = ViewData["Ten"] as string ?? "Guest";
+    string avatarPath = gioiTinh switch
+    {
+        "Nam" => Url.Content("~/public/male.png"),
+        "Nữ" => Url.Content("~/public/female.png"),
+        _ => Url.Content("~/public/user.png")
+    };
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Danh sách user xử lí - Giám sát</title>
+    <link rel="stylesheet" href="~/css/GiamSat.css" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+    <!-- Header -->
+    <header class="admin-header">
+        <div class="header-left">
+            <div class="header-title">
+                <i class="fas fa-user-shield"></i>
+                <span>GIÁM SÁT HỒ SƠ</span>
+            </div>
+            <nav class="admin-nav">
+                <a href="#">Danh sách hồ sơ</a>
+                <a asp-action="UserList">Danh sách User</a>
+                <a asp-action="Create">Thêm tài khoản</a>
+            </nav>
+        </div>
+        <div class="user-info">
+             @ten
+            <img src="@avatarPath"
+                 alt="Admin Avatar"
+                 class="user-avatar" />
+            <button class="logout-btn" onclick="window.location.href='@Url.Action("Logout","GiamSat")'">
+                <i class="fas fa-sign-out-alt"></i>
+                Đăng xuất
+            </button>
+        </div>
+    </header>
+
+    <div class="page-wrapper">
+        <div class="admin-container">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-file-alt"></i>
+                    Danh sách hồ sơ
+                </div>
+                <div class="table-container">
+                    <table class="profile-table">
+                        <thead>
+                            <tr>
+                                <th>Mã hồ sơ</th>
+                                <th>Tình trạng</th>
+                                <th>Ngày nộp</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var form in Model)
+                        {
+                            <tr>
+                                    <td>@form.FormID</td>
+                                    <td>
+                                        @Html.Raw(RenderStatusIcon(form.XacThucStatus)) Xác thực
+                                        @Html.Raw(RenderStatusIcon(form.XetDuyetStatus)) Xét duyệt
+                                        @Html.Raw(RenderStatusIcon(form.LuuTruStatus)) Lưu trữ
+                                    </td>
+                                    <td>@form.NgayNop.ToString("dd/mm/yyyy")</td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="simple-footer">
+        <p>&copy; 2025 Quản lý cấp hộ chiếu lần đầu. All rights reserved.</p>
+    </footer>
+
+    <script src="../js/GiamSat.js"></script>
+</body>
+</html>

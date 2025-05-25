@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <Content Remove="wwwroot\css\DangKy.css" />
+    <Content Remove="wwwroot\css\GiamSat.css" />
     <Content Remove="wwwroot\css\LuuTru.css" />
   </ItemGroup>
 
@@ -34,6 +35,7 @@
 
   <ItemGroup>
     <None Include="wwwroot\css\DangKy.css" />
+    <None Include="wwwroot\css\GiamSat.css" />
     <None Include="wwwroot\css\LuuTru.css" />
   </ItemGroup>
 

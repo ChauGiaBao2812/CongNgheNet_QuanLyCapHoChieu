@@ -123,13 +123,12 @@ body {
 
 /* ===== Footer ===== */
 .simple-footer {
-  background-color: #8b0000; /* Đỏ đô truyền thống */
+  background: var(--primary-color);
   color: white;
   text-align: center;
-  padding: 15px 0;
+  padding: 20px;
   font-size: 14px;
-  margin-top: auto;
-  margin-bottom: 0;
+  margin-top: 40px;
 }
 
 /* ===== Container ===== */
@@ -142,27 +141,22 @@ body {
 
 /* ===== Card & Table ===== */
 .card {
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  margin-bottom: 20px;
+  overflow: hidden;
 }
 
 .card-header {
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.card-title {
-    font-size: 30px;
-    margin-bottom: 10px;
-    font-weight: 600;
-    color: var(--primary-color);
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 15px 20px;
+  font-size: 23px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .card-header.accent {
@@ -205,7 +199,7 @@ body {
 }
 
 .profile-table tr:hover {
-  background-color: rgba(52, 152, 219, 0.05);
+  background: rgba(139, 0, 0, 0.03);
 }
 
 .status-icon {
