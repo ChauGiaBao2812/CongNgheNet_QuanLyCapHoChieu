@@ -82,10 +82,10 @@
                                 <td>@user.Username</td>
                                 <td>@user.ChucVuDisplay</td>
                                 <td>
-                                    <button class="action-btn edit-btn" onclick="showEditForm(event)">
+                                    <a class="action-btn edit-btn" asp-action="Detail" asp-route-userId="@user.UserID">
                                         <i class="fas fa-edit"></i>
                                         Chỉnh sửa
-                                    </button>
+                                    </a>
                                     <button class="action-btn delete-btn"
                                             onclick="confirmDelete(event)">
                                         <i class="fas fa-trash-alt"></i>

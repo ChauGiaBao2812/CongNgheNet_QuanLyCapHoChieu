@@ -18,6 +18,7 @@
     <Content Remove="wwwroot\css\DangKy.css" />
     <Content Remove="wwwroot\css\GiamSat.css" />
     <Content Remove="wwwroot\css\LuuTru.css" />
+    <Content Remove="wwwroot\css\PersonalInfo.css" />
     <Content Remove="wwwroot\img\GiamSatNew.css" />
   </ItemGroup>
 
@@ -41,6 +42,7 @@
     <None Include="wwwroot\css\GiamSat.css" />
     <None Include="wwwroot\css\LuuTru.css" />
     <None Include="wwwroot\css\GiamSatNew.css" />
+    <None Include="wwwroot\css\PersonalInfo.css" />
   </ItemGroup>
 
   <ItemGroup>

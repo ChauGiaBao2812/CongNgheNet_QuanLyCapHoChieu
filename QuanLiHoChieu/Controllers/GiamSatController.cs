@@ -151,6 +151,25 @@ namespace QuanLiHoChieu.Controllers
             return View();
         }
 
+        public IActionResult Detail(string? userId)
+        {
+            var sql = "EXEC sp_SelectUser";
+            var users = _context.Set<DecryptedUserVM>()
+                .FromSqlRaw(sql)
+                .AsEnumerable();
+            
+            var user = users.FirstOrDefault(x => x.UserID == userId);
+
+            if (user == null)
+            {
+                return View("NotFound");
+            }
+
+            LoadUserGender();
+
+            return View(user);
+        }
+
         public IActionResult UserList()
         {
             var sql = "EXEC sp_SelectUser";
