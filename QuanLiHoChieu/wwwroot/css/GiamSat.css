@@ -142,22 +142,27 @@ body {
 
 /* ===== Card & Table ===== */
 .card {
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-  margin-bottom: 20px;
-  overflow: hidden;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    padding: 20px;
 }
 
 .card-header {
-  background-color: var(--secondary-color);
-  color: white;
-  padding: 15px 20px;
-  font-size: 23px;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-title {
+    font-size: 30px;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .card-header.accent {
