@@ -716,16 +716,16 @@ select.form-control {
   box-shadow: 0 6px 20px rgba(139, 0, 0, 0.3);
 }
 
-.pie-chart::before {
-  content: "91.3%";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--primary-color);
-  z-index: 2;
+.pie-chart .percentage-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--primary-color);
+    z-index: 2;
+    pointer-events: none;
 }
 
 .pie-chart::after {
@@ -840,7 +840,7 @@ select.form-control {
 }
 
 .result-content {
-  padding: 25px;;
+  padding: 25px;
 }
 
 .info-item {

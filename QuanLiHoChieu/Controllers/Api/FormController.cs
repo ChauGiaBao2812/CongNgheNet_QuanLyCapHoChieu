@@ -64,5 +64,53 @@ namespace QuanLiHoChieu.Controllers.Api
             });
 
         }
+
+        [HttpGet("stats")]
+        public async Task<IActionResult> GetFormStats()
+        {
+            var currentYear = DateTime.Now.Year;
+
+            var forms = await _context.PassportDatas
+                .Where(p => p.NgayNop.Year == currentYear)
+                .ToListAsync();
+
+            var formIds = forms.Select(f => f.FormID).ToList();
+
+            var xuLys = await _context.XuLys
+                .Where(x => formIds.Contains(x.FormID))
+                .ToListAsync();
+
+            int total = forms.Count;
+            int resolved = 0;
+            int onTime = 0;
+
+            foreach (var form in forms)
+            {
+                var logs = xuLys.Where(x => x.FormID == form.FormID).ToList();
+
+                bool isRejected = logs.Any(l => l.TrangThai == "Rejected");
+                bool isApproved = new[] { "XacThuc", "XetDuyet", "LuuTru" }
+                    .All(role => logs.Any(l => l.TrangThai == "Verified" && l.LoaiXuLy == role));
+
+                if (isRejected || isApproved)
+                {
+                    resolved++;
+
+                    // NgayXuLy cuối cùng
+                    var latestHandledDate = logs.Max(x => x.NgayXuLy);
+                    var duration = (latestHandledDate - form.NgayNop).TotalDays;
+
+                    if (duration <= 5)
+                        onTime++;
+                }
+            }
+
+            return Ok(new
+            {
+                Tong = total,
+                DaGiaiQuyet = resolved,
+                DungHan = onTime
+            });
+        }
     }
 }
