@@ -27,7 +27,7 @@ namespace QuanLiHoChieu.Controllers
                 var role = User.FindFirst(ClaimTypes.Role)?.Value;
                 return role switch
                 {
-                    "GiamSat" => RedirectToAction("Create", "GiamSat"),
+                    "GiamSat" => RedirectToAction("UserList", "GiamSat"),
                     "XacThuc" => RedirectToAction("List", "XacThuc"),
                     "XetDuyet" => RedirectToAction("List", "XetDuyet"),
                     "LuuTru" => RedirectToAction("List", "LuuTru"),
@@ -93,7 +93,7 @@ namespace QuanLiHoChieu.Controllers
 
             return user.ChucVu switch
             {
-                "GiamSat" => RedirectToAction("Create", "GiamSat"),
+                "GiamSat" => RedirectToAction("UserList", "GiamSat"),
                 "XacThuc" => RedirectToAction("List", "XacThuc"),
                 "XetDuyet" => RedirectToAction("List", "XetDuyet"),
                 "LuuTru" => RedirectToAction("List", "LuuTru"),
