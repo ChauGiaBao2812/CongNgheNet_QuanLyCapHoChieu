@@ -17,7 +17,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Danh sách user xử lí - Hệ Thống Admin</title>
+    <title>Lịch sử hoạt động - Hệ Thống Admin</title>
     <link rel="stylesheet" href="~/css/GiamSat.css" />
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
@@ -31,7 +31,7 @@
             </div>
             <nav class="admin-nav">
                 <a asp-action="UserActionDetail">Danh sách hồ sơ</a>
-                <a href="#" class="active">Danh sách User</a>
+                <a href="#" class="active">Lịch sử hoạt động</a>
                 <a asp-action="Create">Thêm tài khoản</a>
             </nav>
         </div>
@@ -64,7 +64,7 @@
                     <table class="profile-table">
                         <thead>
                             <tr>
-                                <th>Mã User</th>
+                                <th>Username</th>
                                 <th>Hồ sơ duyệt</th>
                                 <th>Thời gian duyệt</th>
                             </tr>
@@ -74,7 +74,7 @@
                         {
                             <tr>
                                 <td>
-                                    <a asp-controller="GiamSat" asp-action="UserActionDetail" asp-route-userId="@item.UserID">@item.UserID</a>
+                                    <a asp-controller="GiamSat" asp-action="UserActionDetail" asp-route-userId="@item.UserID">@item.User.Username</a>
                                 </td>
                                 <td>
                                     <a asp-controller="GiamSat" asp-action="FormDetail" asp-route-formId="@item.FormID">@item.FormID</a>

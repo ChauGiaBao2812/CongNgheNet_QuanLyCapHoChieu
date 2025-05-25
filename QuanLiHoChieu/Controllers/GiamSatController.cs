@@ -35,9 +35,11 @@ namespace QuanLiHoChieu.Controllers
             return View();
         }
 
-        public IActionResult UserList()
+        public IActionResult ActionHistory()
         {
-            var model = _context.XuLys.ToList();
+            var model = _context.XuLys
+                .Include(x => x.User)
+                .ToList();
 
             LoadUserGender();
 
