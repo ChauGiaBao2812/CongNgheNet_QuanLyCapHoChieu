@@ -23,6 +23,11 @@ namespace QuanLiHoChieu.Controllers
             return View();
         }
 
+        public IActionResult Information(string? formID)
+        {
+            return View();
+        }
+
         [HttpPost]
         [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Register(PassportFormVM model, IFormFile? avatar)
@@ -131,5 +136,6 @@ namespace QuanLiHoChieu.Controllers
             // Redirect hoặc trả về view thành công
             return View();
         }
+
     }
 }
