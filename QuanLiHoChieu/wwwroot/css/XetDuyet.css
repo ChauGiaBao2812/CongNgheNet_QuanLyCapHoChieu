@@ -387,10 +387,9 @@ tbody tr:hover {
 }
 
 .applicant-avatar {
-  width: 80px;
-  height: 80px;
+  width: 120px;
+  height: 180px;
   object-fit: cover;
-  border-radius: 50%;
   border: 3px solid var(--accent-color);
 }
 
