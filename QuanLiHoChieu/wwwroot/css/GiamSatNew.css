@@ -149,7 +149,7 @@ body {
 }
 
 .card-header {
-  background-color: var(--secondary-color);
+  background-color: var(--primary-color);
   color: white;
   padding: 15px 20px;
   font-size: 23px;
