@@ -66,13 +66,11 @@ namespace QuanLiHoChieu.Controllers
 
             var passportForms = await formQuery.ToListAsync();
 
-            // Get all XuLys related to those forms
             var formIDs = passportForms.Select(p => p.FormID).ToList();
             var xuLyLogs = await _context.XuLys
                 .Where(x => formIDs.Contains(x.FormID))
                 .ToListAsync();
 
-            // Construct ViewModel list
             var formStatusList = passportForms.Select(form =>
             {
                 var formLogs = xuLyLogs.Where(l => l.FormID == form.FormID).ToList();
@@ -151,7 +149,38 @@ namespace QuanLiHoChieu.Controllers
             return View();
         }
 
-        
+        public async Task<IActionResult> FormDetail(string? formId)
+        {
+            if (string.IsNullOrEmpty(formId))
+                return NotFound("Thiếu mã hồ sơ.");
+
+            var passport = await _context.PassportDatas
+                .FirstOrDefaultAsync(p => p.FormID == formId);
+
+            if (passport == null)
+                return NotFound("Không tìm thấy hồ sơ.");
+
+            var logs = await _context.XuLys
+                .Where(x => x.FormID == formId)
+                .ToListAsync();
+
+            var model = new FormStatusVM
+            {
+                FormID = passport.FormID,
+                NgayNop = passport.NgayNop,
+                UserXacThucID = logs.FirstOrDefault(l => l.LoaiXuLy == "XacThuc")?.UserID,
+                NoteXacThuc = logs.FirstOrDefault(l => l.LoaiXuLy == "XacThuc")?.GhiChu,
+                UserXetDuyetID = logs.FirstOrDefault(l => l.LoaiXuLy == "XetDuyet")?.UserID,
+                NoteXetDuyet = logs.FirstOrDefault(l => l.LoaiXuLy == "XetDuyet")?.GhiChu,
+                UserLuuTruID = logs.FirstOrDefault(l => l.LoaiXuLy == "LuuTru")?.UserID
+            };
+
+            LoadUserGender();
+
+            return View(model);
+        }
+
+
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync("MyCookieAuth");

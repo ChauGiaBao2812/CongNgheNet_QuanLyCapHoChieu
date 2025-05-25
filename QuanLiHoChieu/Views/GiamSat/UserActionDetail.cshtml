@@ -80,13 +80,15 @@
                         @foreach (var form in Model)
                         {
                             <tr>
-                                    <td>@form.FormID</td>
-                                    <td>
-                                        @Html.Raw(RenderStatusIcon(form.XacThucStatus)) Xác thực
-                                        @Html.Raw(RenderStatusIcon(form.XetDuyetStatus)) Xét duyệt
-                                        @Html.Raw(RenderStatusIcon(form.LuuTruStatus)) Lưu trữ
-                                    </td>
-                                    <td>@form.NgayNop.ToString("dd/mm/yyyy")</td>
+                                <td>
+                                    <a asp-controller="GiamSat" asp-action="FormDetail" asp-route-formId="@form.FormID">@form.FormID</a>
+                                </td>
+                                <td>
+                                    @Html.Raw(RenderStatusIcon(form.XacThucStatus)) Xác thực
+                                    @Html.Raw(RenderStatusIcon(form.XetDuyetStatus)) Xét duyệt
+                                    @Html.Raw(RenderStatusIcon(form.LuuTruStatus)) Lưu trữ
+                                </td>
+                                <td>@form.NgayNop.ToString("dd/mm/yyyy")</td>
                             </tr>
                         }
                         </tbody>
