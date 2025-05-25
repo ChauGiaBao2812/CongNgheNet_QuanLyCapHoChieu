@@ -48,49 +48,52 @@ namespace QuanLiHoChieu.Controllers
         {
             LoadUserGender();
 
-            _logger.LogInformation(userId);
-
-            if (string.IsNullOrEmpty(userId))
+            var handledFormIDs = new List<string>();
+            if (!string.IsNullOrEmpty(userId))
             {
-                return NotFound("Không tìm thấy người dùng.");
+                handledFormIDs = await _context.XuLys
+                    .Where(x => x.UserID == userId)
+                    .Select(x => x.FormID)
+                    .Distinct()
+                    .ToListAsync();
             }
 
-            var formIDs = await _context.XuLys
-                .Where(x => x.UserID == userId)
-                .Select(x => x.FormID)
-                .Distinct()
-                .ToListAsync();
+            var formQuery = _context.PassportDatas.AsQueryable();
+            if (!string.IsNullOrEmpty(userId))
+            {
+                formQuery = formQuery.Where(p => handledFormIDs.Contains(p.FormID));
+            }
 
-            var logs = await _context.XuLys
+            var passportForms = await formQuery.ToListAsync();
+
+            // Get all XuLys related to those forms
+            var formIDs = passportForms.Select(p => p.FormID).ToList();
+            var xuLyLogs = await _context.XuLys
                 .Where(x => formIDs.Contains(x.FormID))
                 .ToListAsync();
 
-            var passportDatas = await _context.PassportDatas
-                .Where(p => formIDs.Contains(p.FormID))
-                .ToDictionaryAsync(p => p.FormID, p => p.NgayNop);
-
-            var formStatusList = formIDs.Select(formID =>
+            // Construct ViewModel list
+            var formStatusList = passportForms.Select(form =>
             {
-                var formLogs = logs.Where(l => l.FormID == formID).ToList();
+                var formLogs = xuLyLogs.Where(l => l.FormID == form.FormID).ToList();
 
                 bool? xacThucStatus = GetStatus(formLogs, "XacThuc");
                 bool? xetDuyetStatus = GetStatus(formLogs, "XetDuyet");
                 bool? luuTruStatus = GetStatus(formLogs, "LuuTru");
 
-                passportDatas.TryGetValue(formID, out var ngayNop);
-
                 return new FormStatusVM
                 {
-                    FormID = formID,
+                    FormID = form.FormID,
                     XacThucStatus = xacThucStatus,
                     XetDuyetStatus = xetDuyetStatus,
                     LuuTruStatus = luuTruStatus,
-                    NgayNop = ngayNop
+                    NgayNop = form.NgayNop
                 };
             }).ToList();
 
             return View(formStatusList);
         }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
