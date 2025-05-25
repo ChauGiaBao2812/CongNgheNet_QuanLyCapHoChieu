@@ -65,8 +65,8 @@ namespace QuanLiHoChieu.Migrations
                         GioiTinh,
                         NgaySinh,
                         QueQuan,
-                        CONVERT(VARCHAR(128), DECRYPTBYKEY(SĐT)) AS SĐT,
-                        CONVERT(NVARCHAR(256), DECRYPTBYKEY(Email)) AS Email,
+                        CONVERT(VARCHAR(128), DECRYPTBYKEY(SĐT)) AS SDT,
+                        CONVERT(VARCHAR(256), DECRYPTBYKEY(Email)) AS Email,
                         ChucVu,
                         Username
                     FROM [User];

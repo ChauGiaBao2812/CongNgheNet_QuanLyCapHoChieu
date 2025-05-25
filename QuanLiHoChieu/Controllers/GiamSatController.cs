@@ -151,6 +151,16 @@ namespace QuanLiHoChieu.Controllers
             return View();
         }
 
+        public IActionResult UserList()
+        {
+            var sql = "EXEC sp_SelectUser";
+            var users = _context.Set<DecryptedUserVM>().FromSqlRaw(sql).ToList();
+
+            LoadUserGender();
+
+            return View(users);
+        }
+
         public async Task<IActionResult> FormDetail(string? formId)
         {
             if (string.IsNullOrEmpty(formId))

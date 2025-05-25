@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using QuanLiHoChieu.Models;
+using QuanLiHoChieu.Models.ViewModels;
 
 namespace QuanLiHoChieu.Data
 {
@@ -37,6 +38,8 @@ namespace QuanLiHoChieu.Data
             // Set up composite key or constraints if any (none in your case so far)
 
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<DecryptedUserVM>().HasNoKey();
         }
     }
 }
