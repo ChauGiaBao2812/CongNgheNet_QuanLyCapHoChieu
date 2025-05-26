@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sửa thông tin cá nhân</title>
+    <link rel="stylesheet" href="../css/PersonalInfo.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header class="admin-header">
+      <div class="header-left">
+        <div class="header-title">
+          <i class="fas fa-user-shield"></i>
+          <span>THÔNG TIN CÁ NHÂN</span>
+        </div>
+      </div>
+      <div class="user-info">
+        <img
+          src="content/images/admin-avatar.jpg"
+          alt="Admin Avatar"
+          class="user-avatar"
+        />
+        <button class="logout-btn" onclick="logout()">
+          <i class="fas fa-sign-out-alt"></i> Đăng xuất
+        </button>
+      </div>
+    </header>
+
+    <div class="page-wrapper">
+      <div class="profile-container">
+        <div class="profile-image">
+          <img
+            src="content/images/default-avatar.jpg"
+            alt="Ảnh đại diện"
+            class="avatar"
+          />
+        </div>
+
+        <div class="info-display">
+          <div class="info-row">
+            <label class="info-label">Họ tên:</label>
+            <input type="text" class="info-value" value="Nguyễn Văn A">
+          </div>
+
+          <div class="info-row">
+            <label class="info-label">Ngày sinh:</label>
+            <input type="date" class="info-value" value="01/01/1990" />
+          </div>
+
+          <div class="info-row">
+            <label class="info-label">Chức vụ:</label>
+            <input type="text" class="info-value" value="Nhân viên">
+          </div>
+
+          <div class="info-row">
+            <label class="info-label">Quê quán:</label>
+            <input type="text" class="info-value" value="Hà Nội">
+          </div>
+
+          <div class="info-row">
+            <label class="info-label">Địa chỉ:</label>
+            <input type="text" class="info-value" value="123 Đường ABC, Quận XYZ, TP.HCM">
+          </div>
+
+          <div class="info-row">
+            <label class="info-label">Số điện thoại:</label>
+            <input type="text" class="info-value" value="0123456789">
+          </div>
+
+          <div class="info-row">
+            <label class="info-label">Email:</label>
+            <input type="email" class="info-value" value="nguyenvana@example.com">
+          </div>
+          <div class="form-actions">
+              <button type="submit" class="submit-btn">
+                Sửa thông tin
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7"></path>
+                </svg>
+              </button>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="simple-footer">
+      <p>&copy; 2025 Quản lý cấp hộ chiếu lần đầu. All rights reserved.</p>
+    </footer>
+    <script src="../js/GiamSat.js"></script>
+  </body>
+</html>

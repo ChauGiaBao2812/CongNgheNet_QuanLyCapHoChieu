@@ -74,6 +74,37 @@ namespace QuanLiHoChieu.Migrations
                     EXEC sp_CloseSymmetricKey;
                 END;
                 ");
+
+            migrationBuilder.Sql(@"
+                CREATE PROCEDURE sp_UpdateUser
+                    @UserID VARCHAR(20),
+                    @HoTen NVARCHAR(256),
+                    @NgaySinh DATE,
+                    @QueQuan NVARCHAR(100),
+                    @SDT VARCHAR(128),
+                    @Email VARCHAR(256)
+                AS
+                BEGIN
+                    BEGIN TRY
+                        EXEC sp_OpenSymmetricKey;
+
+                        UPDATE [User]
+                        SET 
+                            HoTen = ENCRYPTBYKEY(KEY_GUID('SymmetricKey_AES'), @HoTen),
+                            NgaySinh = @NgaySinh,
+                            QueQuan = @QueQuan,
+                            SĐT = ENCRYPTBYKEY(KEY_GUID('SymmetricKey_AES'), @SDT),
+                            Email = ENCRYPTBYKEY(KEY_GUID('SymmetricKey_AES'), @Email)
+                        WHERE UserID = @UserID;
+
+                        EXEC sp_CloseSymmetricKey;
+                    END TRY
+                    BEGIN CATCH
+                        EXEC sp_CloseSymmetricKey;
+                        THROW;
+                    END CATCH
+                END;
+           ");
         }
 
         /// <inheritdoc />
@@ -81,6 +112,7 @@ namespace QuanLiHoChieu.Migrations
         {
             migrationBuilder.Sql("DROP PROCEDURE IF EXISTS sp_InsertUser;");
             migrationBuilder.Sql("DROP PROCEDURE IF EXISTS sp_SelectUser;");
+            migrationBuilder.Sql("DROP PROCEDURE IF EXISTS sp_UpdateUser;");
         }
     }
 }

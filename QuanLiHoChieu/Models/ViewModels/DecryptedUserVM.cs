@@ -1,4 +1,6 @@
-﻿namespace QuanLiHoChieu.Models.ViewModels
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace QuanLiHoChieu.Models.ViewModels
 {
     public class DecryptedUserVM
     {
@@ -7,6 +9,8 @@
         public string? GioiTinh { get; set; }
         public DateTime? NgaySinh { get; set; }
         public string? QueQuan { get; set; }
+
+        [Phone]
         public string? SDT { get; set; }
         public string? Email { get; set; }
         public string? ChucVu { get; set; }

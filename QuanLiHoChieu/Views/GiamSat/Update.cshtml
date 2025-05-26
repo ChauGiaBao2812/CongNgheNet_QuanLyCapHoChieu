@@ -1,0 +1,132 @@
+﻿@model QuanLiHoChieu.Models.ViewModels.DecryptedUserVM
+
+
+@{
+    Layout = null;
+    var gioiTinh = ViewData["GioiTinh"] as string ?? "Other";
+    var ten = ViewData["Ten"] as string ?? "Guest";
+    string avatarPath = gioiTinh switch
+    {
+        "Nam" => Url.Content("~/public/male.png"),
+        "Nữ" => Url.Content("~/public/female.png"),
+        _ => Url.Content("~/public/user.png")
+    };
+    string userAvatarPath = Model.GioiTinh switch
+    {
+        "Nam" => Url.Content("~/public/male.png"),
+        "Nữ" => Url.Content("~/public/female.png"),
+        _ => Url.Content("~/public/user.png")
+    };
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sửa thông tin cá nhân</title>
+    <link rel="stylesheet" href="../css/PersonalInfo.css" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+    <header class="admin-header">
+        <div class="header-left">
+            <div class="header-title">
+                <i class="fas fa-user-shield"></i>
+                <span>GIÁM SÁT HỒ SƠ</span>
+            </div>
+            <nav class="admin-nav">
+                <a asp-action="UserActionDetail">Danh sách hồ sơ</a>
+                <a asp-action="UserList">Danh sách người dùng</a>
+                <a asp-action="ActionHistory">Lịch sử hoạt động</a>
+            </nav>
+        </div>
+
+        <div class="user-info">
+            @ten
+            <img src="@avatarPath" alt="User Avatar" class="user-avatar" />
+            <button class="logout-btn" onclick="window.location.href='@Url.Action("Logout","GiamSat")'">
+                <i class="fas fa-sign-out-alt"></i> Đăng xuất
+            </button>
+        </div>
+    </header>
+
+    <div class="page-wrapper">
+        <div class="profile-container">
+            <div class="profile-image">
+                <img src="@userAvatarPath"
+                     alt="Ảnh đại diện"
+                     class="avatar" />
+            </div>
+            
+            <form asp-action="Update" asp-controller="GiamSat" method="post" style="margin: 0; padding: 0;display: contents;">
+                <input type="hidden" name="UserID" value="@Model.UserID" />
+                <input type="hidden" name="GioiTinh" value="@Model.GioiTinh" />
+                <input type="hidden" name="ChucVu" value="@Model.ChucVu" />
+
+                <div class="info-display">
+                    <div class="info-row">
+                        <label class="info-label">Họ tên:</label>
+                        <input type="text" class="info-value" name="HoTen" value="@Model.HoTen" />
+                    </div>
+
+                    <div class="info-row">
+                        <label class="info-label">Ngày sinh:</label>
+                        <input type="date" class="info-value" name="NgaySinh" value="@(Model.NgaySinh?.ToString("yyyy-MM-dd"))" />
+                    </div>
+
+                    <div class="info-row">
+                        <label class="info-label">Chức vụ:</label>
+                        <div class="info-value">@Model.ChucVuDisplay</div>
+                    </div>
+
+                    <div class="info-row">
+                        <label class="info-label">Quê quán:</label>
+                        <input type="text" class="info-value" name="QueQuan" value="@Model.QueQuan" />
+                    </div>
+
+                    <div class="info-row">
+                        <label class="info-label">Số điện thoại:</label>
+                        <input type="text" class="info-value" name="SDT" value="@Model.SDT" />
+                    </div>
+
+                    <div class="info-row">
+                        <label class="info-label">Email:</label>
+                        <input type="email" class="info-value" name="Email" value="@Model.Email" />
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="submit-btn">
+                            Sửa thông tin
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor"
+                                 stroke-width="2"
+                                 stroke-linecap="round"
+                                 stroke-linejoin="round">
+                                <path d="M5 12h14M12 5l7 7-7 7"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer class="simple-footer">
+        <p>&copy; 2025 Quản lý cấp hộ chiếu lần đầu. All rights reserved.</p>
+    </footer>
+
+    @* Sẽ thông báo lỗi hoặc thông báo thành công *@
+    @if (ViewBag.AlertMessage != null)
+    {
+        <script>
+            alert(@Html.Raw(Json.Serialize(ViewBag.AlertMessage)));
+        </script>
+    }
+    <script src="~/js/GiamSat.js"></script>
+</body>
+</html>
+

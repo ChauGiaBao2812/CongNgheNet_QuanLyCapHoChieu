@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Antiforgery;
 
 namespace QuanLiHoChieu.Controllers
 {
@@ -168,6 +169,72 @@ namespace QuanLiHoChieu.Controllers
             LoadUserGender();
 
             return View(user);
+        }
+
+        public IActionResult Update(string? userId)
+        {
+            var sql = "EXEC sp_SelectUser";
+            var users = _context.Set<DecryptedUserVM>()
+                .FromSqlRaw(sql)
+                .AsEnumerable();
+
+            var user = users.FirstOrDefault(x => x.UserID == userId);
+
+            if (user == null)
+            {
+                return View("NotFound");
+            }
+
+            LoadUserGender();
+
+            return View(user);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Update(DecryptedUserVM model)
+        {
+            LoadUserGender();
+
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+
+                var userExists = _context.Users.Any(u => u.UserID == model.UserID);
+                if (!userExists)
+                {
+                    ModelState.AddModelError("", "User not found.");
+                    return View(model);
+                }
+
+                var sql = "EXEC sp_UpdateUser @UserID, @HoTen, @NgaySinh, @QueQuan, @SDT, @Email";
+
+                await _context.Database.ExecuteSqlRawAsync(sql,
+                    new SqlParameter("@UserID", model.UserID),
+                    new SqlParameter("@HoTen", model.HoTen),
+                    new SqlParameter("@NgaySinh", model.NgaySinh),
+                    new SqlParameter("@QueQuan", model.QueQuan),
+                    new SqlParameter("@SDT", model.SDT),
+                    new SqlParameter("@Email", model.Email)
+                );
+
+                ViewBag.AlertMessage = "Cập nhật thông tin thành công!";
+
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception here if you have a logger, e.g. _logger.LogError(ex, "Error updating user");
+
+                ModelState.AddModelError("", $"Có lỗi xảy ra khi cập nhật thông tin. Vui lòng thử lại. {ex}");
+                ViewBag.AlertMessage = $"{ex}";
+
+                return View(model);
+            }
+
         }
 
         public IActionResult UserList()

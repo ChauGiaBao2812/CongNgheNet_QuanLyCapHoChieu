@@ -15,8 +15,8 @@ namespace QuanLiHoChieu.Migrations
                 AFTER UPDATE
                 AS
                 BEGIN
-                    INSERT INTO AuditLog(Username, Action, TableName)
-                    VALUES (SYSTEM_USER, 'UPDATE', 'User');
+                    INSERT INTO AuditLog(Username, Action, TableName, TimeStamp)
+                    VALUES (SYSTEM_USER, 'UPDATE', 'User', GETDATE());
                 END
             ");
         }
