@@ -24,18 +24,6 @@ namespace QuanLiHoChieu.Controllers
             _context = context;
             _logger = logger;
         }
-        public IActionResult Create()
-        {
-            if (string.IsNullOrEmpty(User?.Identity?.Name))
-            {
-                return RedirectToAction("AccessDenied", "Chung");
-            }
-
-            LoadUserGender();
-
-            return View();
-        }
-
         public IActionResult ActionHistory()
         {
             var model = _context.XuLys
@@ -93,6 +81,18 @@ namespace QuanLiHoChieu.Controllers
             }).ToList();
 
             return View(formStatusList);
+        }
+
+        public IActionResult Create()
+        {
+            if (string.IsNullOrEmpty(User?.Identity?.Name))
+            {
+                return RedirectToAction("AccessDenied", "Chung");
+            }
+
+            LoadUserGender();
+
+            return View();
         }
 
 
@@ -237,12 +237,46 @@ namespace QuanLiHoChieu.Controllers
 
         }
 
+        public async Task<IActionResult> Delete(string username)
+        {
+            if (string.IsNullOrEmpty(username))
+            {
+                return RedirectToAction("UserList");
+            }
+
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
+            var taiKhoan = await _context.TaiKhoans.FirstOrDefaultAsync(t => t.Username == username);
+
+            if (user != null && user.ChucVu == "GiamSat")
+            {
+                TempData["AlertMessage"] = "Không thể xoá người dùng có chức vụ Giám sát";
+                return RedirectToAction("UserList");
+            }
+
+            if (user != null)
+            {
+                _context.Users.Remove(user);
+            }
+
+            if (taiKhoan != null)
+            {
+                _context.TaiKhoans.Remove(taiKhoan);
+            }
+
+            await _context.SaveChangesAsync();
+
+            TempData["AlertMessage"] = "Xóa người dùng thành công!";
+            return RedirectToAction("UserList");
+        }
+
         public IActionResult UserList()
         {
             var sql = "EXEC sp_SelectUser";
             var users = _context.Set<DecryptedUserVM>().FromSqlRaw(sql).ToList();
 
             LoadUserGender();
+
+            ViewBag.AlertMessage = TempData["AlertMessage"];
 
             return View(users);
         }
