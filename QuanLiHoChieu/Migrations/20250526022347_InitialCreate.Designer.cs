@@ -12,8 +12,8 @@ using QuanLiHoChieu.Data;
 namespace QuanLiHoChieu.Migrations
 {
     [DbContext(typeof(PassportDbContext))]
-    [Migration("20250521011934_Keys")]
-    partial class Keys
+    [Migration("20250526022347_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -312,6 +312,9 @@ namespace QuanLiHoChieu.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
+                    b.Property<bool>("Activated")
+                        .HasColumnType("bit");
+
                     b.Property<byte[]>("MatKhau")
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
@@ -368,6 +371,38 @@ namespace QuanLiHoChieu.Migrations
                         .IsUnique();
 
                     b.ToTable("User", (string)null);
+                });
+
+            modelBuilder.Entity("QuanLiHoChieu.Models.ViewModels.DecryptedUserVM", b =>
+                {
+                    b.Property<string>("ChucVu")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("GioiTinh")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HoTen")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("NgaySinh")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("QueQuan")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SDT")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Username")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.ToTable("DecryptedUserVM");
                 });
 
             modelBuilder.Entity("QuanLiHoChieu.Models.XuLy", b =>

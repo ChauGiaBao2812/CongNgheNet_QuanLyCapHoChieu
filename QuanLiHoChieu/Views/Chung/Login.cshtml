@@ -56,6 +56,13 @@
         </div>
     </div>
 
+    @* Sẽ thông báo lỗi hoặc thông báo thành công *@
+    @if (ViewBag.AlertMessage != null)
+    {
+        <script>
+            alert(@Html.Raw(Json.Serialize(ViewBag.AlertMessage)));
+        </script>
+    }
     <script src="~/js/script.js"></script>
 </body>
 </html>

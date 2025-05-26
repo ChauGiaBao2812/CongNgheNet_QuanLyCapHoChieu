@@ -269,10 +269,57 @@ namespace QuanLiHoChieu.Controllers
             return RedirectToAction("UserList");
         }
 
+        public async Task<IActionResult> ToggleActivate(string username)
+        {
+            if (string.IsNullOrEmpty(username))
+            {
+                TempData["AlertMessage"] = "Tên người dùng không hợp lệ.";
+                return RedirectToAction("UserList");
+            }
+
+            var taiKhoan = await _context.TaiKhoans.FirstOrDefaultAsync(t => t.Username == username);
+
+            if (taiKhoan == null)
+            {
+                TempData["AlertMessage"] = "Không tìm thấy tài khoản.";
+                return RedirectToAction("UserList");
+            }
+
+            // Optional: prevent deactivation for supervisors
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
+            if (user != null && user.ChucVu == "GiamSat")
+            {
+                TempData["AlertMessage"] = "Không thể vô hiệu hóa tài khoản của Giám sát.";
+                return RedirectToAction("UserList");
+            }
+
+            // Toggle the Activated flag
+            taiKhoan.Activated = !taiKhoan.Activated;
+            await _context.SaveChangesAsync();
+
+            TempData["AlertMessage"] = taiKhoan.Activated
+                ? "Tài khoản đã được kích hoạt lại."
+                : "Tài khoản đã bị vô hiệu hóa.";
+
+            return RedirectToAction("UserList");
+        }
+
         public IActionResult UserList()
         {
             var sql = "EXEC sp_SelectUser";
             var users = _context.Set<DecryptedUserVM>().FromSqlRaw(sql).ToList();
+
+            var activations = _context.TaiKhoans
+                .Where(t => users.Select(u => u.Username).Contains(t.Username))
+                .ToDictionary(t => t.Username, t => t.Activated);
+
+            foreach (var user in users)
+            {
+                if (user.Username != null && activations.TryGetValue(user.Username, out var activated))
+                {
+                    user.Activated = activated;
+                }
+            }
 
             LoadUserGender();
 

@@ -12,6 +12,8 @@ namespace QuanLiHoChieu.Models
         [Required]
         public byte[] MatKhau { get; set; } = null!;
 
+        public bool Activated { get; set; } = true;
+
         // Navigation property for related User (1:1 or 1:0..1)
         public User? User { get; set; }
     }

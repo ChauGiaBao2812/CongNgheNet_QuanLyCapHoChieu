@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace QuanLiHoChieu.Models.ViewModels
 {
@@ -15,6 +16,9 @@ namespace QuanLiHoChieu.Models.ViewModels
         public string? Email { get; set; }
         public string? ChucVu { get; set; }
         public string? Username { get; set; }
+
+        [NotMapped]
+        public bool Activated { get; set; }  // Add this line
 
         public string ChucVuDisplay => ChucVu switch
         {

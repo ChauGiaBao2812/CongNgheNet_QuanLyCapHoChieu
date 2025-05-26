@@ -86,10 +86,20 @@
                                         <i class="fas fa-edit"></i>
                                         Chỉnh sửa
                                     </a>
-                                     <a class="action-btn delete-btn" asp-action="Delete" asp-route-username="@user.Username">
-                                        <i class="fas fa-trash-alt"></i>
-                                        Xóa
-                                    </a>
+                                    @if (user.Activated)
+                                    {
+                                            <a class="action-btn delete-btn" asp-action="ToggleActivate" asp-route-username="@user.Username">
+                                                <i class="fas fa-toggle-off"></i>
+                                            Tắt kích hoạt
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                            <a class="action-btn add-btn" asp-action="ToggleActivate" asp-route-username="@user.Username">
+                                                <i class="fas fa-toggle-on"></i>
+                                            Kích hoạt
+                                        </a>
+                                    }
                                 </td>
                             </tr>
                         }

@@ -28,6 +28,24 @@ namespace QuanLiHoChieu.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "DecryptedUserVM",
+                columns: table => new
+                {
+                    UserID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    HoTen = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    GioiTinh = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgaySinh = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    QueQuan = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SDT = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ChucVu = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Username = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ResidentData",
                 columns: table => new
                 {
@@ -64,7 +82,8 @@ namespace QuanLiHoChieu.Migrations
                 columns: table => new
                 {
                     Username = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    MatKhau = table.Column<byte[]>(type: "varbinary(max)", nullable: false)
+                    MatKhau = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    Activated = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -239,6 +258,9 @@ namespace QuanLiHoChieu.Migrations
         {
             migrationBuilder.DropTable(
                 name: "AuditLog");
+
+            migrationBuilder.DropTable(
+                name: "DecryptedUserVM");
 
             migrationBuilder.DropTable(
                 name: "LuuTru");

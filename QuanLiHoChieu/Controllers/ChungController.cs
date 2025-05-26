@@ -56,7 +56,7 @@ namespace QuanLiHoChieu.Controllers
 
             if (account == null)
             {
-                ViewBag.Error = "Tên đăng nhập hoặc mật khẩu không đúng.";
+                ViewBag.AlertMessage = "Tên đăng nhập hoặc mật khẩu không đúng.";
                 return View(model);
             }
 
@@ -65,7 +65,14 @@ namespace QuanLiHoChieu.Controllers
 
             if (user == null)
             {
-                ViewBag.Error = "Không tìm thấy người dùng";
+                ViewBag.AlertMessage = "Không tìm thấy người dùng";
+                return View(model);
+            }
+
+            // Check activation status
+            if (!account.Activated)
+            {
+                ViewBag.AlertMessage = "Tài khoản này đã bị khóa. Vui lòng liên hệ quản trị viên.";
                 return View(model);
             }
 
