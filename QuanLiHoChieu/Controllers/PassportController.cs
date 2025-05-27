@@ -4,6 +4,9 @@ using QuanLiHoChieu.Data;
 using QuanLiHoChieu.Helpers;
 using QuanLiHoChieu.Models;
 using QuanLiHoChieu.Models.ViewModels;
+using QuestPDF.Fluent;
+using QuestPDF.Infrastructure;
+
 
 namespace QuanLiHoChieu.Controllers
 {
@@ -129,12 +132,46 @@ namespace QuanLiHoChieu.Controllers
             _context.PassportDatas.Add(passportData);
             await _context.SaveChangesAsync();
 
-            ViewBag.AlertMessage = $"Đơn của người đề nghị đã được gửi thành công. Mã đơn: {formId}";
+            ViewBag.AlertMessage = $"Đơn của người đề nghị đã được gửi thành công. " +
+                $"Vui lòng tải phiếu xác nhận ở bên dưới.";
+            ViewBag.FormId = formId;
 
             ModelState.Clear();
 
             // Redirect hoặc trả về view thành công
             return View();
+        }
+
+        public IActionResult DownloadPdf(string formId)
+        {
+            byte[] pdfBytes = GenerateFormPdf(formId);
+
+            string fileName = $"HoSo_{formId}.pdf";
+
+            return File(pdfBytes, "application/pdf", fileName);
+        }
+
+        private byte[] GenerateFormPdf(string formId)
+        {
+            var document = Document.Create(container =>
+            {
+                container.Page(page =>
+                {
+                    page.Margin(50);
+                    page.Content()
+                        .Column(column =>
+                        {
+                            column.Item().Text("Phiếu xác nhận đăng ký hộ chiếu").Bold().FontSize(20);
+                            column.Item()
+                                .PaddingTop(20)
+                                .Text($"Mã hồ sơ: {formId}")
+                                .FontSize(16);
+                            column.Item().Text("Vui lòng lưu lại mã hồ sơ này để tra cứu thông tin về sau.");
+                        });
+                });
+            });
+
+            return document.GeneratePdf();
         }
 
     }

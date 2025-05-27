@@ -2,8 +2,11 @@ using Microsoft.EntityFrameworkCore;
 using QuanLiHoChieu.Data;
 using QuanLiHoChieu.Services.Interface;
 using QuanLiHoChieu.Services;
+using QuestPDF.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
+
+QuestPDF.Settings.License = LicenseType.Community;
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

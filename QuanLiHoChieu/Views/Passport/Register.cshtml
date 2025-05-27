@@ -308,6 +308,13 @@
                 </div>
 
                 <div class="form-actions">
+
+                    @if (ViewBag.FormId != null)
+                    {
+                        <a href="@Url.Action("DownloadPdf", "Passport", new { formId = ViewBag.FormId })" class="submit-btn" target="_blank" style="margin-right: 10px">
+                            Tải phiếu xác nhận (PDF)
+                        </a>
+                    }
                     <button type="submit" class="submit-btn">
                         Gửi thông tin
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
