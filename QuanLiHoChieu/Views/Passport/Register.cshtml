@@ -92,86 +92,15 @@
 
                         <div class="form-group">
                             <label class="form-label">Dân tộc (*)</label>
-                            <select asp-for="DanToc" class="form-control">
+                            <select asp-for="DanToc" id="ethnicity-select" class="form-control">
                                 <option value="">-- Chọn dân tộc --</option>
-                                <option value="Ba Na">Ba Na</option>
-                                <option value="Bố Y">Bố Y</option>
-                                <option value="Brâu">Brâu</option>
-                                <option value="Bru-Vân Kiều">Bru-Vân Kiều</option>
-                                <option value="Chăm">Chăm</option>
-                                <option value="Chơ Ro">Chơ Ro</option>
-                                <option value="Chu Ru">Chu Ru</option>
-                                <option value="Chứt">Chứt</option>
-                                <option value="Co">Co</option>
-                                <option value="Cơ Ho">Cơ Ho</option>
-                                <option value="Cơ Lao">Cơ Lao</option>
-                                <option value="Cơ Tu">Cơ Tu</option>
-                                <option value="Cống">Cống</option>
-                                <option value="Dao">Dao</option>
-                                <option value="Ê-đê">Ê-đê</option>
-                                <option value="Gia Rai">Gia Rai</option>
-                                <option value="Giáy">Giáy</option>
-                                <option value="Gié-Triêng">Gié-Triêng</option>
-                                <option value="Hà Nhì">Hà Nhì</option>
-                                <option value="Hoa">Hoa</option>
-                                <option value="Hrê">Hrê</option>
-                                <option value="Kháng">Kháng</option>
-                                <option value="Khmer">Khmer</option>
-                                <option value="Khơ Mú">Khơ Mú</option>
-                                <option value="Kinh">Kinh</option>
-                                <option value="La Chí">La Chí</option>
-                                <option value="La Ha">La Ha</option>
-                                <option value="La Hủ">La Hủ</option>
-                                <option value="Lào">Lào</option>
-                                <option value="Lô Lô">Lô Lô</option>
-                                <option value="Lự">Lự</option>
-                                <option value="Mạ">Mạ</option>
-                                <option value="Mảng">Mảng</option>
-                                <option value="Mnông">Mnông</option>
-                                <option value="Mông">Mông</option>
-                                <option value="Mường">Mường</option>
-                                <option value="Ngái">Ngái</option>
-                                <option value="Nùng">Nùng</option>
-                                <option value="Ơ Đu">Ơ Đu</option>
-                                <option value="Pà Thẻn">Pà Thẻn</option>
-                                <option value="Phù Lá">Phù Lá</option>
-                                <option value="Pu Péo">Pu Péo</option>
-                                <option value="Ra Glai">Ra Glai</option>
-                                <option value="Rơ Măm">Rơ Măm</option>
-                                <option value="Sán Chay">Sán Chay</option>
-                                <option value="Sán Dìu">Sán Dìu</option>
-                                <option value="Si La">Si La</option>
-                                <option value="Tà Ôi">Tà Ôi</option>
-                                <option value="Tày">Tày</option>
-                                <option value="Thái">Thái</option>
-                                <option value="Thổ">Thổ</option>
-                                <option value="Xinh Mun">Xinh Mun</option>
-                                <option value="Xơ Đăng">Xơ Đăng</option>
-                                <option value="Xtiêng">Xtiêng</option>
                             </select>
                         </div>
 
                         <div class="form-group">
                             <label class="form-label">Tôn giáo (*)</label>
-                            <select asp-for="TonGiao" class="form-control">
+                            <select asp-for="TonGiao" id="religion-select" class="form-control">
                                 <option value="">-- Chọn tôn giáo --</option>
-                                <option value="Không">Không</option>
-                                <option value="Phật giáo">Phật giáo</option>
-                                <option value="Công giáo">Công giáo</option>
-                                <option value="Tin lành">Tin lành</option>
-                                <option value="Cao Đài">Cao Đài</option>
-                                <option value="Phật giáo Hòa Hảo">Phật giáo Hòa Hảo</option>
-                                <option value="Hồi giáo">Hồi giáo</option>
-                                <option value="Tôn giáo Baha'i">Tôn giáo Baha'i</option>
-                                <option value="Tịnh độ Cư sỹ Phật hội Việt Nam">Tịnh độ Cư sỹ Phật hội Việt Nam</option>
-                                <option value="Đạo Tứ Ân Hiếu nghĩa">Đạo Tứ Ân Hiếu nghĩa</option>
-                                <option value="Bửu Sơn Kỳ hương">Bửu Sơn Kỳ hương</option>
-                                <option value="Giáo hội Phật đường Nam Tông Minh Sư đạo">Giáo hội Phật đường Nam Tông Minh Sư đạo</option>
-                                <option value="Hội thánh Minh lý đạo - Tam Tông Miếu">Hội thánh Minh lý đạo - Tam Tông Miếu</option>
-                                <option value="Chăm Bà la môn">Chăm Bà la môn</option>
-                                <option value="Giáo hội Các thánh hữu Ngày sau của Chúa Giê su Ky tô (Mormon)">Giáo hội Các thánh hữu Ngày sau của Chúa Giê su Ky tô (Mormon)</option>
-                                <option value="Phật giáo Hiếu Nghĩa Tà Lơn (Cấp đăng ký hoạt động)">Phật giáo Hiếu Nghĩa Tà Lơn (Cấp đăng ký hoạt động)</option>
-                                <option value="Giáo hội Cơ đốc Phục lâm Việt Nam">Giáo hội Cơ đốc Phục lâm Việt Nam</option>
                             </select>
                         </div>
                     </div>
@@ -214,80 +143,29 @@
                     <div class="form-grid">
                         <div class="form-group">
                             <label for="province" class="form-label">Tỉnh/Thành phố (*)</label>
-                            <select asp-for="ttTinhThanh" id="province" class="form-control" onchange="loadDistricts()">
+                            <select id="province" class="form-control">
                                 <option value="">-- Chọn Tỉnh/Thành --</option>
-                                <option value="An Giang">An Giang</option>
-                                <option value="Bà Rịa - Vũng Tàu">Bà Rịa - Vũng Tàu</option>
-                                <option value="Bắc Giang">Bắc Giang</option>
-                                <option value="Bắc Kạn">Bắc Kạn</option>
-                                <option value="Bắc Ninh">Bắc Ninh</option>
-                                <option value="Bạc Liêu">Bạc Liêu</option>
-                                <option value="Bến Tre">Bến Tre</option>
-                                <option value="Bình Dương">Bình Dương</option>
-                                <option value="Bình Định">Bình Định</option>
-                                <option value="Bình Phước">Bình Phước</option>
-                                <option value="Bình Thuận">Bình Thuận</option>
-                                <option value="Cà Mau">Cà Mau</option>
-                                <option value="Cao Bằng">Cao Bằng</option>
-                                <option value="Cần Thơ">Cần Thơ</option>
-                                <option value="Đà Nẵng">Đà Nẵng</option>
-                                <option value="Đồng Nai">Đồng Nai</option>
-                                <option value="Đồng Tháp">Đồng Tháp</option>
-                                <option value="Đắk Lắk">Đắk Lắk</option>
-                                <option value="Đắk Nông">Đắk Nông</option>
-                                <option value="Gia Lai">Gia Lai</option>
-                                <option value="Hà Giang">Hà Giang</option>
-                                <option value="Hà Nội">Hà Nội</option>
-                                <option value="Hà Tĩnh">Hà Tĩnh</option>
-                                <option value="Hải Dương">Hải Dương</option>
-                                <option value="Hải Phòng">Hải Phòng</option>
-                                <option value="Hậu Giang">Hậu Giang</option>
-                                <option value="Hòa Bình">Hòa Bình</option>
-                                <option value="Hưng Yên">Hưng Yên</option>
-                                <option value="TP. Hồ Chí Minh">TP. Hồ Chí Minh</option>
-                                <option value="Khánh Hòa">Khánh Hòa</option>
-                                <option value="Kiên Giang">Kiên Giang</option>
-                                <option value="Kon Tum">Kon Tum</option>
-                                <option value="Lai Châu">Lai Châu</option>
-                                <option value="Lâm Đồng">Lâm Đồng</option>
-                                <option value="Lạng Sơn">Lạng Sơn</option>
-                                <option value="Lào Cai">Lào Cai</option>
-                                <option value="Long An">Long An</option>
-                                <option value="Nam Định">Nam Định</option>
-                                <option value="Nghệ An">Nghệ An</option>
-                                <option value="Ninh Bình">Ninh Bình</option>
-                                <option value="Ninh Thuận">Ninh Thuận</option>
-                                <option value="Phú Thọ">Phú Thọ</option>
-                                <option value="Phú Yên">Phú Yên</option>
-                                <option value="Quảng Bình">Quảng Bình</option>
-                                <option value="Quảng Nam">Quảng Nam</option>
-                                <option value="Quảng Ngãi">Quảng Ngãi</option>
-                                <option value="Quảng Ninh">Quảng Ninh</option>
-                                <option value="Quảng Trị">Quảng Trị</option>
-                                <option value="Sóc Trăng">Sóc Trăng</option>
-                                <option value="Sơn La">Sơn La</option>
-                                <option value="Tây Ninh">Tây Ninh</option>
-                                <option value="Thái Bình">Thái Bình</option>
-                                <option value="Thái Nguyên">Thái Nguyên</option>
-                                <option value="Thanh Hóa">Thanh Hóa</option>
-                                <option value="Thừa Thiên Huế">Thừa Thiên Huế</option>
-                                <option value="Tiền Giang">Tiền Giang</option>
-                                <option value="Trà Vinh">Trà Vinh</option>
-                                <option value="Tuyên Quang">Tuyên Quang</option>
-                                <option value="Vĩnh Long">Vĩnh Long</option>
-                                <option value="Vĩnh Phúc">Vĩnh Phúc</option>
-                                <option value="Yên Bái">Yên Bái</option>
+                                <!-- options dynamically loaded -->
                             </select>
+                            <input type="hidden" name="ttTinhThanh" id="ttTinhThanh" />
                         </div>
 
                         <div class="form-group">
                             <label for="district" class="form-label">Quận/Huyện (*)</label>
-                            <input asp-for="ttQuanHuyen" type="text" class="form-control" placeholder="Quận / Huyện">
+                            <select id="district" class="form-control">
+                                <option value="">-- Chọn Quận/Huyện --</option>
+                                <!-- options dynamically loaded -->
+                            </select>
+                            <input type="hidden" name="ttQuanHuyen" id="ttQuanHuyen" />
                         </div>
 
                         <div class="form-group">
-                            <label class="form-label">Phường/Xã (*)</label>
-                            <input asp-for="ttPhuongXa" type="text" class="form-control" placeholder="Phường / Xã">
+                            <label for="ward" class="form-label">Phường/Xã (*)</label>
+                            <select id="ward" class="form-control">
+                                <option value="">-- Chọn Phường/Xã --</option>
+                                <!-- options dynamically loaded -->
+                            </select>
+                            <input type="hidden" name="ttPhuongXa" id="ttPhuongXa" />
                         </div>
 
                         <div class="form-group">
@@ -307,82 +185,29 @@
 
                     <div class="form-grid">
                         <div class="form-group">
-                            <label for="province" class="form-label">Tỉnh/Thành phố (*)</label>
-                            <select asp-for="thtTinhThanh" id="province" class="form-control" onchange="loadDistricts()">
+                            <label for="temp-province" class="form-label">Tỉnh/Thành phố (*)</label>
+                            <select id="temp-province" class="form-control">
                                 <option value="">-- Chọn Tỉnh/Thành --</option>
-                                <option value="An Giang">An Giang</option>
-                                <option value="Bà Rịa - Vũng Tàu">Bà Rịa - Vũng Tàu</option>
-                                <option value="Bắc Giang">Bắc Giang</option>
-                                <option value="Bắc Kạn">Bắc Kạn</option>
-                                <option value="Bắc Ninh">Bắc Ninh</option>
-                                <option value="Bạc Liêu">Bạc Liêu</option>
-                                <option value="Bến Tre">Bến Tre</option>
-                                <option value="Bình Dương">Bình Dương</option>
-                                <option value="Bình Định">Bình Định</option>
-                                <option value="Bình Phước">Bình Phước</option>
-                                <option value="Bình Thuận">Bình Thuận</option>
-                                <option value="Cà Mau">Cà Mau</option>
-                                <option value="Cao Bằng">Cao Bằng</option>
-                                <option value="Cần Thơ">Cần Thơ</option>
-                                <option value="Đà Nẵng">Đà Nẵng</option>
-                                <option value="Đồng Nai">Đồng Nai</option>
-                                <option value="Đồng Tháp">Đồng Tháp</option>
-                                <option value="Đắk Lắk">Đắk Lắk</option>
-                                <option value="Đắk Nông">Đắk Nông</option>
-                                <option value="Gia Lai">Gia Lai</option>
-                                <option value="Hà Giang">Hà Giang</option>
-                                <option value="Hà Nội">Hà Nội</option>
-                                <option value="Hà Tĩnh">Hà Tĩnh</option>
-                                <option value="Hải Dương">Hải Dương</option>
-                                <option value="Hải Phòng">Hải Phòng</option>
-                                <option value="Hậu Giang">Hậu Giang</option>
-                                <option value="Hòa Bình">Hòa Bình</option>
-                                <option value="Hưng Yên">Hưng Yên</option>
-                                <option value="TP. Hồ Chí Minh">TP. Hồ Chí Minh</option>
-                                <option value="Khánh Hòa">Khánh Hòa</option>
-                                <option value="Kiên Giang">Kiên Giang</option>
-                                <option value="Kon Tum">Kon Tum</option>
-                                <option value="Lai Châu">Lai Châu</option>
-                                <option value="Lâm Đồng">Lâm Đồng</option>
-                                <option value="Lạng Sơn">Lạng Sơn</option>
-                                <option value="Lào Cai">Lào Cai</option>
-                                <option value="Long An">Long An</option>
-                                <option value="Nam Định">Nam Định</option>
-                                <option value="Nghệ An">Nghệ An</option>
-                                <option value="Ninh Bình">Ninh Bình</option>
-                                <option value="Ninh Thuận">Ninh Thuận</option>
-                                <option value="Phú Thọ">Phú Thọ</option>
-                                <option value="Phú Yên">Phú Yên</option>
-                                <option value="Quảng Bình">Quảng Bình</option>
-                                <option value="Quảng Nam">Quảng Nam</option>
-                                <option value="Quảng Ngãi">Quảng Ngãi</option>
-                                <option value="Quảng Ninh">Quảng Ninh</option>
-                                <option value="Quảng Trị">Quảng Trị</option>
-                                <option value="Sóc Trăng">Sóc Trăng</option>
-                                <option value="Sơn La">Sơn La</option>
-                                <option value="Tây Ninh">Tây Ninh</option>
-                                <option value="Thái Bình">Thái Bình</option>
-                                <option value="Thái Nguyên">Thái Nguyên</option>
-                                <option value="Thanh Hóa">Thanh Hóa</option>
-                                <option value="Thừa Thiên Huế">Thừa Thiên Huế</option>
-                                <option value="Tiền Giang">Tiền Giang</option>
-                                <option value="Trà Vinh">Trà Vinh</option>
-                                <option value="Tuyên Quang">Tuyên Quang</option>
-                                <option value="Vĩnh Long">Vĩnh Long</option>
-                                <option value="Vĩnh Phúc">Vĩnh Phúc</option>
-                                <option value="Yên Bái">Yên Bái</option>
                             </select>
+                            <input type="hidden" name="thtTinhThanh" id="thtTinhThanh" />
                         </div>
 
                         <div class="form-group">
-                            <label for="district" class="form-label">Quận/Huyện (*)</label>
-                            <input asp-for="thtQuanHuyen" type="text" class="form-control" placeholder="Quận / Huyện">
+                            <label for="temp-district" class="form-label">Quận/Huyện (*)</label>
+                            <select id="temp-district" class="form-control">
+                                <option value="">-- Chọn Quận/Huyện --</option>
+                            </select>
+                            <input type="hidden" name="thtQuanHuyen" id="thtQuanHuyen" />
                         </div>
 
                         <div class="form-group">
-                            <label class="form-label">Phường/Xã (*)</label>
-                            <input asp-for="thtPhuongXa" type="text" class="form-control" placeholder="Phường / Xã">
+                            <label for="temp-ward" class="form-label">Phường/Xã (*)</label>
+                            <select id="temp-ward" class="form-control">
+                                <option value="">-- Chọn Phường/Xã --</option>
+                            </select>
+                            <input type="hidden" name="thtPhuongXa" id="thtPhuongXa" />
                         </div>
+
 
                         <div class="form-group">
                             <label class="form-label">Địa chỉ cụ thể (*)</label>
@@ -506,5 +331,6 @@
         </script>
     }
     <script src="~/js/image-upload.js"></script>
+    <script src="~/js/Vietnemse-address-filler.js"></script>
 </body>
 </html>

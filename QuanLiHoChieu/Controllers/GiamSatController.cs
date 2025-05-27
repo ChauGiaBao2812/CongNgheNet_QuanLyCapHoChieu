@@ -285,7 +285,6 @@ namespace QuanLiHoChieu.Controllers
                 return RedirectToAction("UserList");
             }
 
-            // Optional: prevent deactivation for supervisors
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
             if (user != null && user.ChucVu == "GiamSat")
             {
@@ -293,7 +292,6 @@ namespace QuanLiHoChieu.Controllers
                 return RedirectToAction("UserList");
             }
 
-            // Toggle the Activated flag
             taiKhoan.Activated = !taiKhoan.Activated;
             await _context.SaveChangesAsync();
 

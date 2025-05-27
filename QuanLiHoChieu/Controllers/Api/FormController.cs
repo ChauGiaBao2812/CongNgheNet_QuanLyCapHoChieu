@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Text.Json;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuanLiHoChieu.Data;
 using QuanLiHoChieu.Models;
@@ -111,6 +112,52 @@ namespace QuanLiHoChieu.Controllers.Api
                 DaGiaiQuyet = resolved,
                 DungHan = onTime
             });
+        }
+
+        [HttpGet("ethnicities")]
+        public IActionResult GetEthnicities()
+        {
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "Data", "Ethnicities.json");
+
+            if (!System.IO.File.Exists(filePath))
+            {
+                return NotFound("Ethnicities data not found.");
+            }
+
+            var json = System.IO.File.ReadAllText(filePath);
+            var ethnicities = JsonSerializer.Deserialize<List<string>>(json);
+
+            return Ok(ethnicities);
+        }
+
+        [HttpGet("religions")]
+        public IActionResult GetReligions()
+        {
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "Data", "Religions.json");
+
+            if (!System.IO.File.Exists(filePath))
+            {
+                return NotFound("Religions data not found.");
+            }
+
+            var json = System.IO.File.ReadAllText(filePath);
+            var religions = JsonSerializer.Deserialize<List<string>>(json);
+
+            return Ok(religions);
+        }
+
+        [HttpGet("addresses")]
+        public IActionResult GetAddresses()
+        {
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "Data", "Addresses.json");
+
+            if (!System.IO.File.Exists(filePath))
+            {
+                return NotFound("Address data not found.");
+            }
+
+            var json = System.IO.File.ReadAllText(filePath);
+            return Content(json, "application/json");
         }
     }
 }
