@@ -46,13 +46,20 @@ namespace QuanLiHoChieu.Controllers.Api
             var luuTru = logs.FirstOrDefault(x => x.LoaiXuLy == "LuuTru");
 
             string status;
+            string? rejectedReason = null;
 
             if (luuTru != null && luuTru.TrangThai == "Verified")
                 status = "Đã lưu vào danh sách hộ chiếu";
             else if (xetDuyet != null && xetDuyet.TrangThai == "Rejected")
+            {
                 status = "Không đồng ý cấp hộ chiếu";
+                rejectedReason = xetDuyet.GhiChu;
+            }
             else if (xacThuc != null && xacThuc.TrangThai == "Rejected")
+            {
                 status = "Không đồng ý cấp hộ chiếu";
+                rejectedReason = xacThuc.GhiChu;
+            }
             else if (xetDuyet != null && xetDuyet.TrangThai == "Verified")
                 status = "Đồng ý cấp hộ chiếu";
             else
@@ -61,7 +68,8 @@ namespace QuanLiHoChieu.Controllers.Api
             return Ok(new
             {
                 formID = formID,
-                status = status
+                status = status,
+                rejectedReason = rejectedReason
             });
 
         }

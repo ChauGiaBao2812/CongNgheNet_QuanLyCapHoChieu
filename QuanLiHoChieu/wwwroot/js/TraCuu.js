@@ -7,6 +7,7 @@
         statusResult.style.display = 'block';
         statusMessage.textContent = 'Vui lòng nhập mã hồ sơ.';
         fileNumber.textContent = '-';
+        removeRejectedReason()
         return;
     }
 
@@ -27,9 +28,40 @@
 
         fileNumber.textContent = data.formID;
         statusMessage.textContent = data.status;
+
+        if (data.rejectedReason) {
+            showRejectedReason(data.rejectedReason);
+        } else {
+            removeRejectedReason();
+        }
     } catch (error) {
         console.error('Fetch error:', error);
         statusMessage.textContent = 'Không thể kết nối đến máy chủ.';
         fileNumber.textContent = '-';
+        removeRejectedReason();
+    }
+}
+
+// Helper function to create or update the rejected reason element
+function showRejectedReason(reason) {
+    let existing = document.getElementById('rejectedReasonDiv');
+    if (!existing) {
+        existing = document.createElement('div');
+        existing.id = 'rejectedReasonDiv';
+        existing.className = 'info-item';
+        existing.innerHTML = `
+            <span class="info-label">Lý do từ chối:</span>
+            <span class="info-value" id="rejectedReasonText"></span>
+        `;
+        document.querySelector('.result-content').appendChild(existing);
+    }
+    document.getElementById('rejectedReasonText').textContent = reason;
+}
+
+// Helper function to remove rejected reason element if exists
+function removeRejectedReason() {
+    const existing = document.getElementById('rejectedReasonDiv');
+    if (existing) {
+        existing.remove();
     }
 }
