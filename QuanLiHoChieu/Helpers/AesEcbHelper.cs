@@ -20,8 +20,11 @@ namespace QuanLiHoChieu.Helpers
             }
         }
 
-        public static string DecryptAesEcb(byte[] encryptedBytes)
+        public static string? DecryptAesEcb(byte[]? encryptedBytes)
         {
+            if (encryptedBytes == null || encryptedBytes.Length == 0)
+                return null;
+
             using (Aes aes = Aes.Create())
             {
                 aes.Key = _key;

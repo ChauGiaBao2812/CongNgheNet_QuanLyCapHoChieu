@@ -58,17 +58,13 @@ namespace QuanLiHoChieu.Models.ViewModels
         public string ttSoNhaDuong { get; set; } = null!;
 
         // Địa chỉ tạm trú
-        [Required]
-        public string thtTinhThanh { get; set; } = null!;
+        public string? thtTinhThanh { get; set; } = null!;
 
-        [Required]
-        public string thtQuanHuyen { get; set; } = null!;
+        public string? thtQuanHuyen { get; set; } = null!;
 
-        [Required]
-        public string thtPhuongXa { get; set; } = null!;
+        public string? thtPhuongXa { get; set; } = null!;
 
-        [Required]
-        public string thtSoNhaDuong { get; set; } = null!;
+        public string? thtSoNhaDuong { get; set; } = null!;
 
         // Optional fields
         public string? HoTenCha { get; set; }

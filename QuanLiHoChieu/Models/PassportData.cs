@@ -60,17 +60,13 @@ namespace QuanLiHoChieu.Models
         public byte[] ttSoNhaDuong { get; set; } = null!;
 
         // Địa chỉ tạm trú (tht)
-        [Required]
-        public byte[] thtTinhThanh { get; set; } = null!;
+        public byte[]? thtTinhThanh { get; set; } = null!;
 
-        [Required]
-        public byte[] thtQuanHuyen { get; set; } = null!;
+        public byte[]? thtQuanHuyen { get; set; } = null!;
 
-        [Required]
-        public byte[] thtPhuongXa { get; set; } = null!;
+        public byte[]? thtPhuongXa { get; set; } = null!;
 
-        [Required]
-        public byte[] thtSoNhaDuong { get; set; } = null!;
+        public byte[]? thtSoNhaDuong { get; set; } = null!;
 
         // Optional fields
         public byte[]? NgheNghiep { get; set; }

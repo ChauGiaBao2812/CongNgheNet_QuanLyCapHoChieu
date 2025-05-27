@@ -12,7 +12,7 @@ using QuanLiHoChieu.Data;
 namespace QuanLiHoChieu.Migrations
 {
     [DbContext(typeof(PassportDbContext))]
-    [Migration("20250526022347_InitialCreate")]
+    [Migration("20250527070011_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -178,19 +178,15 @@ namespace QuanLiHoChieu.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<byte[]>("thtPhuongXa")
-                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<byte[]>("thtQuanHuyen")
-                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<byte[]>("thtSoNhaDuong")
-                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<byte[]>("thtTinhThanh")
-                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<byte[]>("ttPhuongXa")
@@ -402,7 +398,9 @@ namespace QuanLiHoChieu.Migrations
                     b.Property<string>("Username")
                         .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("DecryptedUserVM");
+                    b.ToTable((string)null);
+
+                    b.ToView(null, (string)null);
                 });
 
             modelBuilder.Entity("QuanLiHoChieu.Models.XuLy", b =>

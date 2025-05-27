@@ -36,53 +36,61 @@ namespace QuanLiHoChieu.Services
             return new PassportResidentVM
             {
                 FormID = data.FormID,
-                CCCD = AesEcbEncryption.DecryptAesEcb(data.CCCD),
+                CCCD = AesEcbEncryption.DecryptAesEcb(data.CCCD) ?? "",
 
                 // PassportData
-                HoTenPD = AesEcbEncryption.DecryptAesEcb(data.HoTen),
+                HoTenPD = AesEcbEncryption.DecryptAesEcb(data.HoTen) ?? "",
                 GioiTinhPD = data.GioiTinh,
                 NgaySinhPD = data.NgaySinh,
-                NoiSinhPD = AesEcbEncryption.DecryptAesEcb(data.NoiSinh),
+                NoiSinhPD = AesEcbEncryption.DecryptAesEcb(data.NoiSinh) ?? "",
                 NgayCapPD = data.NgayCap,
-                NoiCapPD = AesEcbEncryption.DecryptAesEcb(data.NoiCap),
+                NoiCapPD = AesEcbEncryption.DecryptAesEcb(data.NoiCap) ?? "",
                 DanTocPD = data.DanToc,
                 TonGiaoPD = data.TonGiao,
-                SDTPD = AesEcbEncryption.DecryptAesEcb(data.SĐT),
+                SDTPD = AesEcbEncryption.DecryptAesEcb(data.SĐT) ?? "",
                 ttDiaChiPD = string.Join(", ",
                     AesEcbEncryption.DecryptAesEcb(data.ttSoNhaDuong),
                     AesEcbEncryption.DecryptAesEcb(data.ttPhuongXa),
                     AesEcbEncryption.DecryptAesEcb(data.ttQuanHuyen),
                     AesEcbEncryption.DecryptAesEcb(data.ttTinhThanh)),
                 thtDiaChiPD = string.Join(", ",
-                    AesEcbEncryption.DecryptAesEcb(data.thtSoNhaDuong),
-                    AesEcbEncryption.DecryptAesEcb(data.thtPhuongXa),
-                    AesEcbEncryption.DecryptAesEcb(data.thtQuanHuyen),
-                    AesEcbEncryption.DecryptAesEcb(data.thtTinhThanh)),
+                    new[]
+                    {
+                        AesEcbEncryption.DecryptAesEcb(data.thtSoNhaDuong),
+                        AesEcbEncryption.DecryptAesEcb(data.thtPhuongXa),
+                        AesEcbEncryption.DecryptAesEcb(data.thtQuanHuyen),
+                        AesEcbEncryption.DecryptAesEcb(data.thtTinhThanh)
+                    }.Where(x => !string.IsNullOrWhiteSpace(x))
+                ),
                 HoTenChaPD = data.HoTenCha != null ? AesEcbEncryption.DecryptAesEcb(data.HoTenCha) : null,
                 NgaySinhChaPD = data.NgaySinhCha,
                 HoTenMePD = data.HoTenMe != null ? AesEcbEncryption.DecryptAesEcb(data.HoTenMe) : null,
                 NgaySinhMePD = data.NgaySinhMe,
 
                 // ResidentData
-                HoTenRD = AesEcbEncryption.DecryptAesEcb(rd.HoTen),
+                HoTenRD = AesEcbEncryption.DecryptAesEcb(rd.HoTen) ?? "",
                 GioiTinhRD = rd.GioiTinh,
                 NgaySinhRD = rd.NgaySinh,
-                NoiSinhRD = AesEcbEncryption.DecryptAesEcb(rd.NoiSinh),
+                NoiSinhRD = AesEcbEncryption.DecryptAesEcb(rd.NoiSinh) ?? "",
                 NgayCapRD = rd.NgayCap,
-                NoiCapRD = AesEcbEncryption.DecryptAesEcb(rd.NoiCap),
+                NoiCapRD = AesEcbEncryption.DecryptAesEcb(rd.NoiCap) ?? "",
                 DanTocRD = rd.DanToc,
                 TonGiaoRD = rd.TonGiao,
-                SDTRD = AesEcbEncryption.DecryptAesEcb(rd.SĐT),
+                SDTRD = AesEcbEncryption.DecryptAesEcb(rd.SĐT) ?? "",
                 ttDiaChiRD = string.Join(", ",
                     AesEcbEncryption.DecryptAesEcb(rd.ttSoNhaDuong),
                     AesEcbEncryption.DecryptAesEcb(rd.ttPhuongXa),
                     AesEcbEncryption.DecryptAesEcb(rd.ttQuanHuyen),
                     AesEcbEncryption.DecryptAesEcb(rd.ttTinhThanh)),
                 thtDiaChiRD = string.Join(", ",
-                    AesEcbEncryption.DecryptAesEcb(rd.thtSoNhaDuong),
-                    AesEcbEncryption.DecryptAesEcb(rd.thtPhuongXa),
-                    AesEcbEncryption.DecryptAesEcb(rd.thtQuanHuyen),
-                    AesEcbEncryption.DecryptAesEcb(rd.thtTinhThanh)),
+                    new[]
+                    {
+                        AesEcbEncryption.DecryptAesEcb(rd.thtSoNhaDuong),
+                        AesEcbEncryption.DecryptAesEcb(rd.thtPhuongXa),
+                        AesEcbEncryption.DecryptAesEcb(rd.thtQuanHuyen),
+                        AesEcbEncryption.DecryptAesEcb(rd.thtTinhThanh)
+                    }.Where(x => !string.IsNullOrWhiteSpace(x))
+                ),
                 HoTenChaRD = rd.HoTenCha != null ? AesEcbEncryption.DecryptAesEcb(rd.HoTenCha) : null,
                 NgaySinhChaRD = rd.NgaySinhCha,
                 HoTenMeRD = rd.HoTenMe != null ? AesEcbEncryption.DecryptAesEcb(rd.HoTenMe) : null,
@@ -104,17 +112,17 @@ namespace QuanLiHoChieu.Services
             return new PassportFormReviewVM
             {
                 FormID = form?.FormID,
-                CCCD = AesEcbEncryption.DecryptAesEcb(form!.CCCD),
-                HoTen = AesEcbEncryption.DecryptAesEcb(form.HoTen),
+                CCCD = AesEcbEncryption.DecryptAesEcb(form!.CCCD) ?? "",
+                HoTen = AesEcbEncryption.DecryptAesEcb(form.HoTen) ?? "",
                 GioiTinh = form.GioiTinh,
                 NgaySinh = form.NgaySinh,
-                NoiSinh = AesEcbEncryption.DecryptAesEcb(form.NoiSinh),
+                NoiSinh = AesEcbEncryption.DecryptAesEcb(form.NoiSinh) ?? "",
                 NgayCap = form.NgayCap,
-                NoiCap = AesEcbEncryption.DecryptAesEcb(form.NoiCap),
+                NoiCap = AesEcbEncryption.DecryptAesEcb(form.NoiCap) ?? "",
                 DanToc = form.DanToc,
                 TonGiao = form.TonGiao,
-                SDT = AesEcbEncryption.DecryptAesEcb(form.SĐT),
-                Email = AesEcbEncryption.DecryptAesEcb(form.Email),
+                SDT = AesEcbEncryption.DecryptAesEcb(form.SĐT) ?? "",
+                Email = AesEcbEncryption.DecryptAesEcb(form.Email) ?? "",
                 Hinh = form.Hinh,
 
                 PermanentAddress = string.Join(", ",
@@ -124,10 +132,14 @@ namespace QuanLiHoChieu.Services
                     AesEcbEncryption.DecryptAesEcb(form.ttTinhThanh)),
 
                 TemporaryAddress = string.Join(", ",
-                    AesEcbEncryption.DecryptAesEcb(form.thtSoNhaDuong),
-                    AesEcbEncryption.DecryptAesEcb(form.thtPhuongXa),
-                    AesEcbEncryption.DecryptAesEcb(form.thtQuanHuyen),
-                    AesEcbEncryption.DecryptAesEcb(form.thtTinhThanh)),
+                    new[]
+                    {
+                        AesEcbEncryption.DecryptAesEcb(form.thtSoNhaDuong),
+                        AesEcbEncryption.DecryptAesEcb(form.thtPhuongXa),
+                        AesEcbEncryption.DecryptAesEcb(form.thtQuanHuyen),
+                        AesEcbEncryption.DecryptAesEcb(form.thtTinhThanh)
+                    }.Where(x => !string.IsNullOrWhiteSpace(x))
+                ),
 
                 HoTenCha = form.HoTenCha != null ? AesEcbEncryption.DecryptAesEcb(form.HoTenCha) : null,
                 NgaySinhCha = form.NgaySinhCha,

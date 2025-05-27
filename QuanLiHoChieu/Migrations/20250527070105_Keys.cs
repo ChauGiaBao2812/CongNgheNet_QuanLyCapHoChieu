@@ -56,7 +56,7 @@ namespace QuanLiHoChieu.Migrations
             migrationBuilder.Sql(@"
                 DROP SYMMETRIC KEY SymmetricKey_AES;
                 DROP CERTIFICATE Cert_AES;
-                -- DROP MASTER KEY -- chỉ nếu bạn chắc chắn không cần nó nữa
+                DROP MASTER KEY;
             ");
         }
     }

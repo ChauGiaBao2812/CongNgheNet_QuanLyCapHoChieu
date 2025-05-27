@@ -39,7 +39,11 @@ namespace QuanLiHoChieu.Data
 
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<DecryptedUserVM>().HasNoKey();
+            modelBuilder.Entity<DecryptedUserVM>(e =>
+            {
+                e.HasNoKey();
+                e.ToView(null);
+            });
         }
     }
 }

@@ -28,24 +28,6 @@ namespace QuanLiHoChieu.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DecryptedUserVM",
-                columns: table => new
-                {
-                    UserID = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    HoTen = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    GioiTinh = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NgaySinh = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    QueQuan = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SDT = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ChucVu = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Username = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                });
-
-            migrationBuilder.CreateTable(
                 name: "ResidentData",
                 columns: table => new
                 {
@@ -111,10 +93,10 @@ namespace QuanLiHoChieu.Migrations
                     ttQuanHuyen = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     ttPhuongXa = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     ttSoNhaDuong = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
-                    thtTinhThanh = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
-                    thtQuanHuyen = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
-                    thtPhuongXa = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
-                    thtSoNhaDuong = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    thtTinhThanh = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    thtQuanHuyen = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    thtPhuongXa = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    thtSoNhaDuong = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     NgheNghiep = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     CoQuan = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     DiaChiCoQuan = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
@@ -258,9 +240,6 @@ namespace QuanLiHoChieu.Migrations
         {
             migrationBuilder.DropTable(
                 name: "AuditLog");
-
-            migrationBuilder.DropTable(
-                name: "DecryptedUserVM");
 
             migrationBuilder.DropTable(
                 name: "LuuTru");
