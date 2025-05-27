@@ -13,8 +13,12 @@ namespace QuanLiHoChieu.Models.ViewModels
         public string? UserXacThucID {  get; set; }
         public string? UserXetDuyetID {  get; set; }
         public string? UserLuuTruID {  get; set; }
+        public string? UserXacThucName {  get; set; }
+        public string? UserXetDuyetName {  get; set; }
+        public string? UserLuuTruName { get; set; }
         public string? NoteXacThuc {  get; set; }
         public string? NoteXetDuyet {  get; set; }
+        
 
     }
 }

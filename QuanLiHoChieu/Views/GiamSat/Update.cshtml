@@ -17,6 +17,14 @@
         "Nữ" => Url.Content("~/public/female.png"),
         _ => Url.Content("~/public/user.png")
     };
+
+    var roles = new List<SelectListItem>
+    {
+        new SelectListItem { Text = "Giám sát", Value = "GiamSat" },
+        new SelectListItem { Text = "Xét duyệt", Value = "XetDuyet" },
+        new SelectListItem { Text = "Xác thực", Value = "XacThuc" },
+        new SelectListItem { Text = "Lưu trữ", Value = "LuuTru" }
+    };
 }
 
 <!DOCTYPE html>
@@ -25,7 +33,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sửa thông tin cá nhân</title>
-    <link rel="stylesheet" href="../css/PersonalInfo.css" />
+    <link rel="stylesheet" href="~/css/PersonalInfo.css" />
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
@@ -63,7 +71,6 @@
             <form asp-action="Update" asp-controller="GiamSat" method="post" style="margin: 0; padding: 0;display: contents;">
                 <input type="hidden" name="UserID" value="@Model.UserID" />
                 <input type="hidden" name="GioiTinh" value="@Model.GioiTinh" />
-                <input type="hidden" name="ChucVu" value="@Model.ChucVu" />
 
                 <div class="info-display">
                     <div class="info-row">
@@ -78,7 +85,7 @@
 
                     <div class="info-row">
                         <label class="info-label">Chức vụ:</label>
-                        <div class="info-value">@Model.ChucVuDisplay</div>
+                        <select asp-for="ChucVu" asp-items="roles" class="info-value"></select>
                     </div>
 
                     <div class="info-row">

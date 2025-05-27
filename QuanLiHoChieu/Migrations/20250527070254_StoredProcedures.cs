@@ -82,7 +82,8 @@ namespace QuanLiHoChieu.Migrations
                     @NgaySinh DATE,
                     @QueQuan NVARCHAR(100),
                     @SDT VARCHAR(128),
-                    @Email VARCHAR(256)
+                    @Email VARCHAR(256),
+                    @ChucVu NVARCHAR(50)
                 AS
                 BEGIN
                     BEGIN TRY
@@ -94,7 +95,8 @@ namespace QuanLiHoChieu.Migrations
                             NgaySinh = @NgaySinh,
                             QueQuan = @QueQuan,
                             SĐT = ENCRYPTBYKEY(KEY_GUID('SymmetricKey_AES'), @SDT),
-                            Email = ENCRYPTBYKEY(KEY_GUID('SymmetricKey_AES'), @Email)
+                            Email = ENCRYPTBYKEY(KEY_GUID('SymmetricKey_AES'), @Email),
+                            ChucVu = @ChucVu
                         WHERE UserID = @UserID;
 
                         EXEC sp_CloseSymmetricKey;

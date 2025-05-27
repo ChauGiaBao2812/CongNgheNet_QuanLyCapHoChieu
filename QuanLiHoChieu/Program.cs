@@ -24,6 +24,7 @@ builder.Services.AddAuthentication("MyCookieAuth")
     });
 
 builder.Services.AddScoped<IGetDataByFormIdService, GetDataByFormIdService>();
+builder.Services.AddScoped<IRootAdminService, RootAdminService>();
 
 
 var app = builder.Build();

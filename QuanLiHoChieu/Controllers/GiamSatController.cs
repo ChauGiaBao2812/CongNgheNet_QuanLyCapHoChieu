@@ -10,6 +10,7 @@ using System.Security.Claims;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Antiforgery;
+using QuanLiHoChieu.Services.Interface;
 
 namespace QuanLiHoChieu.Controllers
 {
@@ -18,11 +19,13 @@ namespace QuanLiHoChieu.Controllers
     {
         private readonly PassportDbContext _context;
         private readonly ILogger<GiamSatController> _logger;
+        private readonly IRootAdminService _rootAdminService;
 
-        public GiamSatController(PassportDbContext context, ILogger<GiamSatController> logger)
+        public GiamSatController(PassportDbContext context, ILogger<GiamSatController> logger, IRootAdminService rootAdminService)
         {
             _context = context;
             _logger = logger;
+            _rootAdminService = rootAdminService;
         }
         public IActionResult ActionHistory()
         {
@@ -203,14 +206,30 @@ namespace QuanLiHoChieu.Controllers
                     return View(model);
                 }
 
-                var userExists = _context.Users.Any(u => u.UserID == model.UserID);
-                if (!userExists)
+                var user = _context.Users.SingleOrDefault(u => u.UserID == model.UserID);
+                if (user == null)
                 {
                     ModelState.AddModelError("", "User not found.");
                     return View(model);
                 }
 
-                var sql = "EXEC sp_UpdateUser @UserID, @HoTen, @NgaySinh, @QueQuan, @SDT, @Email";
+                var currentUserId = User.FindFirst("UserID")?.Value ?? "Unknown";
+                bool currentlyGiamSat = user.ChucVu == "GiamSat";
+                bool demotingFromGiamSat = currentlyGiamSat && model.ChucVu != "GiamSat";
+                bool demotingSelf = model.UserID == currentUserId && currentlyGiamSat && model.ChucVu != "GiamSat";
+
+                if (demotingFromGiamSat)
+                {
+                    int remainingGiamSatCount = _context.Users.Count(u => u.ChucVu == "GiamSat" && u.UserID != model.UserID);
+
+                    if (remainingGiamSatCount == 0)
+                    {
+                        ViewBag.AlertMessage = "Không thể thay đổi chức vụ Giám sát cuối cùng";
+                        return View(model);
+                    }
+                }
+
+                var sql = "EXEC sp_UpdateUser @UserID, @HoTen, @NgaySinh, @QueQuan, @SDT, @Email, @ChucVu";
 
                 await _context.Database.ExecuteSqlRawAsync(sql,
                     new SqlParameter("@UserID", model.UserID),
@@ -218,8 +237,15 @@ namespace QuanLiHoChieu.Controllers
                     new SqlParameter("@NgaySinh", model.NgaySinh),
                     new SqlParameter("@QueQuan", model.QueQuan),
                     new SqlParameter("@SDT", model.SDT),
-                    new SqlParameter("@Email", model.Email)
+                    new SqlParameter("@Email", model.Email),
+                    new SqlParameter("ChucVu", model.ChucVu)
                 );
+
+                if (demotingSelf)
+                {
+                    return RedirectToAction("Logout");
+                }
+
 
                 ViewBag.AlertMessage = "Cập nhật thông tin thành công!";
 
@@ -341,15 +367,44 @@ namespace QuanLiHoChieu.Controllers
                 .Where(x => x.FormID == formId)
                 .ToListAsync();
 
+            var userIds = logs
+                .Select(l => l.UserID)
+                .Where(id => id != null)
+                .Distinct()
+                .ToList();
+
+            var sql = "EXEC sp_SelectUser";
+            var users = _context.Set<DecryptedUserVM>()
+                .FromSqlRaw(sql)
+                .AsEnumerable()
+                .Where(u => !string.IsNullOrEmpty(u.UserID))
+                .ToDictionary(u => u.UserID!, u => u.HoTen ?? "");
+
+            var xacThucLog = logs.FirstOrDefault(l => l.LoaiXuLy == "XacThuc");
+            var xetDuyetLog = logs.FirstOrDefault(l => l.LoaiXuLy == "XetDuyet");
+            var luuTruLog = logs.FirstOrDefault(l => l.LoaiXuLy == "LuuTru");
+
             var model = new FormStatusVM
             {
                 FormID = passport.FormID,
                 NgayNop = passport.NgayNop,
-                UserXacThucID = logs.FirstOrDefault(l => l.LoaiXuLy == "XacThuc")?.UserID,
-                NoteXacThuc = logs.FirstOrDefault(l => l.LoaiXuLy == "XacThuc")?.GhiChu,
-                UserXetDuyetID = logs.FirstOrDefault(l => l.LoaiXuLy == "XetDuyet")?.UserID,
-                NoteXetDuyet = logs.FirstOrDefault(l => l.LoaiXuLy == "XetDuyet")?.GhiChu,
-                UserLuuTruID = logs.FirstOrDefault(l => l.LoaiXuLy == "LuuTru")?.UserID
+
+                UserXacThucID = xacThucLog?.UserID,
+                UserXacThucName = xacThucLog != null && xacThucLog.UserID != null && users.ContainsKey(xacThucLog.UserID)
+                                  ? users[xacThucLog.UserID]
+                                  : null,
+                NoteXacThuc = xacThucLog?.GhiChu,
+
+                UserXetDuyetID = xetDuyetLog?.UserID,
+                UserXetDuyetName = xetDuyetLog != null && xetDuyetLog.UserID != null && users.ContainsKey(xetDuyetLog.UserID)
+                                  ? users[xetDuyetLog.UserID]
+                                  : null,
+                NoteXetDuyet = xetDuyetLog?.GhiChu,
+
+                UserLuuTruID = luuTruLog?.UserID,
+                UserLuuTruName = luuTruLog != null && luuTruLog.UserID != null && users.ContainsKey(luuTruLog.UserID)
+                                  ? users[luuTruLog.UserID]
+                                  : null
             };
 
             LoadUserGender();
