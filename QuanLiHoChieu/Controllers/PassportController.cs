@@ -5,6 +5,7 @@ using QuanLiHoChieu.Helpers;
 using QuanLiHoChieu.Models;
 using QuanLiHoChieu.Models.ViewModels;
 using QuestPDF.Fluent;
+using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
 
 
@@ -153,26 +154,119 @@ namespace QuanLiHoChieu.Controllers
 
         private byte[] GenerateFormPdf(string formId)
         {
-            var document = Document.Create(container =>
+            var data = _context.PassportDatas.FirstOrDefault(p => p.FormID == formId);
+            if (data == null)
+                throw new ArgumentNullException(nameof(data));
+
+            string? Decrypt(byte[]? val) => val == null ? null : AesEcbEncryption.DecryptAesEcb(val);
+
+            return Document.Create(container =>
             {
                 container.Page(page =>
                 {
-                    page.Margin(50);
-                    page.Content()
-                        .Column(column =>
+                    page.Margin(30);
+
+                    page.Header().AlignCenter().Text("CỤC QUẢN LÝ XUẤT NHẬP CẢNH")
+                        .FontSize(14).Bold().FontColor(Colors.Red.Darken2);
+
+                    page.Content().Background(Colors.Grey.Lighten4).Padding(20).Column(column =>
+                    {
+                        column.Spacing(15);
+
+                        column.Item().AlignCenter().Text("PHIẾU XÁC NHẬN ĐĂNG KÝ HỘ CHIẾU")
+                            .FontSize(22).Bold();
+
+                        column.Item().AlignCenter().Text($"Mã hồ sơ: {formId}")
+                            .FontSize(12).Italic();
+
+                        //column.Item().PaddingTop(10).Text("Thông tin cá nhân").Bold().FontSize(18);
+
+                        column.Item().Table(table =>
                         {
-                            column.Item().Text("Phiếu xác nhận đăng ký hộ chiếu").Bold().FontSize(20);
-                            column.Item()
-                                .PaddingTop(20)
-                                .Text($"Mã hồ sơ: {formId}")
-                                .FontSize(16);
-                            column.Item().Text("Vui lòng lưu lại mã hồ sơ này để tra cứu thông tin về sau.");
+                            table.ColumnsDefinition(c =>
+                            {
+                                c.RelativeColumn(1);
+                                c.RelativeColumn(2);
+                            });
+
+                            void Row(string label, string value)
+                            {
+                                table.Cell().Element(CellStyle).Text(label).Bold();
+                                table.Cell().Element(CellStyle).Text(value ?? "");
+                            }
+
+                            IContainer CellStyle(IContainer container) =>
+                                container.PaddingVertical(4).BorderBottom(1).BorderColor(Colors.Grey.Lighten2);
+
+                        table.Cell().ColumnSpan(2).Element(CellStyle).Text("Thông tin cá nhân").Bold().FontSize(18);
+                            Row("Họ tên", Decrypt(data.HoTen) ?? "");
+                            Row("Giới tính", data.GioiTinh);
+                            Row("Ngày sinh", data.NgaySinh.ToString("dd/MM/yyyy"));
+                            Row("Nơi sinh", Decrypt(data.NoiSinh) ?? "");
+                            Row("CCCD", Decrypt(data.CCCD) ?? "");
+                            Row("Ngày cấp", data.NgayCap.ToString("dd/MM/yyyy"));
+                            Row("Nơi cấp", Decrypt(data.NoiCap) ?? "");
+                            Row("Dân tộc", data.DanToc);
+                            Row("Tôn giáo", data.TonGiao ?? "");
+                            Row("SĐT", Decrypt(data.SĐT) ?? "");
+                            Row("Email", Decrypt(data.Email) ?? "");
+
+                            table.Cell().ColumnSpan(2).Element(CellStyle).Text("Địa chỉ thường trú").Bold().FontSize(18); ;
+                            Row("Tỉnh/Thành", Decrypt(data.ttTinhThanh) ?? "");
+                            Row("Quận/Huyện", Decrypt(data.ttQuanHuyen) ?? "");
+                            Row("Phường/Xã", Decrypt(data.ttPhuongXa) ?? "");
+                            Row("Số nhà, Đường", Decrypt(data.ttSoNhaDuong) ?? "");
+
+                            table.Cell().ColumnSpan(2).Element(CellStyle).Text("Địa chỉ tạm trú").Bold().FontSize(18); ;
+                            Row("Tỉnh/Thành", Decrypt(data.thtTinhThanh) ?? "");
+                            Row("Quận/Huyện", Decrypt(data.thtQuanHuyen) ?? "");
+                            Row("Phường/Xã", Decrypt(data.thtPhuongXa) ?? "");
+                            Row("Số nhà, Đường", Decrypt(data.thtSoNhaDuong) ?? "");
+
+                            table.Cell().ColumnSpan(2).Element(CellStyle).Text("Thông tin cha mẹ").Bold().FontSize(18); ;
+                            Row("Họ tên Cha", Decrypt(data.HoTenCha) ?? "");
+                            Row("Ngày sinh Cha", data.NgaySinhCha?.ToString("dd/MM/yyyy") ?? "");
+                            Row("Họ tên Mẹ", Decrypt(data.HoTenMe) ?? "");
+                            Row("Ngày sinh Mẹ", data.NgaySinhMe?.ToString("dd/MM/yyyy") ?? "");
+
+                            table.Cell().ColumnSpan(2).Element(CellStyle).Text("Thông tin hồ sơ").Bold().FontSize(18); ;
+                            Row("Nội dung đề nghị", data.NoiDungDeNghi);
+                            Row("Nơi tiếp nhận hồ sơ", data.NoiTiepNhanHS);
+                            Row("Ngày nộp", data.NgayNop.ToString("dd/MM/yyyy"));
                         });
+
+                        column.Item().PaddingTop(30).Row(row =>
+                        {
+                            row.RelativeItem().AlignCenter().Text("Người đăng ký").Bold().FontSize(18); ;
+                            row.RelativeItem().AlignCenter().Text("Xác nhận cơ quan").Bold().FontSize(18); ;
+                        });
+
+                        column.Item().Row(row =>
+                        {
+                            row.RelativeItem().Element(c => c.PaddingTop(1).LineHorizontal(1));
+                            row.RelativeItem().Element(c => c.PaddingTop(1).LineHorizontal(1));
+                        });
+
+                        column.Item().Row(row =>
+                        {
+                            row.RelativeItem().AlignCenter().Text(Decrypt(data.HoTen) ?? "").FontSize(16).Italic();
+                            row.RelativeItem();
+                        });
+
+                    });
+
+                    page.Footer().Element(footer =>
+                    {
+                        footer.AlignCenter().Text(x =>
+                        {
+                            x.Span("Trang ");
+                            x.CurrentPageNumber();
+                            x.Span(" / ");
+                            x.TotalPages().FontSize(10); ;
+                        });
+                    });
                 });
-            });
-
-            return document.GeneratePdf();
+            }).GeneratePdf();
         }
-
     }
 }
