@@ -62,6 +62,7 @@ namespace QuanLiHoChieu.Controllers
 
             if (resident == null)
             {
+                ViewBag.AlertMessage = "Không có công dân mang CCCD này trong dữ liệu quốc gia";
                 return View(model);
             }
 
